@@ -1,22 +1,7 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <appinfo>
-<version>2.0.6</version>
-<url>https://github.com/wnmp/wnmp/releases/download/2.0.6/Wnmp-2.0.6.exe</url>
-<upgradeurl>https://github.com/wnmp/wnmp/releases/download/2.0.6/Wnmp-Upgrade-Installer-2.0.6.exe</upgradeurl>
-<about>
-Wnmp 2.0.6
-**********
-- Wnmp Control Panel 2.1.1
-
-  * Fixed #19, Checking for updates crashes the application
-</about>
-<cpversion>2.1.0</cpversion>
-<cpupdateurl>https://github.com/wnmp/wnmp/blob/master/updatefiles/Wnmp.exe</cpupdateurl>
-<cpupdaterurl>https://github.com/wnmp/wnmp/blob/master/updatefiles/updater.exe</cpupdaterurl>
-<cpabout>
-Wnmp Control Panel 2.1.0
-************************
-
-  * Fixed #19, Checking for updates crashes the application
-</cpabout>
+  <version>2.0.13</version>
+  <cpversion>2.2.6</cpversion>
+  <upgradeurl>https://github.com/wnmp/wnmp/releases/download/2.0.13/Wnmp-Upgrade-Installer-2.0.13.exe</upgradeurl>
+  <cpupdateurl></cpupdateurl>
 </appinfo>
