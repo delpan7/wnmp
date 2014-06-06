@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <appinfo>
-  <version>2.0.13</version>
-  <cpversion>2.2.6</cpversion>
-  <upgradeurl>https://github.com/wnmp/wnmp/releases/download/2.0.13/Wnmp-Upgrade-Installer-2.0.13.exe</upgradeurl>
+  <version>2.1.0</version>
+  <cpversion>2.3</cpversion>
+  <upgradeurl>https://github.com/wnmp/wnmp/releases/download/2.1.0/Wnmp-Upgrade-Installer-2.1.0.exe</upgradeurl>
   <cpupdateurl></cpupdateurl>
 </appinfo>
