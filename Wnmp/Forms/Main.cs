@@ -58,7 +58,7 @@ namespace Wnmp.Forms
             Nginx.startArgs = "";
             Nginx.stopArgs = "-s stop";
             Nginx.killStop = false;
-            Nginx.statusLabel = nginxrunning;
+            Nginx.statusLabel = ngx_name;
             Nginx.confDir = "/conf/";
             Nginx.logDir = "/logs/";
         }
@@ -72,7 +72,7 @@ namespace Wnmp.Forms
             MariaDB.startArgs = "";
             MariaDB.stopArgs = "";
             MariaDB.killStop = true;
-            MariaDB.statusLabel = mariadbrunning;
+            MariaDB.statusLabel = mdb_name;
             MariaDB.confDir = "/mariadb/";
             MariaDB.logDir = "/mariadb/data/";
         }
@@ -90,7 +90,7 @@ namespace Wnmp.Forms
             PHP.startArgs = ""; // Special handling see StartPHP() in the WnmpProgram class
             PHP.stopArgs = "";
             PHP.killStop = true;
-            PHP.statusLabel = phprunning;
+            PHP.statusLabel = php_name;
             PHP.confDir = "/php/";
             PHP.logDir = "/php/logs/";
         }
@@ -104,7 +104,7 @@ namespace Wnmp.Forms
             PHP.startArgs = ""; // Special handling see StartPHP() in the WnmpProgram class
             PHP.stopArgs = "";
             PHP.killStop = true;
-            PHP.statusLabel = phprunning;
+            PHP.statusLabel = php_name;
             PHP.confDir = "/php/phpbins/" + Options.settings.phpBin + "/";
             PHP.logDir = "/php/phpbins/" + Options.settings.phpBin + "/logs/";
         }

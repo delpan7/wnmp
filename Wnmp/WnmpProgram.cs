@@ -41,8 +41,9 @@ namespace Wnmp
         /// </summary>
         private void SetStartedLabel()
         {
-            statusLabel.Text = "\u221A";
-            statusLabel.ForeColor = Color.Green;
+            //statusLabel.Text = "\u221A";
+            statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            statusLabel.ForeColor = Color.Lime;
         }
 
         /// <summary>
@@ -50,7 +51,15 @@ namespace Wnmp
         /// </summary>
         private void SetStoppedLabel()
         {
-            statusLabel.Text = "X";
+            //statusLabel.Text = "X";
+            statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            statusLabel.ForeColor = Color.Black;
+        }
+        /// <summary>
+        /// Changes the labels apperance to error
+        /// </summary>
+        private void SetErrorLabel() {
+            statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             statusLabel.ForeColor = Color.DarkRed;
         }
 
@@ -112,6 +121,8 @@ namespace Wnmp
 
         public void Start()
         {
+            SetStartedLabel();
+            return;
             if (IsPHP() == true) {
                 StartPHP();
                 return;
@@ -128,6 +139,8 @@ namespace Wnmp
         private string mdb_pidfile = Main.StartupPath + "/mariadb/data/" + Environment.MachineName + ".pid";
         public void Stop()
         {
+            SetStoppedLabel();
+            return;
             try {
                 /* Only kill our MariaDB instance (doesn't work if Wnmp is closed after starting MDB) */
                 if (IsMariaDB() == true && PID != 0) {
