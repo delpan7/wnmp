@@ -104,7 +104,7 @@ namespace Wnmp
             int i;
             int ProcessCount = Options.settings.PHP_Processes;
             short port = Options.settings.PHP_Port;
-            string phpini = Main.StartupPath + "/php/php.ini";
+            string phpini = confDir + "/php.ini";
 
             try {
                 for (i = 1; i <= ProcessCount; i++) {
