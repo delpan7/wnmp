@@ -78,6 +78,9 @@
     </Compile>
     <Compile Include="Log.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="WnmpMariaDBProgram.cs" />
+    <Compile Include="WnmpNginxProgram.cs" />
+    <Compile Include="WnmpPHPProgram.cs" />
     <Compile Include="WnmpProgram.cs" />
     <Compile Include="Updater\UpdatePrompt.cs">
       <SubType>Form</SubType>

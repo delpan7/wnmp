@@ -14,6 +14,8 @@ namespace Wnmp
     public class WnmpProgram
     {
         public Label statusLabel { get; set; } // Label that shows the programs status
+        public CheckBox statusChecked { get; set; } // Label that shows the programs status
+        public string baseDir { get; set; }    // Directory where all the programs configuration files are
         public string exeName { get; set; }    // Location of the executable file
         public string procName { get; set; }   // Name of the process
         public string progName { get; set; }   // User-friendly name of the program 
@@ -222,6 +224,10 @@ namespace Wnmp
             Process[] process = Process.GetProcessesByName(procName);
 
             return (process.Length != 0);
+        }
+        public bool IsChecked()
+        {
+            return (statusChecked.Checked == true);
         }
     }
 }
