@@ -45,7 +45,7 @@ namespace Wnmp.Forms
         {
             get {
                 var myCp = base.CreateParams;
-                myCp.Style = myCp.Style & ~Constants.WS_THICKFRAME; // Remove WS_THICKFRAME (Disables resizing)
+                myCp.Style = myCp.Style; // Remove WS_THICKFRAME (Disables resizing)
                 return myCp;
             }
         }
@@ -83,11 +83,8 @@ namespace Wnmp.Forms
             SetSettings();
             settings.UpdateSettings();
             /* Setup custom PHP without restart */
-            if (settings.phpBin == "Default") {
-                mainForm.SetupPHP();
-            } else {
-                mainForm.SetupCustomPHP();
-            }
+            mainForm.ReloadSetupPHP();
+
             this.Close();
         }
 
@@ -119,7 +116,7 @@ namespace Wnmp.Forms
             UpdateCheckInterval.Value = settings.UpdateFrequency;
             PHP_PROCESSES.Value = settings.PHP_Processes;
             PHP_PORT.Value = settings.PHP_Port;
-            phpBin.Items.Add("Default");
+            //phpBin.Items.Add("Default");
             foreach (string str in phpVersions()) {
                 phpBin.Items.Add(str);
             }
@@ -128,9 +125,9 @@ namespace Wnmp.Forms
 
         private string[] phpVersions()
         {
-            if (Directory.Exists(Main.StartupPath + "/php/phpbins") == false)
+            if (Directory.Exists(Main.StartupPath + "/php") == false)
                 return new string[0];
-            return Directory.GetDirectories(Main.StartupPath + "/php/phpbins").Select(d => new DirectoryInfo(d).Name).ToArray();
+            return Directory.GetDirectories(Main.StartupPath + "/php").Select(d => new DirectoryInfo(d).Name).ToArray();
         }
 
         private void StartWithWindows()

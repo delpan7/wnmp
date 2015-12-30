@@ -26,7 +26,7 @@ namespace Wnmp
         public string confDir { get; set; }    // Directory where all the programs configuration files are
         public string logDir { get; set; }     // Directory where all the programs log files are
 
-        public int PID { get; private set; }   // PID of process
+        public int PID { get; protected set; }   // PID of process
         public ContextMenuStrip configContextMenu { get; set; } // Displays all the programs config files in |confDir|
         public ContextMenuStrip logContextMenu { get; set; }    // Displays all the programs log files in |logDir|
 
@@ -41,7 +41,7 @@ namespace Wnmp
         /// <summary>
         /// Changes the labels apperance to started
         /// </summary>
-        private void SetStartedLabel()
+        protected void SetStartedLabel()
         {
             //statusLabel.Text = "\u221A";
             statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -51,18 +51,11 @@ namespace Wnmp
         /// <summary>
         /// Changes the labels apperance to stopped
         /// </summary>
-        private void SetStoppedLabel()
+        protected void SetStoppedLabel()
         {
             //statusLabel.Text = "X";
             statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             statusLabel.ForeColor = Color.Black;
-        }
-        /// <summary>
-        /// Changes the labels apperance to error
-        /// </summary>
-        private void SetErrorLabel() {
-            statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            statusLabel.ForeColor = Color.DarkRed;
         }
 
         public void SetStatusLabel()
@@ -73,7 +66,7 @@ namespace Wnmp
                 SetStoppedLabel();
         }
 
-        private void StartProcess(string exe, string args)
+        protected void StartProcess(string exe, string args)
         {
             Process ps = new Process();
             ps.StartInfo.FileName = exe;
@@ -90,45 +83,16 @@ namespace Wnmp
             PID = ps.Id;
         }
 
-        private bool IsMariaDB()
-        {
-            return (progLogSection == Log.LogSection.WNMP_MARIADB);
-        }
-
         private bool IsPHP()
         {
             return (progLogSection == Log.LogSection.WNMP_PHP);
-        }
-
-        /* PHP needs special handling so we have to create a seperate function */
-        private void StartPHP()
-        {
-            int i;
-            int ProcessCount = Options.settings.PHP_Processes;
-            short port = Options.settings.PHP_Port;
-            string phpini = confDir + "/php.ini";
-
-            try {
-                for (i = 1; i <= ProcessCount; i++) {
-                    StartProcess(exeName, String.Format("-b localhost:{0} -c {1}", port, phpini));
-                    Log.wnmp_log_notice("Starting PHP " + i + "/" + ProcessCount + " On port: " + port, progLogSection);
-                    port++;
-                }
-                Log.wnmp_log_notice("PHP started", progLogSection);
-                SetStartedLabel();
-            } catch (Exception ex) {
-                Log.wnmp_log_error(ex.Message, progLogSection);
-            }
         }
 
         public void Start()
         {
             SetStartedLabel();
             return;
-            if (IsPHP() == true) {
-                StartPHP();
-                return;
-            }
+            
             try {
                 StartProcess(exeName, startArgs);
                 Log.wnmp_log_notice("Started " + progName, progLogSection);
@@ -138,24 +102,12 @@ namespace Wnmp
             }
         }
 
-        private string mdb_pidfile = Main.StartupPath + "/mariadb/data/" + Environment.MachineName + ".pid";
+        
         public void Stop()
         {
             SetStoppedLabel();
             return;
             try {
-                /* Only kill our MariaDB instance (doesn't work if Wnmp is closed after starting MDB) */
-                if (IsMariaDB() == true && PID != 0) {
-                    Process process = Process.GetProcessById(PID);
-                    process.Kill();
-                    /* A hack to delete MariaDB's PID file */
-                    if (File.Exists(mdb_pidfile))
-                        File.Delete(mdb_pidfile);
-                    PID = 0;
-                    Log.wnmp_log_notice("Stopped " + progName, progLogSection);
-                    SetStoppedLabel();
-                    return;
-                }
                 if (killStop) {
                     Process[] process = Process.GetProcessesByName(procName);
                     foreach (Process currentProc in process) {
@@ -228,6 +180,21 @@ namespace Wnmp
         public bool IsChecked()
         {
             return (statusChecked.Checked == true);
+        }
+
+        /// <summary>
+        /// Adds configuration files or log files to the context menu strip
+        /// </summary>
+        protected void DirFiles(string path, string GetFiles, ContextMenuStrip cms)
+        {
+            DirectoryInfo dinfo = new DirectoryInfo(path);
+
+            if (!dinfo.Exists)
+                return;
+
+            FileInfo[] Files = dinfo.GetFiles(GetFiles);
+            foreach (FileInfo file in Files)
+                cms.Items.Add(file.Name, null);
         }
     }
 }

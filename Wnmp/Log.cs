@@ -47,7 +47,7 @@ namespace Wnmp
 
         private static void wnmp_log(string message, Color color, LogSection logSection)
         {
-            var str = string.Format("{0} [{1}] - {2}", DateTime.Now.ToString(), GetEnumDescription(logSection), message);
+            var str = string.Format("{0} [{1}] - {2}", DateTime.Now.ToString(" H:m:s "), GetEnumDescription(logSection), message);
             var textLength = rtfLog.TextLength;
             rtfLog.AppendText(str + "\n");
             if (rtfLog.Find(GetEnumDescription(logSection), textLength, RichTextBoxFinds.MatchCase) != -1) {
