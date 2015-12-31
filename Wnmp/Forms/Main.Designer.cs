@@ -124,19 +124,19 @@ namespace Wnmp.Forms
             // wnmpOptionsToolStripMenuItem
             // 
             this.wnmpOptionsToolStripMenuItem.Name = "wnmpOptionsToolStripMenuItem";
-            this.wnmpOptionsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.wnmpOptionsToolStripMenuItem.Text = "Wnmp Options";
+            this.wnmpOptionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.wnmpOptionsToolStripMenuItem.Text = "配置";
             this.wnmpOptionsToolStripMenuItem.Click += new System.EventHandler(this.wnmpOptionsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -210,6 +210,7 @@ namespace Wnmp.Forms
             this.php_check_box.Size = new System.Drawing.Size(15, 14);
             this.php_check_box.TabIndex = 81;
             this.php_check_box.UseVisualStyleBackColor = true;
+            this.php_check_box.CheckedChanged += new System.EventHandler(this.app_check_box_CheckedChanged);
             // 
             // mdb_check_box
             // 
@@ -222,6 +223,7 @@ namespace Wnmp.Forms
             this.mdb_check_box.Size = new System.Drawing.Size(15, 14);
             this.mdb_check_box.TabIndex = 80;
             this.mdb_check_box.UseVisualStyleBackColor = true;
+            this.mdb_check_box.CheckedChanged += new System.EventHandler(this.app_check_box_CheckedChanged);
             // 
             // ngx_check_box
             // 
@@ -234,6 +236,7 @@ namespace Wnmp.Forms
             this.ngx_check_box.Size = new System.Drawing.Size(15, 14);
             this.ngx_check_box.TabIndex = 79;
             this.ngx_check_box.UseVisualStyleBackColor = true;
+            this.ngx_check_box.CheckedChanged += new System.EventHandler(this.app_check_box_CheckedChanged);
             // 
             // php_log
             // 
@@ -510,7 +513,7 @@ namespace Wnmp.Forms
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(500, 308);
+            this.panel1.Size = new System.Drawing.Size(500, 307);
             this.panel1.TabIndex = 5;
             // 
             // wnmpdir
@@ -528,11 +531,11 @@ namespace Wnmp.Forms
             // 
             this.log_rtb.BackColor = System.Drawing.Color.White;
             this.log_rtb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.log_rtb.Location = new System.Drawing.Point(0, 185);
+            this.log_rtb.Location = new System.Drawing.Point(0, 178);
             this.log_rtb.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.log_rtb.Name = "log_rtb";
             this.log_rtb.ReadOnly = true;
-            this.log_rtb.Size = new System.Drawing.Size(500, 108);
+            this.log_rtb.Size = new System.Drawing.Size(500, 129);
             this.log_rtb.TabIndex = 49;
             this.log_rtb.Text = "";
             // 
@@ -540,7 +543,7 @@ namespace Wnmp.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(500, 333);
+            this.ClientSize = new System.Drawing.Size(500, 332);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.MainFormMenuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

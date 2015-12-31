@@ -12,8 +12,8 @@ namespace Wnmp
     {
         public WnmpNginxProgram(Label Label_name, CheckBox chekbox_name)
         {
-            baseDir = Main.StartupPath + "/nginx/";
-            exeName = "nginx.exe";
+            baseDir = Main.StartupPath.Replace(@"\", "/") + "/nginx/";
+            exeName = baseDir + "nginx.exe";
             procName = "nginx";
             progName = "Nginx";
             progLogSection = Log.LogSection.WNMP_NGINX;
@@ -22,9 +22,9 @@ namespace Wnmp
             killStop = false;
             statusLabel = Label_name;
             statusChecked = chekbox_name;
-            confDir = "conf/";
-            logDir = "logs/";
-
+            confDir = baseDir + "conf/";
+            logDir = baseDir + "logs/";
+            
             if (!File.Exists(baseDir + "nginx.exe"))
                 Log.wnmp_log_error("Error: Nginx Not Found", Log.LogSection.WNMP_NGINX);
 
@@ -32,6 +32,25 @@ namespace Wnmp
             this.DirFiles(baseDir + "logs", "*.log", logContextMenu);
 
             this.SetStatusLabel();
+        }
+
+        public void UpdatePHPngxCfg()
+        {
+            int i;
+            int port = (int)Options.settings.PHP_Port;
+            int PHPProcesses = (int)Options.settings.PHP_Processes;
+
+            using (var sw = new StreamWriter(confDir + "php_processes.conf"))
+            {
+                sw.WriteLine("# DO NOT MODIFY!!! THIS FILE IS MANAGED BY THE WNMP CONTROL PANEL.\r\n");
+                sw.WriteLine("upstream php_processes {");
+                for (i = 1; i <= PHPProcesses; i++)
+                {
+                    sw.WriteLine("    server 127.0.0.1:" + port + " weight=1;");
+                    port++;
+                }
+                sw.WriteLine("}");
+            }
         }
     }
 }

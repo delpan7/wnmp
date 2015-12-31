@@ -18,7 +18,7 @@ namespace Wnmp
 
             mdb_pidfile = baseDir + "data/" + Environment.MachineName + ".pid";
 
-            exeName = "/bin/mysqld.exe";
+            exeName = baseDir + "/bin/mysqld.exe";
             procName = "mysqld";
             progName = "MariaDB";
             progLogSection = Log.LogSection.WNMP_MARIADB;
@@ -27,8 +27,8 @@ namespace Wnmp
             killStop = true;
             statusLabel = Label_name;
             statusChecked = chekbox_name;
-            confDir = "";
-            logDir = "data/";
+            confDir = baseDir;
+            logDir = baseDir + "data/";
 
             if (!Directory.Exists(Application.StartupPath + "/mariadb"))
                 Log.wnmp_log_error("Error: MariaDB Not Found", Log.LogSection.WNMP_MARIADB);
@@ -39,10 +39,8 @@ namespace Wnmp
             this.SetStatusLabel();
         }
 
-        public void Stop()
+        public new void Stop()
         {
-            SetStoppedLabel();
-            return;
             try
             {
                 Process process = Process.GetProcessById(PID);

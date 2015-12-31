@@ -19,8 +19,9 @@
 
 using System;
 using System.IO;
-
+using System.Linq;
 using Wnmp.Forms;
+using System.Windows.Forms;
 namespace Wnmp.Configuration
 {
     /// <summary>
@@ -34,12 +35,12 @@ namespace Wnmp.Configuration
         public bool StartWithWindows = false;
         public bool RunAppsAtLaunch = false;
         public bool MinimizeWnmpToTray = false;
-        public bool AutoCheckForUpdates = true;
-        public int UpdateFrequency = 7;
-        public string phpBin = "Default";
+        public bool NginxChecked = true;
+        public bool MariaDBChecked = true;
+        public bool PHPChecked = true;
+        public string phpBin = "";
         public short PHP_Port = 9001;
         public int PHP_Processes = 2;
-        public DateTime Lastcheckforupdate = DateTime.MinValue;
         public bool FirstRun = true;
         private string IniFile;
 
@@ -87,12 +88,14 @@ namespace Wnmp.Configuration
             Boolean.TryParse(ReadIniValue("startupwithwindows", StartWithWindows), out StartWithWindows);
             Boolean.TryParse(ReadIniValue("startallapplicationsatlaunch", RunAppsAtLaunch), out RunAppsAtLaunch);
             Boolean.TryParse(ReadIniValue("minimizewnmptotray", MinimizeWnmpToTray),  out MinimizeWnmpToTray);
-            Boolean.TryParse(ReadIniValue("autocheckforupdates", AutoCheckForUpdates), out AutoCheckForUpdates);
             Boolean.TryParse(ReadIniValue("firstrun", FirstRun), out FirstRun);
-            int.TryParse(ReadIniValue("checkforupdatefrequency", UpdateFrequency), out UpdateFrequency);
+
+            Boolean.TryParse(ReadIniValue("ngx_checked", NginxChecked), out NginxChecked);
+            Boolean.TryParse(ReadIniValue("mdb_checked", MariaDBChecked), out MariaDBChecked);
+            Boolean.TryParse(ReadIniValue("php_checked", PHPChecked), out PHPChecked);
+
             int.TryParse(ReadIniValue("phpprocesses", PHP_Processes), out PHP_Processes);
             short.TryParse(ReadIniValue("phpport", PHP_Port), out PHP_Port);
-            DateTime.TryParse(ReadIniValue("lastcheckforupdate", Lastcheckforupdate), out Lastcheckforupdate);
             phpBin = ReadIniValue("phpbin", phpBin);
             UpdateSettings();
         }
@@ -101,24 +104,34 @@ namespace Wnmp.Configuration
         /// </summary>
         public void UpdateSettings()
         {
+            if (phpBin.Length == 0)
+                phpBin = phpVersions()[0];
+            
             if (PHP_Port == 9000)
                 PHP_Port++;
 
             using (var sw = new StreamWriter(iniPath)) {
                 sw.WriteLine("[WNMP]");
-                sw.WriteLine("; Editor path\r\neditorpath=" + Editor);
-                sw.WriteLine("; Start Wnmp with Windows\r\nstartupwithwindows=" + StartWithWindows);
-                sw.WriteLine("; Start all applications when Wnmp starts\r\nstartallapplicationsatlaunch=" + RunAppsAtLaunch);
-                sw.WriteLine("; Minimize Wnmp to tray when minimized\r\nminimizewnmptotray=" + MinimizeWnmpToTray);
-                sw.WriteLine("; Automatically check for updates\r\nautocheckforupdates=" + AutoCheckForUpdates);
-                sw.WriteLine("; Update frequency(In days)\r\ncheckforupdatefrequency=" + UpdateFrequency);
-                sw.WriteLine("; Last check for update\r\nlastcheckforupdate=" + Lastcheckforupdate);
-                sw.WriteLine("; First run\r\nfirstrun=" + FirstRun);
+                sw.WriteLine("; 编辑器路径\r\neditorpath=" + Editor);
+                sw.WriteLine("; 开机启动\r\nstartupwithwindows=" + StartWithWindows);
+                sw.WriteLine("; Wnmp启动时自动启动所选应用\r\nstartallapplicationsatlaunch=" + RunAppsAtLaunch);
+                sw.WriteLine("; 最小化到系统托盘\r\nminimizewnmptotray=" + MinimizeWnmpToTray);
+                sw.WriteLine("; 是否第一次启动\r\nfirstrun=" + FirstRun);
+                sw.WriteLine("; 勾选Nginx\r\nngx_checked=" + NginxChecked);
+                sw.WriteLine("; 勾选MariaDB\r\nmdb_checked=" + MariaDBChecked);
+                sw.WriteLine("; 勾选PHP\r\nphp_checked=" + PHPChecked);
                 sw.WriteLine("[PHP]");
-                sw.WriteLine("; Amount of PHP processes\r\nphpprocesses=" + PHP_Processes);
-                sw.WriteLine("; PHP Port\r\nphpport=" + PHP_Port);
-                sw.WriteLine("; PHP Version to use\r\nphpbin=" + phpBin);
+                sw.WriteLine("; PHP 进程数\r\nphpprocesses=" + PHP_Processes);
+                sw.WriteLine("; PHP 端口\r\nphpport=" + PHP_Port);
+                sw.WriteLine("; PHP 使用版本\r\nphpbin=" + phpBin);
             }
+        }
+
+        public string[] phpVersions()
+        {
+            if (Directory.Exists(Main.StartupPath + "/php") == false)
+                return new string[0];
+            return Directory.GetDirectories(Main.StartupPath + "/php").Select(d => new DirectoryInfo(d).Name).ToArray();
         }
     }
 }

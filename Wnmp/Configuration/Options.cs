@@ -82,8 +82,11 @@ namespace Wnmp.Forms
         {
             SetSettings();
             settings.UpdateSettings();
-            /* Setup custom PHP without restart */
+            
+            /* 切换PHP版本 */
             mainForm.ReloadSetupPHP();
+            //更新PHP进程配置文件
+            mainForm.UpdatePHPngxCfg();
 
             this.Close();
         }
@@ -94,13 +97,9 @@ namespace Wnmp.Forms
             settings.StartWithWindows = StartWnmpWithWindows.Checked;
             settings.RunAppsAtLaunch = StartAllProgramsOnLaunch.Checked;
             settings.MinimizeWnmpToTray = MinimizeWnmpToTray.Checked;
-            settings.AutoCheckForUpdates = AutoUpdate.Checked;
             settings.PHP_Processes = (int)PHP_PROCESSES.Value;
             settings.PHP_Port = (short)PHP_PORT.Value;
-            settings.UpdateFrequency = (int)UpdateCheckInterval.Value;
-            UpdatePHPngxCfg();
             settings.phpBin = phpBin.Text;
-            
         }
 
         /// <summary>
@@ -112,23 +111,25 @@ namespace Wnmp.Forms
             StartWnmpWithWindows.Checked = settings.StartWithWindows;
             StartAllProgramsOnLaunch.Checked = settings.RunAppsAtLaunch;
             MinimizeWnmpToTray.Checked = settings.MinimizeWnmpToTray;
-            AutoUpdate.Checked = settings.AutoCheckForUpdates;
-            UpdateCheckInterval.Value = settings.UpdateFrequency;
             PHP_PROCESSES.Value = settings.PHP_Processes;
             PHP_PORT.Value = settings.PHP_Port;
             //phpBin.Items.Add("Default");
-            foreach (string str in phpVersions()) {
+            foreach (string str in settings.phpVersions()) {
                 phpBin.Items.Add(str);
             }
-            phpBin.SelectedIndex = phpBin.Items.IndexOf(settings.phpBin);
+            
+            if (settings.phpBin.Length > 0)
+            {
+                phpBin.SelectedIndex = phpBin.Items.IndexOf(settings.phpBin);
+            }
+            else
+            {
+                phpBin.SelectedIndex = 0;
+            }
+            Console.WriteLine("{0}", settings.phpBin.ToString());
         }
 
-        private string[] phpVersions()
-        {
-            if (Directory.Exists(Main.StartupPath + "/php") == false)
-                return new string[0];
-            return Directory.GetDirectories(Main.StartupPath + "/php").Select(d => new DirectoryInfo(d).Name).ToArray();
-        }
+        
 
         private void StartWithWindows()
         {
@@ -142,23 +143,6 @@ namespace Wnmp.Forms
                 root = Registry.CurrentUser.OpenSubKey(key, true);
                 if (root.GetValue("Wnmp") != null)
                     root.DeleteValue("Wnmp");
-            }
-        }
-
-        private void UpdatePHPngxCfg()
-        {
-            int i;
-            int port = (int)PHP_PORT.Value;
-            int PHPProcesses = (int)PHP_PROCESSES.Value;
-
-            using (var sw = new StreamWriter(Main.StartupPath + "/conf/php_processes.conf")) {
-                sw.WriteLine("# DO NOT MODIFY!!! THIS FILE IS MANAGED BY THE WNMP CONTROL PANEL.\r\n");
-                sw.WriteLine("upstream php_processes {");
-                for (i = 1; i <= PHPProcesses; i++) {
-                    sw.WriteLine("    server 127.0.0.1:" + port + " weight=1;");
-                    port++;
-                }
-                sw.WriteLine("}");
             }
         }
 

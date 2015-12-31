@@ -50,15 +50,11 @@ namespace Wnmp.Forms
             this.General = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.selecteditor = new System.Windows.Forms.Button();
-            this.UpdateCheckInterval = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.StartAllProgramsOnLaunch = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.StartWnmpWithWindows = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.AutoUpdate = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.editorTB = new System.Windows.Forms.TextBox();
             this.MinimizeWnmpToTray = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -74,7 +70,6 @@ namespace Wnmp.Forms
             this.tabControl1.SuspendLayout();
             this.General.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.UpdateCheckInterval)).BeginInit();
             this.PHP.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PHP_PROCESSES)).BeginInit();
@@ -83,11 +78,11 @@ namespace Wnmp.Forms
             // 
             // Save
             // 
-            this.Save.Location = new System.Drawing.Point(188, 346);
+            this.Save.Location = new System.Drawing.Point(188, 184);
             this.Save.Name = "Save";
-            this.Save.Size = new System.Drawing.Size(75, 23);
+            this.Save.Size = new System.Drawing.Size(75, 21);
             this.Save.TabIndex = 13;
-            this.Save.Text = "Save";
+            this.Save.Text = "保存";
             this.Save.UseVisualStyleBackColor = true;
             this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
@@ -95,10 +90,10 @@ namespace Wnmp.Forms
             // 
             this.tabControl1.Controls.Add(this.General);
             this.tabControl1.Controls.Add(this.PHP);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Location = new System.Drawing.Point(12, 11);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(347, 312);
+            this.tabControl1.Size = new System.Drawing.Size(347, 165);
             this.tabControl1.TabIndex = 16;
             // 
             // General
@@ -107,82 +102,52 @@ namespace Wnmp.Forms
             this.General.Location = new System.Drawing.Point(4, 22);
             this.General.Name = "General";
             this.General.Padding = new System.Windows.Forms.Padding(3);
-            this.General.Size = new System.Drawing.Size(339, 286);
+            this.General.Size = new System.Drawing.Size(339, 139);
             this.General.TabIndex = 0;
-            this.General.Text = "General";
+            this.General.Text = "常规";
             this.General.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.selecteditor);
-            this.groupBox1.Controls.Add(this.UpdateCheckInterval);
-            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.StartAllProgramsOnLaunch);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.StartWnmpWithWindows);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.AutoUpdate);
-            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.editorTB);
             this.groupBox1.Controls.Add(this.MinimizeWnmpToTray);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(327, 190);
+            this.groupBox1.Size = new System.Drawing.Size(327, 123);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Application Settings";
+            this.groupBox1.Text = "应用设置";
             // 
             // selecteditor
             // 
-            this.selecteditor.Location = new System.Drawing.Point(235, 20);
+            this.selecteditor.Location = new System.Drawing.Point(239, 18);
             this.selecteditor.Name = "selecteditor";
-            this.selecteditor.Size = new System.Drawing.Size(26, 23);
+            this.selecteditor.Size = new System.Drawing.Size(26, 21);
             this.selecteditor.TabIndex = 14;
             this.selecteditor.Text = "...";
             this.selecteditor.UseVisualStyleBackColor = true;
             this.selecteditor.Click += new System.EventHandler(this.selecteditor_Click);
             // 
-            // UpdateCheckInterval
-            // 
-            this.UpdateCheckInterval.Location = new System.Drawing.Point(195, 154);
-            this.UpdateCheckInterval.Maximum = new decimal(new int[] {
-            365,
-            0,
-            0,
-            0});
-            this.UpdateCheckInterval.Name = "UpdateCheckInterval";
-            this.UpdateCheckInterval.Size = new System.Drawing.Size(66, 20);
-            this.UpdateCheckInterval.TabIndex = 13;
-            this.UpdateCheckInterval.Value = new decimal(new int[] {
-            7,
-            0,
-            0,
-            0});
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(25, 156);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(157, 13);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Update check interval (in days):";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 25);
+            this.label1.Location = new System.Drawing.Point(25, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 13);
+            this.label1.Size = new System.Drawing.Size(47, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Editor:";
+            this.label1.Text = "编辑器:";
             // 
             // StartAllProgramsOnLaunch
             // 
             this.StartAllProgramsOnLaunch.AutoSize = true;
-            this.StartAllProgramsOnLaunch.Location = new System.Drawing.Point(195, 79);
+            this.StartAllProgramsOnLaunch.Location = new System.Drawing.Point(199, 73);
             this.StartAllProgramsOnLaunch.Name = "StartAllProgramsOnLaunch";
             this.StartAllProgramsOnLaunch.Size = new System.Drawing.Size(15, 14);
             this.StartAllProgramsOnLaunch.TabIndex = 7;
@@ -191,16 +156,16 @@ namespace Wnmp.Forms
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 80);
+            this.label3.Location = new System.Drawing.Point(25, 74);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(147, 13);
+            this.label3.Size = new System.Drawing.Size(173, 12);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Start all programs on launch?:";
+            this.label3.Text = "Wnmp启动时自动启动所选应用?:";
             // 
             // StartWnmpWithWindows
             // 
             this.StartWnmpWithWindows.AutoSize = true;
-            this.StartWnmpWithWindows.Location = new System.Drawing.Point(195, 57);
+            this.StartWnmpWithWindows.Location = new System.Drawing.Point(199, 53);
             this.StartWnmpWithWindows.Name = "StartWnmpWithWindows";
             this.StartWnmpWithWindows.Size = new System.Drawing.Size(15, 14);
             this.StartWnmpWithWindows.TabIndex = 4;
@@ -209,43 +174,25 @@ namespace Wnmp.Forms
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 57);
+            this.label2.Location = new System.Drawing.Point(25, 53);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(125, 13);
+            this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Start Wnmp on start up?:";
-            // 
-            // AutoUpdate
-            // 
-            this.AutoUpdate.AutoSize = true;
-            this.AutoUpdate.Location = new System.Drawing.Point(195, 130);
-            this.AutoUpdate.Name = "AutoUpdate";
-            this.AutoUpdate.Size = new System.Drawing.Size(15, 14);
-            this.AutoUpdate.TabIndex = 11;
-            this.AutoUpdate.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(25, 130);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(167, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Automatically check for updates?:";
+            this.label2.Text = "开机启动?:";
             // 
             // editorTB
             // 
-            this.editorTB.Location = new System.Drawing.Point(68, 22);
+            this.editorTB.Location = new System.Drawing.Point(72, 20);
             this.editorTB.Name = "editorTB";
             this.editorTB.ReadOnly = true;
-            this.editorTB.Size = new System.Drawing.Size(161, 20);
+            this.editorTB.Size = new System.Drawing.Size(161, 21);
             this.editorTB.TabIndex = 1;
             this.editorTB.DoubleClick += new System.EventHandler(this.editorTB_DoubleClick);
             // 
             // MinimizeWnmpToTray
             // 
             this.MinimizeWnmpToTray.AutoSize = true;
-            this.MinimizeWnmpToTray.Location = new System.Drawing.Point(195, 105);
+            this.MinimizeWnmpToTray.Location = new System.Drawing.Point(199, 97);
             this.MinimizeWnmpToTray.Name = "MinimizeWnmpToTray";
             this.MinimizeWnmpToTray.Size = new System.Drawing.Size(15, 14);
             this.MinimizeWnmpToTray.TabIndex = 9;
@@ -254,11 +201,11 @@ namespace Wnmp.Forms
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 105);
+            this.label4.Location = new System.Drawing.Point(25, 97);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(140, 13);
+            this.label4.Size = new System.Drawing.Size(113, 12);
             this.label4.TabIndex = 8;
-            this.label4.Text = "Minimize Wnmp to the tray?:";
+            this.label4.Text = "最小化到系统托盘?:";
             // 
             // PHP
             // 
@@ -266,7 +213,7 @@ namespace Wnmp.Forms
             this.PHP.Location = new System.Drawing.Point(4, 22);
             this.PHP.Name = "PHP";
             this.PHP.Padding = new System.Windows.Forms.Padding(3);
-            this.PHP.Size = new System.Drawing.Size(339, 286);
+            this.PHP.Size = new System.Drawing.Size(339, 139);
             this.PHP.TabIndex = 1;
             this.PHP.Text = "PHP";
             this.PHP.UseVisualStyleBackColor = true;
@@ -281,31 +228,31 @@ namespace Wnmp.Forms
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Location = new System.Drawing.Point(6, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(327, 115);
+            this.groupBox2.Size = new System.Drawing.Size(327, 112);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "PHP Settings";
+            this.groupBox2.Text = "PHP 设置";
             // 
-            // phpVersion
+            // phpBin
             // 
             this.phpBin.FormattingEnabled = true;
-            this.phpBin.Location = new System.Drawing.Point(108, 78);
-            this.phpBin.Name = "phpVersion";
-            this.phpBin.Size = new System.Drawing.Size(69, 21);
+            this.phpBin.Location = new System.Drawing.Point(108, 72);
+            this.phpBin.Name = "phpBin";
+            this.phpBin.Size = new System.Drawing.Size(69, 20);
             this.phpBin.TabIndex = 5;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(18, 81);
+            this.label9.Location = new System.Drawing.Point(18, 75);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(70, 13);
+            this.label9.Size = new System.Drawing.Size(83, 12);
             this.label9.TabIndex = 4;
-            this.label9.Text = "PHP Version:";
+            this.label9.Text = "PHP 使用版本:";
             // 
             // PHP_PROCESSES
             // 
-            this.PHP_PROCESSES.Location = new System.Drawing.Point(108, 25);
+            this.PHP_PROCESSES.Location = new System.Drawing.Point(108, 23);
             this.PHP_PROCESSES.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -317,7 +264,7 @@ namespace Wnmp.Forms
             0,
             0});
             this.PHP_PROCESSES.Name = "PHP_PROCESSES";
-            this.PHP_PROCESSES.Size = new System.Drawing.Size(69, 20);
+            this.PHP_PROCESSES.Size = new System.Drawing.Size(69, 21);
             this.PHP_PROCESSES.TabIndex = 3;
             this.PHP_PROCESSES.Value = new decimal(new int[] {
             2,
@@ -328,22 +275,22 @@ namespace Wnmp.Forms
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(18, 27);
+            this.label8.Location = new System.Drawing.Point(18, 25);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(84, 13);
+            this.label8.Size = new System.Drawing.Size(71, 12);
             this.label8.TabIndex = 2;
-            this.label8.Text = "PHP Processes:";
+            this.label8.Text = "PHP 进程数:";
             // 
             // PHP_PORT
             // 
-            this.PHP_PORT.Location = new System.Drawing.Point(108, 50);
+            this.PHP_PORT.Location = new System.Drawing.Point(108, 46);
             this.PHP_PORT.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
             this.PHP_PORT.Name = "PHP_PORT";
-            this.PHP_PORT.Size = new System.Drawing.Size(69, 20);
+            this.PHP_PORT.Size = new System.Drawing.Size(69, 21);
             this.PHP_PORT.TabIndex = 1;
             this.PHP_PORT.Value = new decimal(new int[] {
             9000,
@@ -354,42 +301,41 @@ namespace Wnmp.Forms
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(18, 52);
+            this.label7.Location = new System.Drawing.Point(18, 48);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(54, 13);
+            this.label7.Size = new System.Drawing.Size(59, 12);
             this.label7.TabIndex = 0;
-            this.label7.Text = "PHP Port:";
+            this.label7.Text = "PHP 端口:";
             // 
             // Cancel
             // 
-            this.Cancel.Location = new System.Drawing.Point(280, 346);
+            this.Cancel.Location = new System.Drawing.Point(280, 184);
             this.Cancel.Name = "Cancel";
-            this.Cancel.Size = new System.Drawing.Size(75, 23);
+            this.Cancel.Size = new System.Drawing.Size(75, 21);
             this.Cancel.TabIndex = 17;
-            this.Cancel.Text = "Cancel";
+            this.Cancel.Text = "取消";
             this.Cancel.UseVisualStyleBackColor = true;
             this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
             // 
             // Options
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(360, 381);
+            this.ClientSize = new System.Drawing.Size(360, 216);
             this.Controls.Add(this.Cancel);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.Save);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(298, 250);
+            this.MinimumSize = new System.Drawing.Size(298, 234);
             this.Name = "Options";
-            this.Text = "Options";
+            this.Text = "配置";
             this.Load += new System.EventHandler(this.Options_Load);
             this.tabControl1.ResumeLayout(false);
             this.General.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.UpdateCheckInterval)).EndInit();
             this.PHP.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -407,15 +353,11 @@ namespace Wnmp.Forms
         private System.Windows.Forms.TabPage PHP;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button selecteditor;
-        private System.Windows.Forms.NumericUpDown UpdateCheckInterval;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox StartAllProgramsOnLaunch;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox StartWnmpWithWindows;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox AutoUpdate;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox editorTB;
         private System.Windows.Forms.CheckBox MinimizeWnmpToTray;
         private System.Windows.Forms.Label label4;

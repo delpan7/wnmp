@@ -13,7 +13,7 @@ namespace Wnmp
         public WnmpPHPProgram(Label Label_name, CheckBox chekbox_name)
         {
             baseDir = Main.StartupPath + "/php/" + Options.settings.phpBin + "/";
-            exeName = "php-cgi.exe";
+            exeName = baseDir + "php-cgi.exe";
             procName = "php-cgi";
             progName = "PHP";
             progLogSection = Log.LogSection.WNMP_PHP;
@@ -22,8 +22,8 @@ namespace Wnmp
             killStop = true;
             statusLabel = Label_name;
             statusChecked = chekbox_name;
-            confDir = "";
-            logDir = "logs/";
+            confDir = baseDir;
+            logDir = baseDir + "logs/";
 
             if (!Directory.Exists(Application.StartupPath + "/php"))
                 Log.wnmp_log_error("Error: PHP Not Found", Log.LogSection.WNMP_PHP);
@@ -34,14 +34,12 @@ namespace Wnmp
             this.SetStatusLabel();
         }
 
-        public void Start()
+        public new void Start()
         {
-            SetStartedLabel();
-            return;
             int i;
             int ProcessCount = Options.settings.PHP_Processes;
             short port = Options.settings.PHP_Port;
-            string phpini = baseDir + confDir + "php.ini";
+            string phpini = confDir + "php.ini";
 
             try
             {

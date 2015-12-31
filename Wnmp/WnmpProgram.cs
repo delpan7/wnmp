@@ -68,12 +68,13 @@ namespace Wnmp
 
         protected void StartProcess(string exe, string args)
         {
+            
             Process ps = new Process();
             ps.StartInfo.FileName = exe;
             ps.StartInfo.Arguments = args;
             ps.StartInfo.UseShellExecute = false;
             ps.StartInfo.RedirectStandardOutput = true;
-            ps.StartInfo.WorkingDirectory = Main.StartupPath;
+            ps.StartInfo.WorkingDirectory = baseDir;
             ps.StartInfo.CreateNoWindow = true;
             ps.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             if (this.IsPHP() == true) {
@@ -90,9 +91,6 @@ namespace Wnmp
 
         public void Start()
         {
-            SetStartedLabel();
-            return;
-            
             try {
                 StartProcess(exeName, startArgs);
                 Log.wnmp_log_notice("Started " + progName, progLogSection);
@@ -105,8 +103,6 @@ namespace Wnmp
         
         public void Stop()
         {
-            SetStoppedLabel();
-            return;
             try {
                 if (killStop) {
                     Process[] process = Process.GetProcessesByName(procName);
@@ -156,7 +152,7 @@ namespace Wnmp
         private void configContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             try {
-                Process.Start(Options.settings.Editor, Main.StartupPath + confDir + e.ClickedItem.Text);
+                Process.Start(Options.settings.Editor, confDir + e.ClickedItem.Text);
             } catch (Exception ex) {
                 Log.wnmp_log_error(ex.Message, progLogSection);
             }
@@ -165,7 +161,7 @@ namespace Wnmp
         private void logContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             try {
-                Process.Start(Options.settings.Editor, Main.StartupPath + logDir + e.ClickedItem.Text);
+                Process.Start(Options.settings.Editor, logDir + e.ClickedItem.Text);
             } catch (Exception ex) {
                 Log.wnmp_log_error(ex.Message, progLogSection);
             }

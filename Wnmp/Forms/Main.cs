@@ -22,6 +22,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using System.Collections.Generic;
+using Wnmp.Configuration;
 
 namespace Wnmp.Forms
 {
@@ -34,6 +35,7 @@ namespace Wnmp.Forms
         private WnmpNginxProgram Nginx;
         private WnmpMariaDBProgram MariaDB;
         private WnmpPHPProgram PHP;
+        public static Ini settings = new Ini();
         public static string StartupPath { get { return Application.StartupPath; } }
 
         public static readonly Version CPVER = new Version("3.0.2");
@@ -82,7 +84,8 @@ namespace Wnmp.Forms
             WnmpTrayIcon.Icon = Properties.Resources.logo;
             WnmpTrayIcon.Visible = true;
 
-            
+            UpdateOptions();
+
             DoCheckIfAppsAreRunningTimer();
 
             FirstRun();
@@ -144,9 +147,42 @@ namespace Wnmp.Forms
             }
         }
 
+        /// <summary>
+        /// 切换PHP版本
+        /// </summary>
         public void ReloadSetupPHP()
         {
+            bool is_runing = PHP.IsRunning();
+            if (is_runing)
+                PHP.Stop();
+
             PHP = new WnmpPHPProgram(php_name, php_check_box);
+
+            if (is_runing)
+                PHP.Start();
+        }
+
+        /// <summary>
+        /// 更新PHP进程配置文件
+        /// </summary>
+        public void UpdatePHPngxCfg()
+        {
+            Nginx.UpdatePHPngxCfg();
+            
+        }
+
+        private void SetSettings()
+        {
+            settings.NginxChecked = ngx_check_box.Checked;
+            settings.MariaDBChecked = mdb_check_box.Checked;
+            settings.PHPChecked = php_check_box.Checked;
+        }
+
+        private void UpdateOptions()
+        {
+            ngx_check_box.Checked = settings.NginxChecked;
+            mdb_check_box.Checked = settings.MariaDBChecked;
+            php_check_box.Checked = settings.PHPChecked;
         }
 
         /// <summary>
@@ -294,6 +330,12 @@ namespace Wnmp.Forms
         private void php_log_Click(object sender, EventArgs e)
         {
             PHP.LogButton(sender);
+        }
+
+        private void app_check_box_CheckedChanged(object sender, EventArgs e)
+        {
+            SetSettings();
+            settings.UpdateSettings();
         }
     }
 }
