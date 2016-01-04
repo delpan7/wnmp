@@ -13,6 +13,7 @@ namespace Wnmp
 {
     public class WnmpProgram
     {
+        protected Main wnmpForm;
         public Label statusLabel { get; set; } // Label that shows the programs status
         public CheckBox statusChecked { get; set; } // Label that shows the programs status
         public string baseDir { get; set; }    // Directory where all the programs configuration files are

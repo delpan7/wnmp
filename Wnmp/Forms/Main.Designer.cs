@@ -67,7 +67,7 @@ namespace Wnmp.Forms
             this.mem_start = new System.Windows.Forms.Button();
             this.php_check_box = new System.Windows.Forms.CheckBox();
             this.mdb_check_box = new System.Windows.Forms.CheckBox();
-            this.ngx_check_box = new System.Windows.Forms.CheckBox();
+            //this.ngx_check_box = new System.Windows.Forms.CheckBox();
             this.php_log = new System.Windows.Forms.Button();
             this.mdb_log = new System.Windows.Forms.Button();
             this.ngx_log = new System.Windows.Forms.Button();
@@ -194,7 +194,7 @@ namespace Wnmp.Forms
             this.groupBox1.Controls.Add(this.mem_start);
             this.groupBox1.Controls.Add(this.php_check_box);
             this.groupBox1.Controls.Add(this.mdb_check_box);
-            this.groupBox1.Controls.Add(this.ngx_check_box);
+            //this.groupBox1.Controls.Add(this.ngx_check_box);
             this.groupBox1.Controls.Add(this.php_log);
             this.groupBox1.Controls.Add(this.mdb_log);
             this.groupBox1.Controls.Add(this.ngx_log);
@@ -335,16 +335,16 @@ namespace Wnmp.Forms
             // 
             // ngx_check_box
             // 
-            this.ngx_check_box.AutoSize = true;
-            this.ngx_check_box.Checked = true;
-            this.ngx_check_box.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ngx_check_box.Location = new System.Drawing.Point(25, 49);
-            this.ngx_check_box.Margin = new System.Windows.Forms.Padding(2);
-            this.ngx_check_box.Name = "ngx_check_box";
-            this.ngx_check_box.Size = new System.Drawing.Size(15, 14);
-            this.ngx_check_box.TabIndex = 79;
-            this.ngx_check_box.UseVisualStyleBackColor = true;
-            this.ngx_check_box.CheckedChanged += new System.EventHandler(this.app_check_box_CheckedChanged);
+            //this.ngx_check_box.AutoSize = true;
+            //this.ngx_check_box.Checked = true;
+            //this.ngx_check_box.CheckState = System.Windows.Forms.CheckState.Checked;
+            //this.ngx_check_box.Location = new System.Drawing.Point(25, 49);
+            //this.ngx_check_box.Margin = new System.Windows.Forms.Padding(2);
+            //this.ngx_check_box.Name = "ngx_check_box";
+            //this.ngx_check_box.Size = new System.Drawing.Size(15, 14);
+            //this.ngx_check_box.TabIndex = 79;
+            //this.ngx_check_box.UseVisualStyleBackColor = true;
+            //this.ngx_check_box.CheckedChanged += new System.EventHandler(this.app_check_box_CheckedChanged);
             // 
             // php_log
             // 
@@ -702,7 +702,7 @@ namespace Wnmp.Forms
 
         private System.Windows.Forms.MenuStrip MainFormMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.GroupBox groupBox1;
+        public System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
@@ -720,9 +720,9 @@ namespace Wnmp.Forms
         private System.Windows.Forms.Button ngx_log;
         private System.Windows.Forms.Button wnmpdir;
         public System.Windows.Forms.RichTextBox log_rtb;
-        protected System.Windows.Forms.Label ngx_name;
-        protected System.Windows.Forms.Label php_name;
-        protected System.Windows.Forms.Label mdb_name;
+        public System.Windows.Forms.Label ngx_name;
+        public System.Windows.Forms.Label php_name;
+        public System.Windows.Forms.Label mdb_name;
         public System.Windows.Forms.Button mdb_start;
         public System.Windows.Forms.Button ngx_start;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
@@ -731,9 +731,9 @@ namespace Wnmp.Forms
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hostToIPToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem getHTTPHeadersToolStripMenuItem;
-        private System.Windows.Forms.CheckBox ngx_check_box;
-        private System.Windows.Forms.CheckBox php_check_box;
-        private System.Windows.Forms.CheckBox mdb_check_box;
+        //public System.Windows.Forms.CheckBox ngx_check_box;
+        public System.Windows.Forms.CheckBox php_check_box;
+        public System.Windows.Forms.CheckBox mdb_check_box;
         private System.Windows.Forms.ContextMenuStrip ngx_right_menu;
         private System.Windows.Forms.ToolStripMenuItem ngx_stop;
         private System.Windows.Forms.ToolStripMenuItem ngx_restart;

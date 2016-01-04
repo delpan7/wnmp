@@ -10,8 +10,9 @@ namespace Wnmp
 {
     public class WnmpNginxProgram : WnmpProgram
     {
-        public WnmpNginxProgram(Label Label_name, CheckBox chekbox_name)
+        public WnmpNginxProgram(Main wnmp_form)
         {
+            wnmpForm = wnmp_form;
             baseDir = Main.StartupPath.Replace(@"\", "/") + "/nginx/";
             exeName = baseDir + "nginx.exe";
             procName = "nginx";
@@ -20,8 +21,21 @@ namespace Wnmp
             startArgs = "";
             stopArgs = "-s stop";
             killStop = false;
-            statusLabel = Label_name;
-            statusChecked = chekbox_name;
+            statusLabel = wnmpForm.ngx_name;
+            statusChecked = new System.Windows.Forms.CheckBox();
+            //statusChecked.AutoSize = true;
+            statusChecked.Checked = true;
+            //statusChecked.CheckState = System.Windows.Forms.CheckState.Checked;
+            statusChecked.Location = new System.Drawing.Point(25, 49);
+            //statusChecked.Margin = new System.Windows.Forms.Padding(2);
+            statusChecked.Name = "ngx_check_box";
+            //statusChecked.Size = new System.Drawing.Size(15, 14);
+            //statusChecked.TabIndex = 79;
+            //statusChecked.UseVisualStyleBackColor = true;
+            statusChecked.CheckedChanged += new System.EventHandler(this.app_check_box_CheckedChanged);
+
+            wnmpForm.groupBox1.Controls.Add(statusChecked);
+            //statusChecked = wnmpForm.ngx_check_box;
             confDir = baseDir + "conf/";
             logDir = baseDir + "logs/";
             
@@ -51,6 +65,12 @@ namespace Wnmp
                 }
                 sw.WriteLine("}");
             }
+        }
+        public void app_check_box_CheckedChanged(object sender, EventArgs e)
+        {
+
+            //SetSettings();
+            //settings.UpdateSettings();
         }
     }
 }

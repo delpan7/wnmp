@@ -61,7 +61,7 @@ namespace Wnmp.Forms
             Log.setLogComponent(log_rtb);
             Log.wnmp_log_notice("Checking for applications", Log.LogSection.WNMP_MAIN);
 
-            Nginx = new WnmpNginxProgram(ngx_name, ngx_check_box);
+            Nginx = new WnmpNginxProgram(this);
             MariaDB = new WnmpMariaDBProgram(mdb_name, mdb_check_box);
             PHP = new WnmpPHPProgram(php_name, php_check_box);
         }
@@ -173,14 +173,14 @@ namespace Wnmp.Forms
 
         private void SetSettings()
         {
-            settings.NginxChecked = ngx_check_box.Checked;
+            //settings.NginxChecked = ngx_check_box.Checked;
             settings.MariaDBChecked = mdb_check_box.Checked;
             settings.PHPChecked = php_check_box.Checked;
         }
 
         private void UpdateOptions()
         {
-            ngx_check_box.Checked = settings.NginxChecked;
+            //ngx_check_box.Checked = settings.NginxChecked;
             mdb_check_box.Checked = settings.MariaDBChecked;
             php_check_box.Checked = settings.PHPChecked;
         }
@@ -332,7 +332,7 @@ namespace Wnmp.Forms
             PHP.LogButton(sender);
         }
 
-        private void app_check_box_CheckedChanged(object sender, EventArgs e)
+        public void app_check_box_CheckedChanged(object sender, EventArgs e)
         {
             SetSettings();
             settings.UpdateSettings();
