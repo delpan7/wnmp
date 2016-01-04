@@ -56,6 +56,15 @@ namespace Wnmp.Forms
             this.getHTTPHeadersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.localhostToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rds_check_box = new System.Windows.Forms.CheckBox();
+            this.rds_name = new System.Windows.Forms.Label();
+            this.rds_start = new System.Windows.Forms.Button();
+            this.php_right_menu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.php_stop = new System.Windows.Forms.ToolStripMenuItem();
+            this.php_restart = new System.Windows.Forms.ToolStripMenuItem();
+            this.mem_check_box = new System.Windows.Forms.CheckBox();
+            this.mem_name = new System.Windows.Forms.Label();
+            this.mem_start = new System.Windows.Forms.Button();
             this.php_check_box = new System.Windows.Forms.CheckBox();
             this.mdb_check_box = new System.Windows.Forms.CheckBox();
             this.ngx_check_box = new System.Windows.Forms.CheckBox();
@@ -76,9 +85,6 @@ namespace Wnmp.Forms
             this.mdb_stop = new System.Windows.Forms.ToolStripMenuItem();
             this.mdb_restart = new System.Windows.Forms.ToolStripMenuItem();
             this.php_start = new System.Windows.Forms.Button();
-            this.php_right_menu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.php_stop = new System.Windows.Forms.ToolStripMenuItem();
-            this.php_restart = new System.Windows.Forms.ToolStripMenuItem();
             this.ngx_start = new System.Windows.Forms.Button();
             this.ngx_right_menu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ngx_stop = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,12 +95,20 @@ namespace Wnmp.Forms
             this.panel1 = new System.Windows.Forms.Panel();
             this.wnmpdir = new System.Windows.Forms.Button();
             this.log_rtb = new System.Windows.Forms.RichTextBox();
+            this.mem_right_menu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mem_stop = new System.Windows.Forms.ToolStripMenuItem();
+            this.mem_restart = new System.Windows.Forms.ToolStripMenuItem();
+            this.rds_right_menu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.rds_stop = new System.Windows.Forms.ToolStripMenuItem();
+            this.rds_restart = new System.Windows.Forms.ToolStripMenuItem();
             this.MainFormMenuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.mdb_right_menu.SuspendLayout();
             this.php_right_menu.SuspendLayout();
+            this.mdb_right_menu.SuspendLayout();
             this.ngx_right_menu.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.mem_right_menu.SuspendLayout();
+            this.rds_right_menu.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainFormMenuStrip
@@ -124,19 +138,19 @@ namespace Wnmp.Forms
             // wnmpOptionsToolStripMenuItem
             // 
             this.wnmpOptionsToolStripMenuItem.Name = "wnmpOptionsToolStripMenuItem";
-            this.wnmpOptionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.wnmpOptionsToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.wnmpOptionsToolStripMenuItem.Text = "配置";
             this.wnmpOptionsToolStripMenuItem.Click += new System.EventHandler(this.wnmpOptionsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(97, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -172,6 +186,12 @@ namespace Wnmp.Forms
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.rds_check_box);
+            this.groupBox1.Controls.Add(this.rds_name);
+            this.groupBox1.Controls.Add(this.rds_start);
+            this.groupBox1.Controls.Add(this.mem_check_box);
+            this.groupBox1.Controls.Add(this.mem_name);
+            this.groupBox1.Controls.Add(this.mem_start);
             this.groupBox1.Controls.Add(this.php_check_box);
             this.groupBox1.Controls.Add(this.mdb_check_box);
             this.groupBox1.Controls.Add(this.ngx_check_box);
@@ -194,17 +214,105 @@ namespace Wnmp.Forms
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(375, 160);
+            this.groupBox1.Size = new System.Drawing.Size(375, 241);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Applications";
+            // 
+            // rds_check_box
+            // 
+            this.rds_check_box.AutoSize = true;
+            this.rds_check_box.Checked = true;
+            this.rds_check_box.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.rds_check_box.Location = new System.Drawing.Point(26, 209);
+            this.rds_check_box.Margin = new System.Windows.Forms.Padding(2);
+            this.rds_check_box.Name = "rds_check_box";
+            this.rds_check_box.Size = new System.Drawing.Size(15, 14);
+            this.rds_check_box.TabIndex = 87;
+            this.rds_check_box.UseVisualStyleBackColor = true;
+            // 
+            // rds_name
+            // 
+            this.rds_name.AutoSize = true;
+            this.rds_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rds_name.Location = new System.Drawing.Point(77, 207);
+            this.rds_name.Name = "rds_name";
+            this.rds_name.Size = new System.Drawing.Size(44, 16);
+            this.rds_name.TabIndex = 86;
+            this.rds_name.Text = "Redis";
+            // 
+            // rds_start
+            // 
+            this.rds_start.ContextMenuStrip = this.php_right_menu;
+            this.rds_start.Location = new System.Drawing.Point(166, 202);
+            this.rds_start.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rds_start.Name = "rds_start";
+            this.rds_start.Size = new System.Drawing.Size(50, 26);
+            this.rds_start.TabIndex = 85;
+            this.rds_start.Text = "Start";
+            this.rds_start.UseVisualStyleBackColor = true;
+            // 
+            // php_right_menu
+            // 
+            this.php_right_menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.php_stop,
+            this.php_restart});
+            this.php_right_menu.Name = "nginx_menu";
+            this.php_right_menu.Size = new System.Drawing.Size(118, 48);
+            // 
+            // php_stop
+            // 
+            this.php_stop.Name = "php_stop";
+            this.php_stop.Size = new System.Drawing.Size(117, 22);
+            this.php_stop.Text = "Stop";
+            this.php_stop.Click += new System.EventHandler(this.php_stop_Click);
+            // 
+            // php_restart
+            // 
+            this.php_restart.Name = "php_restart";
+            this.php_restart.Size = new System.Drawing.Size(117, 22);
+            this.php_restart.Text = "Restart";
+            this.php_restart.Click += new System.EventHandler(this.php_restart_Click);
+            // 
+            // mem_check_box
+            // 
+            this.mem_check_box.AutoSize = true;
+            this.mem_check_box.Checked = true;
+            this.mem_check_box.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.mem_check_box.Location = new System.Drawing.Point(25, 169);
+            this.mem_check_box.Margin = new System.Windows.Forms.Padding(2);
+            this.mem_check_box.Name = "mem_check_box";
+            this.mem_check_box.Size = new System.Drawing.Size(15, 14);
+            this.mem_check_box.TabIndex = 84;
+            this.mem_check_box.UseVisualStyleBackColor = true;
+            // 
+            // mem_name
+            // 
+            this.mem_name.AutoSize = true;
+            this.mem_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mem_name.Location = new System.Drawing.Point(76, 167);
+            this.mem_name.Name = "mem_name";
+            this.mem_name.Size = new System.Drawing.Size(83, 16);
+            this.mem_name.TabIndex = 83;
+            this.mem_name.Text = "Memcached";
+            // 
+            // mem_start
+            // 
+            this.mem_start.ContextMenuStrip = this.php_right_menu;
+            this.mem_start.Location = new System.Drawing.Point(165, 162);
+            this.mem_start.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mem_start.Name = "mem_start";
+            this.mem_start.Size = new System.Drawing.Size(50, 26);
+            this.mem_start.TabIndex = 82;
+            this.mem_start.Text = "Start";
+            this.mem_start.UseVisualStyleBackColor = true;
             // 
             // php_check_box
             // 
             this.php_check_box.AutoSize = true;
             this.php_check_box.Checked = true;
             this.php_check_box.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.php_check_box.Location = new System.Drawing.Point(22, 127);
+            this.php_check_box.Location = new System.Drawing.Point(25, 129);
             this.php_check_box.Margin = new System.Windows.Forms.Padding(2);
             this.php_check_box.Name = "php_check_box";
             this.php_check_box.Size = new System.Drawing.Size(15, 14);
@@ -217,7 +325,7 @@ namespace Wnmp.Forms
             this.mdb_check_box.AutoSize = true;
             this.mdb_check_box.Checked = true;
             this.mdb_check_box.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mdb_check_box.Location = new System.Drawing.Point(22, 88);
+            this.mdb_check_box.Location = new System.Drawing.Point(25, 90);
             this.mdb_check_box.Margin = new System.Windows.Forms.Padding(2);
             this.mdb_check_box.Name = "mdb_check_box";
             this.mdb_check_box.Size = new System.Drawing.Size(15, 14);
@@ -230,7 +338,7 @@ namespace Wnmp.Forms
             this.ngx_check_box.AutoSize = true;
             this.ngx_check_box.Checked = true;
             this.ngx_check_box.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ngx_check_box.Location = new System.Drawing.Point(22, 47);
+            this.ngx_check_box.Location = new System.Drawing.Point(25, 49);
             this.ngx_check_box.Margin = new System.Windows.Forms.Padding(2);
             this.ngx_check_box.Name = "ngx_check_box";
             this.ngx_check_box.Size = new System.Drawing.Size(15, 14);
@@ -411,28 +519,6 @@ namespace Wnmp.Forms
             this.php_start.UseVisualStyleBackColor = true;
             this.php_start.Click += new System.EventHandler(this.php_start_Click);
             // 
-            // php_right_menu
-            // 
-            this.php_right_menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.php_stop,
-            this.php_restart});
-            this.php_right_menu.Name = "nginx_menu";
-            this.php_right_menu.Size = new System.Drawing.Size(118, 48);
-            // 
-            // php_stop
-            // 
-            this.php_stop.Name = "php_stop";
-            this.php_stop.Size = new System.Drawing.Size(117, 22);
-            this.php_stop.Text = "Stop";
-            this.php_stop.Click += new System.EventHandler(this.php_stop_Click);
-            // 
-            // php_restart
-            // 
-            this.php_restart.Name = "php_restart";
-            this.php_restart.Size = new System.Drawing.Size(117, 22);
-            this.php_restart.Text = "Restart";
-            this.php_restart.Click += new System.EventHandler(this.php_restart_Click);
-            // 
             // ngx_start
             // 
             this.ngx_start.ContextMenuStrip = this.ngx_right_menu;
@@ -513,7 +599,7 @@ namespace Wnmp.Forms
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(500, 307);
+            this.panel1.Size = new System.Drawing.Size(500, 391);
             this.panel1.TabIndex = 5;
             // 
             // wnmpdir
@@ -531,19 +617,59 @@ namespace Wnmp.Forms
             // 
             this.log_rtb.BackColor = System.Drawing.Color.White;
             this.log_rtb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.log_rtb.Location = new System.Drawing.Point(0, 178);
+            this.log_rtb.Location = new System.Drawing.Point(0, 261);
             this.log_rtb.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.log_rtb.Name = "log_rtb";
             this.log_rtb.ReadOnly = true;
-            this.log_rtb.Size = new System.Drawing.Size(500, 129);
+            this.log_rtb.Size = new System.Drawing.Size(500, 128);
             this.log_rtb.TabIndex = 49;
             this.log_rtb.Text = "";
+            // 
+            // mem_right_menu
+            // 
+            this.mem_right_menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mem_stop,
+            this.mem_restart});
+            this.mem_right_menu.Name = "nginx_menu";
+            this.mem_right_menu.Size = new System.Drawing.Size(118, 48);
+            // 
+            // mem_stop
+            // 
+            this.mem_stop.Name = "mem_stop";
+            this.mem_stop.Size = new System.Drawing.Size(117, 22);
+            this.mem_stop.Text = "Stop";
+            // 
+            // mem_restart
+            // 
+            this.mem_restart.Name = "mem_restart";
+            this.mem_restart.Size = new System.Drawing.Size(117, 22);
+            this.mem_restart.Text = "Restart";
+            // 
+            // rds_right_menu
+            // 
+            this.rds_right_menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rds_stop,
+            this.rds_restart});
+            this.rds_right_menu.Name = "nginx_menu";
+            this.rds_right_menu.Size = new System.Drawing.Size(153, 70);
+            // 
+            // rds_stop
+            // 
+            this.rds_stop.Name = "rds_stop";
+            this.rds_stop.Size = new System.Drawing.Size(152, 22);
+            this.rds_stop.Text = "Stop";
+            // 
+            // rds_restart
+            // 
+            this.rds_restart.Name = "rds_restart";
+            this.rds_restart.Size = new System.Drawing.Size(152, 22);
+            this.rds_restart.Text = "Restart";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(500, 332);
+            this.ClientSize = new System.Drawing.Size(500, 416);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.MainFormMenuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -561,10 +687,12 @@ namespace Wnmp.Forms
             this.MainFormMenuStrip.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.mdb_right_menu.ResumeLayout(false);
             this.php_right_menu.ResumeLayout(false);
+            this.mdb_right_menu.ResumeLayout(false);
             this.ngx_right_menu.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.mem_right_menu.ResumeLayout(false);
+            this.rds_right_menu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -615,6 +743,18 @@ namespace Wnmp.Forms
         private System.Windows.Forms.ContextMenuStrip php_right_menu;
         private System.Windows.Forms.ToolStripMenuItem php_stop;
         private System.Windows.Forms.ToolStripMenuItem php_restart;
+        private System.Windows.Forms.CheckBox rds_check_box;
+        protected System.Windows.Forms.Label rds_name;
+        public System.Windows.Forms.Button rds_start;
+        private System.Windows.Forms.CheckBox mem_check_box;
+        protected System.Windows.Forms.Label mem_name;
+        public System.Windows.Forms.Button mem_start;
+        private System.Windows.Forms.ToolStripMenuItem mem_restart;
+        private System.Windows.Forms.ToolStripMenuItem mem_stop;
+        private System.Windows.Forms.ContextMenuStrip mem_right_menu;
+        private System.Windows.Forms.ContextMenuStrip rds_right_menu;
+        private System.Windows.Forms.ToolStripMenuItem rds_stop;
+        private System.Windows.Forms.ToolStripMenuItem rds_restart;
     }
 }
 

@@ -25,11 +25,11 @@ namespace Wnmp
             confDir = baseDir;
             logDir = baseDir + "logs/";
 
-            if (!Directory.Exists(Application.StartupPath + "/php"))
+            if (!Directory.Exists(baseDir))
                 Log.wnmp_log_error("Error: PHP Not Found", Log.LogSection.WNMP_PHP);
 
             DirFiles(baseDir, "php.ini", configContextMenu);
-            DirFiles(baseDir + "logs", "*.log", logContextMenu);
+            DirFiles(logDir, "*.log", logContextMenu);
 
             this.SetStatusLabel();
         }

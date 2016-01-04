@@ -91,7 +91,11 @@ namespace Wnmp
             [Description("Wnmp PHP")]
             WNMP_PHP = 2,
             [Description("Wnmp MariaDB")]
-            WNMP_MARIADB = 3
+            WNMP_MARIADB = 3,
+            [Description("Wnmp Memcached")]
+            WNMP_MEMCACHED = 4,
+            [Description("Wnmp Redis")]
+            WNMP_REDIS = 5,
         }
     }
 }

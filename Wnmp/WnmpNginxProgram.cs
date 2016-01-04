@@ -29,7 +29,7 @@ namespace Wnmp
                 Log.wnmp_log_error("Error: Nginx Not Found", Log.LogSection.WNMP_NGINX);
 
             this.DirFiles(baseDir + "conf", "*.conf", configContextMenu);
-            this.DirFiles(baseDir + "logs", "*.log", logContextMenu);
+            this.DirFiles(logDir, "*.log", logContextMenu);
 
             this.SetStatusLabel();
         }
