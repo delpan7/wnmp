@@ -28,15 +28,15 @@ namespace Wnmp
         public string logDir { get; set; }     // Directory where all the programs log files are
 
         public int PID { get; protected set; }   // PID of process
-        public ContextMenuStrip configContextMenu { get; set; } // Displays all the programs config files in |confDir|
-        public ContextMenuStrip logContextMenu { get; set; }    // Displays all the programs log files in |logDir|
+        public ToolStripMenuItem configContextMenu { get; set; } // Displays all the programs config files in |confDir|
+        public ToolStripMenuItem logContextMenu { get; set; }    // Displays all the programs log files in |logDir|
 
         public WnmpProgram()
         {
-            configContextMenu = new ContextMenuStrip();
-            logContextMenu = new ContextMenuStrip();
-            configContextMenu.ItemClicked += configContextMenu_ItemClicked;
-            logContextMenu.ItemClicked += logContextMenu_ItemClicked;
+            configContextMenu = new ToolStripMenuItem();
+            logContextMenu = new ToolStripMenuItem();
+            //configContextMenu.Click += new EventHandler(configContextMenu_ItemClicked);
+            //logContextMenu.Click += logContextMenu_ItemClicked;
         }
 
         /// <summary>
@@ -153,16 +153,16 @@ namespace Wnmp
         private void configContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             try {
-                Process.Start(Options.settings.Editor, confDir + e.ClickedItem.Text);
+                Process.Start(Options.settings.Editor, confDir + e.Text);
             } catch (Exception ex) {
                 Log.wnmp_log_error(ex.Message, progLogSection);
             }
         }
 
-        private void logContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void logContextMenu_ItemClicked(object sender, EventArgs e)
         {
             try {
-                Process.Start(Options.settings.Editor, logDir + e.ClickedItem.Text);
+                Process.Start(Options.settings.Editor, logDir + e.Text);
             } catch (Exception ex) {
                 Log.wnmp_log_error(ex.Message, progLogSection);
             }
@@ -182,7 +182,7 @@ namespace Wnmp
         /// <summary>
         /// Adds configuration files or log files to the context menu strip
         /// </summary>
-        protected void DirFiles(string path, string GetFiles, ContextMenuStrip cms)
+        protected void DirFiles(string path, string GetFiles, ToolStripMenuItem cms)
         {
             DirectoryInfo dinfo = new DirectoryInfo(path);
 
@@ -190,8 +190,12 @@ namespace Wnmp
                 return;
 
             FileInfo[] Files = dinfo.GetFiles(GetFiles);
-            foreach (FileInfo file in Files)
-                cms.Items.Add(file.Name, null);
+            ToolStripItem[] tool = { };
+            for (int i=0; i< Files.Length; i++) {
+                tool[i] = new ToolStripMenuItem(Files[i].Name, null, new EventHandler(configContextMenu_ItemClicked), null);
+            }
+            
+            cms.DropDownItems.AddRange(tool);
         }
     }
 }

@@ -43,7 +43,10 @@ namespace Wnmp
                 Log.wnmp_log_error("Error: Nginx Not Found", Log.LogSection.WNMP_NGINX);
 
             this.DirFiles(baseDir + "conf", "*.conf", configContextMenu);
-            this.DirFiles(logDir, "*.log", logContextMenu);
+            this.DirFiles(logDir, "*.log", configContextMenu);
+
+            wnmpForm.ngx_option.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            configContextMenu});
 
             this.SetStatusLabel();
         }
@@ -71,6 +74,11 @@ namespace Wnmp
 
             //SetSettings();
             //settings.UpdateSettings();
+        }
+
+        public void ngx_config_Click(object sender, EventArgs e)
+        {
+            this.ConfigButton(sender);
         }
     }
 }
