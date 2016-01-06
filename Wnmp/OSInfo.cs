@@ -28,8 +28,7 @@ namespace Wnmp
     /// </summary>
     public class OSVersionInfo
     {
-        static public string WindowsVersionString()
-        {
+        static public string WindowsVersionString() {
             var name = (from x in new ManagementObjectSearcher("SELECT Caption FROM Win32_OperatingSystem").Get().Cast<ManagementObject>()
                         select x.GetPropertyValue("Caption")).First();
             return name != null ? name.ToString() : "Unknown";

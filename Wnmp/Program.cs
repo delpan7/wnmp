@@ -30,8 +30,7 @@ namespace Wnmp
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main(string[] args)
-        {
+        static void Main(string[] args) {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             OSVersionCheck();
@@ -41,8 +40,7 @@ namespace Wnmp
         /// <summary>
         /// Checks if the OS is Vista+
         /// </summary>
-        private static void OSVersionCheck()
-        {
+        private static void OSVersionCheck() {
             if (Environment.OSVersion.Version.Major < 6) {
                 MessageBox.Show("Windows Vista+ is required to run Wnmp");
                 Process process = Process.GetCurrentProcess();

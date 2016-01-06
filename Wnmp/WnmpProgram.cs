@@ -31,8 +31,7 @@ namespace Wnmp
         public ToolStripMenuItem configContextMenu { get; set; } // Displays all the programs config files in |confDir|
         public ToolStripMenuItem logContextMenu { get; set; }    // Displays all the programs log files in |logDir|
 
-        public WnmpProgram()
-        {
+        public WnmpProgram() {
             configContextMenu = new ToolStripMenuItem();
             logContextMenu = new ToolStripMenuItem();
             //configContextMenu.Click += new EventHandler(configContextMenu_ItemClicked);
@@ -42,8 +41,7 @@ namespace Wnmp
         /// <summary>
         /// Changes the labels apperance to started
         /// </summary>
-        protected void SetStartedLabel()
-        {
+        protected void SetStartedLabel() {
             //statusLabel.Text = "\u221A";
             statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             statusLabel.ForeColor = Color.Lime;
@@ -52,28 +50,26 @@ namespace Wnmp
         /// <summary>
         /// Changes the labels apperance to stopped
         /// </summary>
-        protected void SetStoppedLabel()
-        {
+        protected void SetStoppedLabel() {
             //statusLabel.Text = "X";
             statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             statusLabel.ForeColor = Color.Black;
         }
 
-        public void SetStatusLabel()
-        {
+        public void SetStatusLabel() {
             if (this.IsRunning() == true)
                 SetStartedLabel();
             else
                 SetStoppedLabel();
         }
 
-        protected void StartProcess(string exe, string args)
-        {
-            
+        protected void StartProcess(string exe, string args) {
+
             Process ps = new Process();
             ps.StartInfo.FileName = exe;
             ps.StartInfo.Arguments = args;
             ps.StartInfo.UseShellExecute = false;
+            ps.StartInfo.RedirectStandardInput = true;
             ps.StartInfo.RedirectStandardOutput = true;
             ps.StartInfo.WorkingDirectory = baseDir;
             ps.StartInfo.CreateNoWindow = true;
@@ -85,13 +81,11 @@ namespace Wnmp
             PID = ps.Id;
         }
 
-        private bool IsPHP()
-        {
+        private bool IsPHP() {
             return (progLogSection == Log.LogSection.WNMP_PHP);
         }
 
-        public void Start()
-        {
+        public void Start() {
             try {
                 StartProcess(exeName, startArgs);
                 Log.wnmp_log_notice("Started " + progName, progLogSection);
@@ -101,9 +95,8 @@ namespace Wnmp
             }
         }
 
-        
-        public void Stop()
-        {
+
+        public void Stop() {
             try {
                 if (killStop) {
                     Process[] process = Process.GetProcessesByName(procName);
@@ -112,7 +105,7 @@ namespace Wnmp
                     }
                 } else {
                     StartProcess(exeName, stopArgs);
-                    new Thread(delegate() {
+                    new Thread(delegate () {
                         Thread.Sleep(2000);
                         Process[] process = Process.GetProcessesByName(procName);
                         foreach (Process currentProc in process) {
@@ -127,75 +120,73 @@ namespace Wnmp
             }
         }
 
-        public void Restart()
-        {
+        public void Restart() {
             this.Stop();
             this.Start();
             Log.wnmp_log_notice("Restarted " + progName, progLogSection);
         }
 
-        public void ConfigButton(object sender)
-        {
+        public void ConfigButton(object sender) {
             Button btnSender = (Button)sender;
             Point ptLowerLeft = new Point(0, btnSender.Height);
             ptLowerLeft = btnSender.PointToScreen(ptLowerLeft);
-            configContextMenu.Show(ptLowerLeft);
+            //configContextMenu.Show(ptLowerLeft);
         }
 
-        public void LogButton(object sender)
-        {
+        public void LogButton(object sender) {
             Button btnSender = (Button)sender;
             Point ptLowerLeft = new Point(0, btnSender.Height);
             ptLowerLeft = btnSender.PointToScreen(ptLowerLeft);
-            logContextMenu.Show(ptLowerLeft);
+            //logContextMenu.Show(ptLowerLeft);
         }
 
-        private void configContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
+        private void configContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e) {
+            Console.WriteLine("{0}", e.ToString());
+
             try {
-                Process.Start(Options.settings.Editor, confDir + e.Text);
+                Process.Start(Options.settings.Editor, confDir + e.ClickedItem.Text);
             } catch (Exception ex) {
                 Log.wnmp_log_error(ex.Message, progLogSection);
             }
         }
 
-        private void logContextMenu_ItemClicked(object sender, EventArgs e)
-        {
+        private void logContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e) {
             try {
-                Process.Start(Options.settings.Editor, logDir + e.Text);
+                //Process.Start(Options.settings.Editor, logDir + e.Text);
             } catch (Exception ex) {
                 Log.wnmp_log_error(ex.Message, progLogSection);
             }
         }
 
-        public bool IsRunning()
-        {
+        public bool IsRunning() {
             Process[] process = Process.GetProcessesByName(procName);
 
             return (process.Length != 0);
         }
-        public bool IsChecked()
-        {
+        public bool IsChecked() {
             return (statusChecked.Checked == true);
         }
 
         /// <summary>
         /// Adds configuration files or log files to the context menu strip
         /// </summary>
-        protected void DirFiles(string path, string GetFiles, ToolStripMenuItem cms)
-        {
+        protected void DirFiles(string path, string GetFiles, ToolStripMenuItem cms) {
             DirectoryInfo dinfo = new DirectoryInfo(path);
 
             if (!dinfo.Exists)
                 return;
 
             FileInfo[] Files = dinfo.GetFiles(GetFiles);
-            ToolStripItem[] tool = { };
-            for (int i=0; i< Files.Length; i++) {
-                tool[i] = new ToolStripMenuItem(Files[i].Name, null, new EventHandler(configContextMenu_ItemClicked), null);
+
+            for (int i = 0; i < Files.Length; i++) {
+                cms.DropDownItems.Add(new ToolStripMenuItem(Files[i].Name, null));
             }
-            
-            cms.DropDownItems.AddRange(tool);
+            cms.DropDownItemClicked += new ToolStripItemClickedEventHandler(configContextMenu_ItemClicked);
+        }
+
+        protected ToolStripMenuItem CreateMenuItem(string text) {
+            ToolStripMenuItem menu_item = new ToolStripMenuItem(text);
+            return menu_item;
         }
     }
 }

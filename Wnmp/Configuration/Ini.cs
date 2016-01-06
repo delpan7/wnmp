@@ -38,6 +38,8 @@ namespace Wnmp.Configuration
         public bool NginxChecked = true;
         public bool MariaDBChecked = true;
         public bool PHPChecked = true;
+        public bool MemcachedChecked = true;
+        public bool RedisChecked = true;
         public string phpBin = "";
         public short PHP_Port = 9001;
         public int PHP_Processes = 2;
@@ -93,6 +95,8 @@ namespace Wnmp.Configuration
             Boolean.TryParse(ReadIniValue("ngx_checked", NginxChecked), out NginxChecked);
             Boolean.TryParse(ReadIniValue("mdb_checked", MariaDBChecked), out MariaDBChecked);
             Boolean.TryParse(ReadIniValue("php_checked", PHPChecked), out PHPChecked);
+            Boolean.TryParse(ReadIniValue("mem_checked", MemcachedChecked), out MemcachedChecked);
+            Boolean.TryParse(ReadIniValue("rds_checked", RedisChecked), out RedisChecked);
 
             int.TryParse(ReadIniValue("phpprocesses", PHP_Processes), out PHP_Processes);
             short.TryParse(ReadIniValue("phpport", PHP_Port), out PHP_Port);
@@ -120,6 +124,8 @@ namespace Wnmp.Configuration
                 sw.WriteLine("; 勾选Nginx\r\nngx_checked=" + NginxChecked);
                 sw.WriteLine("; 勾选MariaDB\r\nmdb_checked=" + MariaDBChecked);
                 sw.WriteLine("; 勾选PHP\r\nphp_checked=" + PHPChecked);
+                sw.WriteLine("; 勾选Memcached\r\nmem_checked=" + MemcachedChecked);
+                sw.WriteLine("; 勾选Redis\r\nrds_checked=" + RedisChecked);
                 sw.WriteLine("[PHP]");
                 sw.WriteLine("; PHP 进程数\r\nphpprocesses=" + PHP_Processes);
                 sw.WriteLine("; PHP 端口\r\nphpport=" + PHP_Port);

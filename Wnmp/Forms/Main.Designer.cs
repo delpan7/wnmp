@@ -27,10 +27,8 @@ namespace Wnmp.Forms
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -42,8 +40,7 @@ namespace Wnmp.Forms
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.MainFormMenuStrip = new System.Windows.Forms.MenuStrip();
@@ -67,14 +64,9 @@ namespace Wnmp.Forms
             this.mem_check_box = new System.Windows.Forms.CheckBox();
             this.mem_name = new System.Windows.Forms.Label();
             this.mem_start = new System.Windows.Forms.Button();
+            this.ngx_check_box = new System.Windows.Forms.CheckBox();
             this.php_check_box = new System.Windows.Forms.CheckBox();
             this.mdb_check_box = new System.Windows.Forms.CheckBox();
-            this.php_log = new System.Windows.Forms.Button();
-            this.mdb_log = new System.Windows.Forms.Button();
-            this.ngx_log = new System.Windows.Forms.Button();
-            this.php_cfg = new System.Windows.Forms.Button();
-            this.mdb_cfg = new System.Windows.Forms.Button();
-            this.ngx_config = new System.Windows.Forms.Button();
             this.php_name = new System.Windows.Forms.Label();
             this.mdb_name = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -140,7 +132,7 @@ namespace Wnmp.Forms
             // wnmpOptionsToolStripMenuItem
             // 
             this.wnmpOptionsToolStripMenuItem.Name = "wnmpOptionsToolStripMenuItem";
-            this.wnmpOptionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.wnmpOptionsToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.wnmpOptionsToolStripMenuItem.Text = "Wnmp配置";
             this.wnmpOptionsToolStripMenuItem.Click += new System.EventHandler(this.wnmpOptionsToolStripMenuItem_Click);
             // 
@@ -149,24 +141,24 @@ namespace Wnmp.Forms
             this.optionsFileStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ngx_option});
             this.optionsFileStripMenuItem.Name = "optionsFileStripMenuItem";
-            this.optionsFileStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionsFileStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.optionsFileStripMenuItem.Text = "打开配置文件";
             // 
             // ngx_option
             // 
             this.ngx_option.Name = "ngx_option";
-            this.ngx_option.Size = new System.Drawing.Size(152, 22);
+            this.ngx_option.Size = new System.Drawing.Size(134, 22);
             this.ngx_option.Text = "Nginx配置";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(145, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -208,14 +200,9 @@ namespace Wnmp.Forms
             this.groupBox1.Controls.Add(this.mem_check_box);
             this.groupBox1.Controls.Add(this.mem_name);
             this.groupBox1.Controls.Add(this.mem_start);
+            this.groupBox1.Controls.Add(this.ngx_check_box);
             this.groupBox1.Controls.Add(this.php_check_box);
             this.groupBox1.Controls.Add(this.mdb_check_box);
-            this.groupBox1.Controls.Add(this.php_log);
-            this.groupBox1.Controls.Add(this.mdb_log);
-            this.groupBox1.Controls.Add(this.ngx_log);
-            this.groupBox1.Controls.Add(this.php_cfg);
-            this.groupBox1.Controls.Add(this.mdb_cfg);
-            this.groupBox1.Controls.Add(this.ngx_config);
             this.groupBox1.Controls.Add(this.php_name);
             this.groupBox1.Controls.Add(this.mdb_name);
             this.groupBox1.Controls.Add(this.label6);
@@ -237,14 +224,13 @@ namespace Wnmp.Forms
             // rds_check_box
             // 
             this.rds_check_box.AutoSize = true;
-            this.rds_check_box.Checked = true;
-            this.rds_check_box.CheckState = System.Windows.Forms.CheckState.Checked;
             this.rds_check_box.Location = new System.Drawing.Point(26, 209);
             this.rds_check_box.Margin = new System.Windows.Forms.Padding(2);
             this.rds_check_box.Name = "rds_check_box";
             this.rds_check_box.Size = new System.Drawing.Size(15, 14);
             this.rds_check_box.TabIndex = 87;
             this.rds_check_box.UseVisualStyleBackColor = true;
+            this.rds_check_box.CheckedChanged += new System.EventHandler(this.app_check_box_CheckedChanged);
             // 
             // rds_name
             // 
@@ -266,6 +252,7 @@ namespace Wnmp.Forms
             this.rds_start.TabIndex = 85;
             this.rds_start.Text = "Start";
             this.rds_start.UseVisualStyleBackColor = true;
+            this.rds_start.Click += new System.EventHandler(this.rds_start_Click);
             // 
             // php_right_menu
             // 
@@ -292,14 +279,13 @@ namespace Wnmp.Forms
             // mem_check_box
             // 
             this.mem_check_box.AutoSize = true;
-            this.mem_check_box.Checked = true;
-            this.mem_check_box.CheckState = System.Windows.Forms.CheckState.Checked;
             this.mem_check_box.Location = new System.Drawing.Point(25, 169);
             this.mem_check_box.Margin = new System.Windows.Forms.Padding(2);
             this.mem_check_box.Name = "mem_check_box";
             this.mem_check_box.Size = new System.Drawing.Size(15, 14);
             this.mem_check_box.TabIndex = 84;
             this.mem_check_box.UseVisualStyleBackColor = true;
+            this.mem_check_box.CheckedChanged += new System.EventHandler(this.app_check_box_CheckedChanged);
             // 
             // mem_name
             // 
@@ -321,12 +307,22 @@ namespace Wnmp.Forms
             this.mem_start.TabIndex = 82;
             this.mem_start.Text = "Start";
             this.mem_start.UseVisualStyleBackColor = true;
+            this.mem_start.Click += new System.EventHandler(this.mem_start_Click);
+            // 
+            // ngx_check_box
+            // 
+            this.ngx_check_box.AutoSize = true;
+            this.ngx_check_box.Location = new System.Drawing.Point(25, 49);
+            this.ngx_check_box.Margin = new System.Windows.Forms.Padding(2);
+            this.ngx_check_box.Name = "ngx_check_box";
+            this.ngx_check_box.Size = new System.Drawing.Size(15, 14);
+            this.ngx_check_box.TabIndex = 79;
+            this.ngx_check_box.UseVisualStyleBackColor = true;
+            this.ngx_check_box.CheckedChanged += new System.EventHandler(this.app_check_box_CheckedChanged);
             // 
             // php_check_box
             // 
             this.php_check_box.AutoSize = true;
-            this.php_check_box.Checked = true;
-            this.php_check_box.CheckState = System.Windows.Forms.CheckState.Checked;
             this.php_check_box.Location = new System.Drawing.Point(25, 129);
             this.php_check_box.Margin = new System.Windows.Forms.Padding(2);
             this.php_check_box.Name = "php_check_box";
@@ -338,8 +334,6 @@ namespace Wnmp.Forms
             // mdb_check_box
             // 
             this.mdb_check_box.AutoSize = true;
-            this.mdb_check_box.Checked = true;
-            this.mdb_check_box.CheckState = System.Windows.Forms.CheckState.Checked;
             this.mdb_check_box.Location = new System.Drawing.Point(25, 90);
             this.mdb_check_box.Margin = new System.Windows.Forms.Padding(2);
             this.mdb_check_box.Name = "mdb_check_box";
@@ -347,72 +341,6 @@ namespace Wnmp.Forms
             this.mdb_check_box.TabIndex = 80;
             this.mdb_check_box.UseVisualStyleBackColor = true;
             this.mdb_check_box.CheckedChanged += new System.EventHandler(this.app_check_box_CheckedChanged);
-            // 
-            // php_log
-            // 
-            this.php_log.Location = new System.Drawing.Point(295, 122);
-            this.php_log.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.php_log.Name = "php_log";
-            this.php_log.Size = new System.Drawing.Size(50, 26);
-            this.php_log.TabIndex = 75;
-            this.php_log.Text = "Logs";
-            this.php_log.UseVisualStyleBackColor = true;
-            this.php_log.Click += new System.EventHandler(this.php_log_Click);
-            // 
-            // mdb_log
-            // 
-            this.mdb_log.Location = new System.Drawing.Point(295, 82);
-            this.mdb_log.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.mdb_log.Name = "mdb_log";
-            this.mdb_log.Size = new System.Drawing.Size(50, 26);
-            this.mdb_log.TabIndex = 74;
-            this.mdb_log.Text = "Logs";
-            this.mdb_log.UseVisualStyleBackColor = true;
-            this.mdb_log.Click += new System.EventHandler(this.mdb_log_Click);
-            // 
-            // ngx_log
-            // 
-            this.ngx_log.Location = new System.Drawing.Point(295, 42);
-            this.ngx_log.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ngx_log.Name = "ngx_log";
-            this.ngx_log.Size = new System.Drawing.Size(50, 26);
-            this.ngx_log.TabIndex = 73;
-            this.ngx_log.Text = "Logs";
-            this.ngx_log.UseVisualStyleBackColor = true;
-            this.ngx_log.Click += new System.EventHandler(this.ngx_log_Click);
-            // 
-            // php_cfg
-            // 
-            this.php_cfg.Location = new System.Drawing.Point(230, 122);
-            this.php_cfg.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.php_cfg.Name = "php_cfg";
-            this.php_cfg.Size = new System.Drawing.Size(50, 26);
-            this.php_cfg.TabIndex = 72;
-            this.php_cfg.Text = "Config";
-            this.php_cfg.UseVisualStyleBackColor = true;
-            this.php_cfg.Click += new System.EventHandler(this.php_cfg_Click);
-            // 
-            // mdb_cfg
-            // 
-            this.mdb_cfg.Location = new System.Drawing.Point(230, 82);
-            this.mdb_cfg.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.mdb_cfg.Name = "mdb_cfg";
-            this.mdb_cfg.Size = new System.Drawing.Size(50, 26);
-            this.mdb_cfg.TabIndex = 71;
-            this.mdb_cfg.Text = "Config";
-            this.mdb_cfg.UseVisualStyleBackColor = true;
-            this.mdb_cfg.Click += new System.EventHandler(this.mdb_cfg_Click);
-            // 
-            // ngx_config
-            // 
-            this.ngx_config.Location = new System.Drawing.Point(230, 42);
-            this.ngx_config.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ngx_config.Name = "ngx_config";
-            this.ngx_config.Size = new System.Drawing.Size(50, 26);
-            this.ngx_config.TabIndex = 70;
-            this.ngx_config.Text = "Config";
-            this.ngx_config.UseVisualStyleBackColor = true;
-            this.ngx_config.Click += new System.EventHandler(this.ngx_config_Click);
             // 
             // php_name
             // 
@@ -713,13 +641,7 @@ namespace Wnmp.Forms
         public System.Windows.Forms.Button start_select;
         public System.Windows.Forms.Button stop_select;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button ngx_config;
-        private System.Windows.Forms.Button php_cfg;
-        private System.Windows.Forms.Button mdb_cfg;
         private System.Windows.Forms.ToolStripMenuItem wnmpOptionsToolStripMenuItem;
-        private System.Windows.Forms.Button php_log;
-        private System.Windows.Forms.Button mdb_log;
-        private System.Windows.Forms.Button ngx_log;
         private System.Windows.Forms.Button wnmpdir;
         public System.Windows.Forms.RichTextBox log_rtb;
         public System.Windows.Forms.Label ngx_name;
@@ -733,7 +655,7 @@ namespace Wnmp.Forms
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hostToIPToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem getHTTPHeadersToolStripMenuItem;
-        //public System.Windows.Forms.CheckBox ngx_check_box;
+        public System.Windows.Forms.CheckBox ngx_check_box;
         public System.Windows.Forms.CheckBox php_check_box;
         public System.Windows.Forms.CheckBox mdb_check_box;
         private System.Windows.Forms.ContextMenuStrip ngx_right_menu;

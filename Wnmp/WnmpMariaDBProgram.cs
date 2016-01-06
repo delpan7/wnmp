@@ -12,8 +12,7 @@ namespace Wnmp
     public class WnmpMariaDBProgram : WnmpProgram
     {
         private string mdb_pidfile;
-        public WnmpMariaDBProgram(Label Label_name, CheckBox chekbox_name)
-        {
+        public WnmpMariaDBProgram(Label Label_name, CheckBox chekbox_name) {
             baseDir = Main.StartupPath + "/mariadb/";
 
             mdb_pidfile = baseDir + "data/" + Environment.MachineName + ".pid";
@@ -39,10 +38,8 @@ namespace Wnmp
             this.SetStatusLabel();
         }
 
-        public new void Stop()
-        {
-            try
-            {
+        public new void Stop() {
+            try {
                 Process process = Process.GetProcessById(PID);
                 process.Kill();
                 /* A hack to delete MariaDB's PID file */
@@ -51,24 +48,18 @@ namespace Wnmp
                 PID = 0;
                 Log.wnmp_log_notice("Stopped " + progName, progLogSection);
                 SetStoppedLabel();
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Log.wnmp_log_error(ex.Message, progLogSection);
             }
         }
-        public void Shell()
-        {
+        public void Shell() {
             if (IsRunning() == false)
                 Start();
 
-            try
-            {
+            try {
                 Process.Start(baseDir + "bin/mysql.exe", "-u root -p");
                 Log.wnmp_log_notice("Started MariaDB shell", Log.LogSection.WNMP_MARIADB);
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Log.wnmp_log_error(ex.Message, Log.LogSection.WNMP_MARIADB);
             }
         }

@@ -10,8 +10,7 @@ namespace Wnmp
 {
     class WnmpRedisProgram : WnmpProgram
     {
-        public WnmpRedisProgram(Label Label_name, CheckBox chekbox_name)
-        {
+        public WnmpRedisProgram(Label Label_name, CheckBox chekbox_name) {
             baseDir = Main.StartupPath + "/redis/";
             exeName = baseDir + "redis-server.exe";
             procName = "redis-server";

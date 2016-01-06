@@ -36,8 +36,7 @@ namespace Wnmp
         /// Returns the DescriptionAttribute string
         /// </summary>
         /// <returns>Enum DescriptionAttribute string</returns>
-        public static string GetEnumDescription(Enum value)
-        {
+        public static string GetEnumDescription(Enum value) {
             var customAttributes = value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), true);
             if (customAttributes.Length > 0)
                 return ((DescriptionAttribute)customAttributes[0]).Description;
@@ -45,8 +44,7 @@ namespace Wnmp
             return string.Empty;
         }
 
-        private static void wnmp_log(string message, Color color, LogSection logSection)
-        {
+        private static void wnmp_log(string message, Color color, LogSection logSection) {
             var str = string.Format("{0} [{1}] - {2}", DateTime.Now.ToString(" H:m:s "), GetEnumDescription(logSection), message);
             var textLength = rtfLog.TextLength;
             rtfLog.AppendText(str + "\n");
@@ -60,20 +58,17 @@ namespace Wnmp
         /// <summary>
         /// Log error
         /// </summary>
-        public static void wnmp_log_error(string message, LogSection logSection)
-        {
+        public static void wnmp_log_error(string message, LogSection logSection) {
             wnmp_log(message, Color.Red, logSection);
         }
         /// <summary>
         /// Log information
         /// </summary>
-        public static void wnmp_log_notice(string message, LogSection logSection)
-        {
+        public static void wnmp_log_notice(string message, LogSection logSection) {
             wnmp_log(message, Color.DarkBlue, logSection);
         }
 
-        public static void setLogComponent(RichTextBox logRichTextBox)
-        {
+        public static void setLogComponent(RichTextBox logRichTextBox) {
             rtfLog = logRichTextBox;
             wnmp_log_notice("Initializing Control Panel", LogSection.WNMP_MAIN);
             Log.wnmp_log_notice("Control Panel Version: " + Main.CPVER, Log.LogSection.WNMP_MAIN);

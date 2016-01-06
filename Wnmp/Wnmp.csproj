@@ -60,6 +60,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Net" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -80,6 +81,8 @@
     <Compile Include="WnmpMariaDBProgram.cs" />
     <Compile Include="WnmpNginxProgram.cs" />
     <Compile Include="WnmpPHPProgram.cs" />
+    <Compile Include="WnmpMemcachedProgram.cs" />
+    <Compile Include="WnmpRedisProgram.cs" />
     <Compile Include="WnmpProgram.cs" />
     <Compile Include="Forms\Main.cs">
       <SubType>Form</SubType>
