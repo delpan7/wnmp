@@ -265,7 +265,7 @@ namespace Wnmp.Forms
         }
 
         private void ngx_config_Click(object sender, EventArgs e) {
-            Nginx.ConfigButton(sender);
+            //Nginx.ConfigButton(sender);
         }
 
         private void ngx_log_Click(object sender, EventArgs e) {
@@ -285,7 +285,7 @@ namespace Wnmp.Forms
         }
 
         private void mdb_cfg_Click(object sender, EventArgs e) {
-            MariaDB.ConfigButton(sender);
+            //MariaDB.ConfigButton(sender);
         }
 
         private void mdb_log_Click(object sender, EventArgs e) {
@@ -304,8 +304,12 @@ namespace Wnmp.Forms
             PHP.Restart();
         }
 
-        private void php_cfg_Click(object sender, EventArgs e) {
-            PHP.ConfigButton(sender);
+        private void ngx_name_Click(object sender, EventArgs e) {
+            //Nginx.OptionButton(sender);
+        }
+
+        private void ngx_name_MouseUp(object sender, MouseEventArgs e) {
+            MessageBox.Show("yes");
         }
 
         private void php_log_Click(object sender, EventArgs e) {

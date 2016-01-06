@@ -39,7 +39,7 @@ namespace Wnmp
             if (!File.Exists(baseDir + "nginx.exe"))
                 Log.wnmp_log_error("Error: Nginx Not Found", Log.LogSection.WNMP_NGINX);
 
-            ToolStripMenuItem ngx_option = this.CreateMenuItem("Nginx配置");
+            //ToolStripMenuItem ngx_option = this.CreateMenuItem("Nginx配置");
 
             this.DirFiles(baseDir + "conf", "*.conf", wnmpForm.ngx_option);
             wnmpForm.ngx_option.DropDownItems.Add(new ToolStripSeparator());
@@ -72,7 +72,7 @@ namespace Wnmp
         }
 
         public void ngx_config_Click(object sender, EventArgs e) {
-            this.ConfigButton(sender);
+            //this.ConfigButton(sender);
         }
     }
 }

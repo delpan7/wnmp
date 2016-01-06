@@ -28,8 +28,8 @@ namespace Wnmp
             if (!Directory.Exists(baseDir))
                 Log.wnmp_log_error("Error: PHP Not Found", Log.LogSection.WNMP_PHP);
 
-            DirFiles(baseDir, "php.ini", configContextMenu);
-            DirFiles(logDir, "*.log", logContextMenu);
+            //DirFiles(baseDir, "php.ini", configContextMenu);
+            //DirFiles(logDir, "*.log", logContextMenu);
 
             this.SetStatusLabel();
         }

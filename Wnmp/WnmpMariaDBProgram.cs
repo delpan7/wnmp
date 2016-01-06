@@ -32,8 +32,8 @@ namespace Wnmp
             if (!Directory.Exists(baseDir))
                 Log.wnmp_log_error("Error: MariaDB Not Found", Log.LogSection.WNMP_MARIADB);
 
-            this.DirFiles(baseDir, "my.ini", configContextMenu);
-            this.DirFiles(logDir, "*.err", logContextMenu);
+            //this.DirFiles(baseDir, "my.ini", configContextMenu);
+            //this.DirFiles(logDir, "*.err", logContextMenu);
 
             this.SetStatusLabel();
         }
