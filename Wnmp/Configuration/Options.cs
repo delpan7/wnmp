@@ -69,7 +69,6 @@ namespace Wnmp.Forms
 
         private void Options_Load(object sender, EventArgs e)
         {
-            settings.ReadSettings();
             UpdateOptions();
         }
 

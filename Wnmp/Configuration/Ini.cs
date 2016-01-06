@@ -46,6 +46,30 @@ namespace Wnmp.Configuration
         public bool FirstRun = true;
         private string IniFile;
 
+        public Ini(){
+            if (!File.Exists(iniPath))
+                UpdateSettings(); // Update options with default values
+
+            if (!LoadIniFile())
+                return;
+            Editor = ReadIniValue("editorpath", Editor);
+            Boolean.TryParse(ReadIniValue("startupwithwindows", StartWithWindows), out StartWithWindows);
+            Boolean.TryParse(ReadIniValue("startallapplicationsatlaunch", RunAppsAtLaunch), out RunAppsAtLaunch);
+            Boolean.TryParse(ReadIniValue("minimizewnmptotray", MinimizeWnmpToTray), out MinimizeWnmpToTray);
+            Boolean.TryParse(ReadIniValue("firstrun", FirstRun), out FirstRun);
+
+            Boolean.TryParse(ReadIniValue("ngx_checked", NginxChecked), out NginxChecked);
+            Boolean.TryParse(ReadIniValue("mdb_checked", MariaDBChecked), out MariaDBChecked);
+            Boolean.TryParse(ReadIniValue("php_checked", PHPChecked), out PHPChecked);
+            Boolean.TryParse(ReadIniValue("mem_checked", MemcachedChecked), out MemcachedChecked);
+            Boolean.TryParse(ReadIniValue("rds_checked", RedisChecked), out RedisChecked);
+
+            int.TryParse(ReadIniValue("phpprocesses", PHP_Processes), out PHP_Processes);
+            short.TryParse(ReadIniValue("phpport", PHP_Port), out PHP_Port);
+            phpBin = ReadIniValue("phpbin", phpBin);
+            UpdateSettings();
+        }
+
         private bool LoadIniFile()
         {
             if (!File.Exists(iniPath))
@@ -76,33 +100,6 @@ namespace Wnmp.Configuration
             return defaultValue.ToString();
         }
 
-        /// <summary>
-        /// Reads the settings from the ini
-        /// </summary>
-        public void ReadSettings()
-        {
-            if (!File.Exists(iniPath))
-                UpdateSettings(); // Update options with default values
-
-            if (!LoadIniFile())
-                return;
-            Editor = ReadIniValue("editorpath", Editor);
-            Boolean.TryParse(ReadIniValue("startupwithwindows", StartWithWindows), out StartWithWindows);
-            Boolean.TryParse(ReadIniValue("startallapplicationsatlaunch", RunAppsAtLaunch), out RunAppsAtLaunch);
-            Boolean.TryParse(ReadIniValue("minimizewnmptotray", MinimizeWnmpToTray),  out MinimizeWnmpToTray);
-            Boolean.TryParse(ReadIniValue("firstrun", FirstRun), out FirstRun);
-
-            Boolean.TryParse(ReadIniValue("ngx_checked", NginxChecked), out NginxChecked);
-            Boolean.TryParse(ReadIniValue("mdb_checked", MariaDBChecked), out MariaDBChecked);
-            Boolean.TryParse(ReadIniValue("php_checked", PHPChecked), out PHPChecked);
-            Boolean.TryParse(ReadIniValue("mem_checked", MemcachedChecked), out MemcachedChecked);
-            Boolean.TryParse(ReadIniValue("rds_checked", RedisChecked), out RedisChecked);
-
-            int.TryParse(ReadIniValue("phpprocesses", PHP_Processes), out PHP_Processes);
-            short.TryParse(ReadIniValue("phpport", PHP_Port), out PHP_Port);
-            phpBin = ReadIniValue("phpbin", phpBin);
-            UpdateSettings();
-        }
         /// <summary>
         /// Updates the settings to the ini
         /// </summary>

@@ -224,6 +224,7 @@ namespace Wnmp.Forms
             // rds_check_box
             // 
             this.rds_check_box.AutoSize = true;
+            this.rds_check_box.Checked = settings.RedisChecked;
             this.rds_check_box.Location = new System.Drawing.Point(26, 209);
             this.rds_check_box.Margin = new System.Windows.Forms.Padding(2);
             this.rds_check_box.Name = "rds_check_box";
@@ -279,6 +280,7 @@ namespace Wnmp.Forms
             // mem_check_box
             // 
             this.mem_check_box.AutoSize = true;
+            this.mem_check_box.Checked = settings.MemcachedChecked;
             this.mem_check_box.Location = new System.Drawing.Point(25, 169);
             this.mem_check_box.Margin = new System.Windows.Forms.Padding(2);
             this.mem_check_box.Name = "mem_check_box";
@@ -312,6 +314,7 @@ namespace Wnmp.Forms
             // ngx_check_box
             // 
             this.ngx_check_box.AutoSize = true;
+            this.ngx_check_box.Checked = settings.NginxChecked;
             this.ngx_check_box.Location = new System.Drawing.Point(25, 49);
             this.ngx_check_box.Margin = new System.Windows.Forms.Padding(2);
             this.ngx_check_box.Name = "ngx_check_box";
@@ -323,6 +326,7 @@ namespace Wnmp.Forms
             // php_check_box
             // 
             this.php_check_box.AutoSize = true;
+            this.php_check_box.Checked = settings.PHPChecked;
             this.php_check_box.Location = new System.Drawing.Point(25, 129);
             this.php_check_box.Margin = new System.Windows.Forms.Padding(2);
             this.php_check_box.Name = "php_check_box";
@@ -334,6 +338,7 @@ namespace Wnmp.Forms
             // mdb_check_box
             // 
             this.mdb_check_box.AutoSize = true;
+            this.mdb_check_box.Checked = settings.MariaDBChecked;
             this.mdb_check_box.Location = new System.Drawing.Point(25, 90);
             this.mdb_check_box.Margin = new System.Windows.Forms.Padding(2);
             this.mdb_check_box.Name = "mdb_check_box";

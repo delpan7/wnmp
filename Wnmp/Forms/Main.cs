@@ -54,7 +54,6 @@ namespace Wnmp.Forms
 
         public Main() {
             InitializeComponent();
-            Options.settings.ReadSettings();
             Options.settings.UpdateSettings();
             Options.mainForm = this;
             UpdateOptions();
@@ -178,13 +177,13 @@ namespace Wnmp.Forms
         }
 
         private void UpdateOptions() {
-            MessageBox.Show(settings.PHPChecked.ToString());
-            ngx_check_box.Checked = settings.NginxChecked;
-            mdb_check_box.Checked = settings.MariaDBChecked;
-            php_check_box.Checked = settings.PHPChecked;
-            mem_check_box.Checked = settings.MemcachedChecked;
-            rds_check_box.Checked = settings.RedisChecked;
-            MessageBox.Show(php_check_box.Checked.ToString());
+            //MessageBox.Show(settings.PHPChecked.ToString());
+            //ngx_check_box.Checked = settings.NginxChecked;
+            //mdb_check_box.Checked = settings.MariaDBChecked;
+            //php_check_box.Checked = settings.PHPChecked;
+            //mem_check_box.Checked = settings.MemcachedChecked;
+            //rds_check_box.Checked = settings.RedisChecked;
+            //MessageBox.Show(php_check_box.Checked.ToString());
         }
 
         /// <summary>
