@@ -10,6 +10,8 @@ namespace Wnmp
 {
     public class WnmpPHPProgram : WnmpProgram
     {
+
+        
         public WnmpPHPProgram(Label Label_name, CheckBox chekbox_name)
         {
             baseDir = Main.StartupPath + "/php/" + Options.settings.phpBin + "/";
@@ -31,7 +33,8 @@ namespace Wnmp
             //DirFiles(baseDir, "php.ini", configContextMenu);
             //DirFiles(logDir, "*.log", logContextMenu);
 
-            this.SetStatusLabel();
+            //this.SetStatusLabel();
+
         }
 
         public new void Start()

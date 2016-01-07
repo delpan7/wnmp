@@ -37,7 +37,6 @@ namespace Wnmp.Configuration
         public bool MinimizeWnmpToTray = false;
         public bool NginxChecked = true;
         public bool MariaDBChecked = true;
-        public bool PHPChecked = true;
         public bool MemcachedChecked = true;
         public bool RedisChecked = true;
         public string phpBin = "";
@@ -60,7 +59,6 @@ namespace Wnmp.Configuration
 
             Boolean.TryParse(ReadIniValue("ngx_checked", NginxChecked), out NginxChecked);
             Boolean.TryParse(ReadIniValue("mdb_checked", MariaDBChecked), out MariaDBChecked);
-            Boolean.TryParse(ReadIniValue("php_checked", PHPChecked), out PHPChecked);
             Boolean.TryParse(ReadIniValue("mem_checked", MemcachedChecked), out MemcachedChecked);
             Boolean.TryParse(ReadIniValue("rds_checked", RedisChecked), out RedisChecked);
 
@@ -120,7 +118,6 @@ namespace Wnmp.Configuration
                 sw.WriteLine("; 是否第一次启动\r\nfirstrun=" + FirstRun);
                 sw.WriteLine("; 勾选Nginx\r\nngx_checked=" + NginxChecked);
                 sw.WriteLine("; 勾选MariaDB\r\nmdb_checked=" + MariaDBChecked);
-                sw.WriteLine("; 勾选PHP\r\nphp_checked=" + PHPChecked);
                 sw.WriteLine("; 勾选Memcached\r\nmem_checked=" + MemcachedChecked);
                 sw.WriteLine("; 勾选Redis\r\nrds_checked=" + RedisChecked);
                 sw.WriteLine("[PHP]");

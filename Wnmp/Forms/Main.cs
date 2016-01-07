@@ -27,6 +27,8 @@ using Wnmp.Configuration;
 namespace Wnmp.Forms
 {
 
+    public delegate void PHPEventHandler();
+
     /// <summary>
     /// Main form of Wnmp
     /// </summary>
@@ -62,7 +64,10 @@ namespace Wnmp.Forms
 
             Nginx = new WnmpNginxProgram(this);
             MariaDB = new WnmpMariaDBProgram(mdb_name, mdb_check_box);
-            PHP = new WnmpPHPProgram(php_name, php_check_box);
+            PHP = new WnmpPHPProgram(ngx_name, ngx_check_box);
+            Nginx.PHPStart += new PHPEventHandler(PHP.Start);
+            Nginx.PHPStop += new PHPEventHandler(PHP.Stop);
+            Nginx.PHPRestart += new PHPEventHandler(PHP.Restart);
             Memcached = new WnmpMemcachedProgram(mem_name, mem_check_box);
             Redis = new WnmpRedisProgram(rds_name, rds_check_box);
         }
@@ -85,13 +90,13 @@ namespace Wnmp.Forms
             WnmpTrayIcon.Icon = Properties.Resources.logo;
             WnmpTrayIcon.Visible = true;
 
-            
+
 
             DoCheckIfAppsAreRunningTimer();
 
             FirstRun();
 
-            
+
 
             if (Options.settings.RunAppsAtLaunch)
                 start_select_Click(null, null);
@@ -154,7 +159,7 @@ namespace Wnmp.Forms
             if (is_runing)
                 PHP.Stop();
 
-            PHP = new WnmpPHPProgram(php_name, php_check_box);
+            PHP = new WnmpPHPProgram(ngx_name, ngx_check_box);
 
             if (is_runing)
                 PHP.Start();
@@ -171,7 +176,6 @@ namespace Wnmp.Forms
         private void SetSettings() {
             settings.NginxChecked = ngx_check_box.Checked;
             settings.MariaDBChecked = mdb_check_box.Checked;
-            settings.PHPChecked = php_check_box.Checked;
             settings.MemcachedChecked = mem_check_box.Checked;
             settings.RedisChecked = rds_check_box.Checked;
         }
@@ -228,7 +232,6 @@ namespace Wnmp.Forms
         private void start_select_Click(object sender, EventArgs e) {
             if (Nginx.IsChecked()) Nginx.Start();
             if (MariaDB.IsChecked()) MariaDB.Start();
-            if (PHP.IsChecked()) PHP.Start();
             if (Memcached.IsChecked()) Memcached.Start();
             if (Redis.IsChecked()) Redis.Start();
         }
@@ -236,7 +239,6 @@ namespace Wnmp.Forms
         private void stop_select_Click(object sender, EventArgs e) {
             if (Nginx.IsChecked()) Nginx.Stop();
             if (MariaDB.IsChecked()) MariaDB.Stop();
-            if (PHP.IsChecked()) PHP.Stop();
             if (Memcached.IsChecked()) Memcached.Stop();
             if (Redis.IsChecked()) Redis.Stop();
         }
@@ -250,70 +252,53 @@ namespace Wnmp.Forms
             Process.Start("explorer.exe", Application.StartupPath);
         }
 
-        /* Applications Section */
-
-        private void ngx_start_Click(object sender, EventArgs e) {
-            Nginx.Start();
-        }
-
-        private void ngx_stop_Click(object sender, EventArgs e) {
-            Nginx.Stop();
-        }
-
-        private void ngx_reload_Click(object sender, EventArgs e) {
-            Nginx.Restart();
-        }
-
-        private void ngx_config_Click(object sender, EventArgs e) {
-            //Nginx.ConfigButton(sender);
-        }
-
-        private void ngx_log_Click(object sender, EventArgs e) {
-            Nginx.LogButton(sender);
-        }
-
-        private void mdb_start_Click(object sender, EventArgs e) {
-            MariaDB.Start();
-        }
-
-        private void mdb_stop_Click(object sender, EventArgs e) {
-            MariaDB.Stop();
-        }
-
-        private void mdb_restart_Click(object sender, EventArgs e) {
-            MariaDB.Restart();
-        }
-
-        private void mdb_cfg_Click(object sender, EventArgs e) {
-            //MariaDB.ConfigButton(sender);
-        }
-
-        private void mdb_log_Click(object sender, EventArgs e) {
-            MariaDB.LogButton(sender);
-        }
-
-        private void php_start_Click(object sender, EventArgs e) {
-            PHP.Start();
-        }
-
-        private void php_stop_Click(object sender, EventArgs e) {
-            PHP.Stop();
-        }
-
-        private void php_restart_Click(object sender, EventArgs e) {
-            PHP.Restart();
-        }
-
-        private void ngx_name_Click(object sender, EventArgs e) {
-            //Nginx.OptionButton(sender);
-        }
 
         private void ngx_name_MouseUp(object sender, MouseEventArgs e) {
-            MessageBox.Show("yes");
+            if (e.Button == MouseButtons.Right) {
+                Nginx.Restart();
+            } else {
+                if (Nginx.IsRunning()) {
+                    Nginx.Stop();
+                } else {
+                    Nginx.Start();
+                }
+            }
         }
 
-        private void php_log_Click(object sender, EventArgs e) {
-            PHP.LogButton(sender);
+        private void mdb_name_MouseUp(object sender, MouseEventArgs e) {
+            if (e.Button == MouseButtons.Right) {
+                MariaDB.Restart();
+            } else {
+                if (MariaDB.IsRunning()) {
+                    MariaDB.Stop();
+                } else {
+                    MariaDB.Start();
+                }
+            }
+        }
+
+        private void mem_name_MouseUp(object sender, MouseEventArgs e) {
+            if (e.Button == MouseButtons.Right) {
+                Memcached.Restart();
+            } else {
+                if (Memcached.IsRunning()) {
+                    Memcached.Stop();
+                } else {
+                    Memcached.Start();
+                }
+            }
+        }
+
+        private void rds_name_MouseUp(object sender, MouseEventArgs e) {
+            if (e.Button == MouseButtons.Right) {
+                Redis.Restart();
+            } else {
+                if (Redis.IsRunning()) {
+                    Redis.Stop();
+                } else {
+                    Redis.Start();
+                }
+            }
         }
 
         public void app_check_box_CheckedChanged(object sender, EventArgs e) {
@@ -321,12 +306,5 @@ namespace Wnmp.Forms
             settings.UpdateSettings();
         }
 
-        private void mem_start_Click(object sender, EventArgs e) {
-            Memcached.Start();
-        }
-
-        private void rds_start_Click(object sender, EventArgs e) {
-            Redis.Start();
-        }
     }
 }

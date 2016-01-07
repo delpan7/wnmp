@@ -10,6 +10,9 @@ namespace Wnmp
 {
     public class WnmpNginxProgram : WnmpProgram
     {
+        public event PHPEventHandler PHPStart;
+        public event PHPEventHandler PHPStop;
+        public event PHPEventHandler PHPRestart;
         public WnmpNginxProgram(Main wnmp_form) {
             wnmpForm = wnmp_form;
             baseDir = Main.StartupPath.Replace(@"\", "/") + "/nginx/";
