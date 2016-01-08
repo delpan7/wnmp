@@ -26,7 +26,6 @@ using Wnmp.Configuration;
 
 namespace Wnmp.Forms
 {
-
     public delegate void PHPEventHandler();
 
     /// <summary>
@@ -41,6 +40,12 @@ namespace Wnmp.Forms
         private WnmpRedisProgram Redis;
         public static Ini settings = new Ini();
         public static string StartupPath { get { return Application.StartupPath; } }
+
+        public event PHPEventHandler PHPStart;
+
+        public event PHPEventHandler PHPStop;
+
+        public event PHPEventHandler PHPRestart;
 
         public static readonly Version CPVER = new Version("3.0.2");
 
@@ -65,9 +70,16 @@ namespace Wnmp.Forms
             Nginx = new WnmpNginxProgram(this);
             MariaDB = new WnmpMariaDBProgram(mdb_name, mdb_check_box);
             PHP = new WnmpPHPProgram(ngx_name, ngx_check_box);
-            Nginx.PHPStart += new PHPEventHandler(PHP.Start);
-            Nginx.PHPStop += new PHPEventHandler(PHP.Stop);
-            Nginx.PHPRestart += new PHPEventHandler(PHP.Restart);
+
+            PHPStart = new PHPEventHandler(Nginx.Start);
+            PHPStart += new PHPEventHandler(PHP.Start);
+
+            PHPStop = new PHPEventHandler(Nginx.Stop);
+            PHPStop += new PHPEventHandler(PHP.Stop);
+
+            //Nginx.PHPStart += new PHPEventHandler(PHP.Start);
+            //Nginx.PHPStop += new PHPEventHandler(PHP.Stop);
+            //Nginx.PHPRestart += new PHPEventHandler(PHP.Restart);
             Memcached = new WnmpMemcachedProgram(mem_name, mem_check_box);
             Redis = new WnmpRedisProgram(rds_name, rds_check_box);
         }
@@ -258,9 +270,9 @@ namespace Wnmp.Forms
                 Nginx.Restart();
             } else {
                 if (Nginx.IsRunning()) {
-                    Nginx.Stop();
+                    PHPStop();
                 } else {
-                    Nginx.Start();
+                    PHPStart();
                 }
             }
         }

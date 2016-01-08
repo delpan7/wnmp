@@ -33,9 +33,9 @@ namespace Wnmp
 
         public WnmpProgram() {
             optionContextMenu = new ContextMenuStrip();
-            optionContextMenu.Items.Add("Start", null, new EventHandler(start_Click));
-            optionContextMenu.Items.Add("Stop", null, new EventHandler(stop_Click));
-            optionContextMenu.Items.Add("Restart", null, new EventHandler(restart_Click));
+            //optionContextMenu.Items.Add("Start", null, new EventHandler(start_Click));
+            //optionContextMenu.Items.Add("Stop", null, new EventHandler(stop_Click));
+            //optionContextMenu.Items.Add("Restart", null, new EventHandler(restart_Click));
             //logContextMenu = new ToolStripMenuItem();
             //configContextMenu.Click += new EventHandler(configContextMenu_ItemClicked);
             //logContextMenu.Click += logContextMenu_ItemClicked;
@@ -97,7 +97,6 @@ namespace Wnmp
                 Log.wnmp_log_error(ex.Message, progLogSection);
             }
         }
-
 
         public void Stop() {
             try {
@@ -190,21 +189,6 @@ namespace Wnmp
         protected ToolStripMenuItem CreateMenuItem(string text) {
             ToolStripMenuItem menu_item = new ToolStripMenuItem(text);
             return menu_item;
-        }
-
-        private void start_Click(object sender, EventArgs e)
-        {
-            Start();
-        }
-
-        private void stop_Click(object sender, EventArgs e)
-        {
-            Stop();
-        }
-
-        private void restart_Click(object sender, EventArgs e)
-        {
-            Restart();
         }
     }
 }

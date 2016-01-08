@@ -60,5 +60,9 @@ namespace Wnmp
                 Log.wnmp_log_error(ex.Message, progLogSection);
             }
         }
+
+        public new void Stop() {
+
+        }
     }
 }
