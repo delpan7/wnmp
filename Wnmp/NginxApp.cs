@@ -8,13 +8,9 @@ using Wnmp.Forms;
 
 namespace Wnmp
 {
-    public class WnmpNginxProgram : WnmpProgram
+    public class NginxApp : WnmpApp
     {
-        
-        public event PHPEventHandler PHPStop;
-        public event PHPEventHandler PHPRestart;
-        public WnmpNginxProgram(Main wnmp_form) {
-            wnmpForm = wnmp_form;
+        public NginxApp(Main wnmpForm) {
             baseDir = Main.StartupPath.Replace(@"\", "/") + "/nginx/";
             exeName = baseDir + "nginx.exe";
             procName = "nginx";
@@ -22,6 +18,7 @@ namespace Wnmp
             progLogSection = Log.LogSection.WNMP_NGINX;
             startArgs = "";
             stopArgs = "-s stop";
+            restartArgs = "-s reload";
             killStop = false;
             statusLabel = wnmpForm.ngx_name;
             statusChecked = wnmpForm.ngx_check_box;
@@ -42,13 +39,13 @@ namespace Wnmp
             if (!File.Exists(baseDir + "nginx.exe"))
                 Log.wnmp_log_error("Error: Nginx Not Found", Log.LogSection.WNMP_NGINX);
 
-            //ToolStripMenuItem ngx_option = this.CreateMenuItem("Nginx配置");
+            ToolStripMenuItem ngx_option = CreateMenuItem("Nginx 配置");
 
-            this.DirFiles(baseDir + "conf", "*.conf", wnmpForm.ngx_option);
-            wnmpForm.ngx_option.DropDownItems.Add(new ToolStripSeparator());
-            this.DirFiles(logDir, "*.log", wnmpForm.ngx_option);
+            DirFiles(baseDir + "conf", "*.conf", ngx_option);
+            ngx_option.DropDownItems.Add(new ToolStripSeparator());
+            DirFiles(logDir, "*.log", ngx_option);
 
-
+            wnmpForm.optionsFileStripMenuItem.DropDownItems.Add(ngx_option);
             this.SetStatusLabel();
         }
 

@@ -8,9 +8,9 @@ using Wnmp.Forms;
 
 namespace Wnmp
 {
-    class WnmpRedisProgram : WnmpProgram
+    class RedisApp : WnmpApp
     {
-        public WnmpRedisProgram(Label Label_name, CheckBox chekbox_name) {
+        public RedisApp(Label Label_name, CheckBox chekbox_name) {
             baseDir = Main.StartupPath + "/redis/";
             exeName = baseDir + "redis-server.exe";
             procName = "redis-server";

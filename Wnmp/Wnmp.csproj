@@ -78,12 +78,12 @@
       <DependentUpon>HttpHeaders.cs</DependentUpon>
     </Compile>
     <Compile Include="Log.cs" />
-    <Compile Include="WnmpMariaDBProgram.cs" />
-    <Compile Include="WnmpNginxProgram.cs" />
-    <Compile Include="WnmpPHPProgram.cs" />
-    <Compile Include="WnmpMemcachedProgram.cs" />
-    <Compile Include="WnmpRedisProgram.cs" />
-    <Compile Include="WnmpProgram.cs" />
+    <Compile Include="MariaDBApp.cs" />
+    <Compile Include="NginxApp.cs" />
+    <Compile Include="PHPApp.cs" />
+    <Compile Include="MemcachedApp.cs" />
+    <Compile Include="RedisApp.cs" />
+    <Compile Include="WnmpApp.cs" />
     <Compile Include="Forms\Main.cs">
       <SubType>Form</SubType>
     </Compile>

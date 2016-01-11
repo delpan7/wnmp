@@ -8,11 +8,11 @@ using Wnmp.Forms;
 
 namespace Wnmp
 {
-    public class WnmpPHPProgram : WnmpProgram
+    public class PHPApp : WnmpApp
     {
 
         
-        public WnmpPHPProgram(Label Label_name, CheckBox chekbox_name)
+        public PHPApp(Main wnmpForm)
         {
             baseDir = Main.StartupPath + "/php/" + Options.settings.phpBin + "/";
             exeName = baseDir + "php-cgi.exe";
@@ -22,22 +22,21 @@ namespace Wnmp
             startArgs = ""; // Special handling see StartPHP() in the WnmpProgram class
             stopArgs = "";
             killStop = true;
-            statusLabel = Label_name;
-            statusChecked = chekbox_name;
             confDir = baseDir;
             logDir = baseDir + "logs/";
 
             if (!Directory.Exists(baseDir))
                 Log.wnmp_log_error("Error: PHP Not Found", Log.LogSection.WNMP_PHP);
 
-            //DirFiles(baseDir, "php.ini", configContextMenu);
-            //DirFiles(logDir, "*.log", logContextMenu);
+            ToolStripMenuItem php_option = CreateMenuItem("PHP 配置");
+            DirFiles(baseDir, "php.ini", php_option);
+            php_option.DropDownItems.Add(new ToolStripSeparator());
+            DirFiles(logDir, "*.log", php_option);
 
-            //this.SetStatusLabel();
-
+            wnmpForm.optionsFileStripMenuItem.DropDownItems.Add(php_option);
         }
 
-        public new void Start()
+        public override void Start()
         {
             int i;
             int ProcessCount = Options.settings.PHP_Processes;
@@ -59,10 +58,6 @@ namespace Wnmp
             {
                 Log.wnmp_log_error(ex.Message, progLogSection);
             }
-        }
-
-        public new void Stop() {
-
         }
     }
 }

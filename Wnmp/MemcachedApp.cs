@@ -9,17 +9,18 @@ using System.ServiceProcess;
 
 namespace Wnmp
 {
-    class WnmpMemcachedProgram : WnmpProgram
+    class MemcachedApp : WnmpApp
     {
+        private string installexeName = "-d install";
         private string installArgs = "-d install";
-        public WnmpMemcachedProgram(Label Label_name, CheckBox chekbox_name) {
+        public MemcachedApp(Label Label_name, CheckBox chekbox_name) {
             baseDir = Main.StartupPath.Replace(@"\", "/") + "/memcached/";
-            exeName = baseDir + "memcached.exe";
+            exeName = "cmd.exe";
             procName = "memcached";
             progName = "Memcached";
             progLogSection = Log.LogSection.WNMP_MEMCACHED;
-            startArgs = "-d start"; // Special handling see StartPHP() in the WnmpProgram class
-            stopArgs = "-d stop";
+            startArgs = "/c net start memcached"; // Special handling see StartPHP() in the WnmpProgram class
+            stopArgs = "/c net stop memcached";
             killStop = false;
             statusLabel = Label_name;
             statusChecked = chekbox_name;
@@ -34,7 +35,7 @@ namespace Wnmp
 
         private void install() {
             try {
-                StartProcess(exeName, installArgs);
+                StartProcess(installexeName, installArgs);
                 Log.wnmp_log_notice("Install " + progName, progLogSection);
             } catch (Exception ex) {
                 Log.wnmp_log_error(ex.Message, progLogSection);
@@ -54,5 +55,7 @@ namespace Wnmp
             }
             return false;
         }
+
+        //public virtual void Start() { }
     }
 }

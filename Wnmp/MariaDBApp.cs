@@ -9,10 +9,10 @@ using Wnmp.Forms;
 
 namespace Wnmp
 {
-    public class WnmpMariaDBProgram : WnmpProgram
+    public class MariaDBApp : WnmpApp
     {
         private string mdb_pidfile;
-        public WnmpMariaDBProgram(Label Label_name, CheckBox chekbox_name) {
+        public MariaDBApp(Main wnmpForm) {
             baseDir = Main.StartupPath + "/mariadb/";
 
             mdb_pidfile = baseDir + "data/" + Environment.MachineName + ".pid";
@@ -24,16 +24,20 @@ namespace Wnmp
             startArgs = "";
             stopArgs = "";
             killStop = true;
-            statusLabel = Label_name;
-            statusChecked = chekbox_name;
+            statusLabel = wnmpForm.mdb_name;
+            statusChecked = wnmpForm.mdb_check_box;
             confDir = baseDir;
             logDir = baseDir + "data/";
 
             if (!Directory.Exists(baseDir))
                 Log.wnmp_log_error("Error: MariaDB Not Found", Log.LogSection.WNMP_MARIADB);
 
-            //this.DirFiles(baseDir, "my.ini", configContextMenu);
-            //this.DirFiles(logDir, "*.err", logContextMenu);
+            ToolStripMenuItem mdb_option = CreateMenuItem("MariaDB 配置");
+            this.DirFiles(baseDir, "my.ini", mdb_option);
+            mdb_option.DropDownItems.Add(new ToolStripSeparator());
+            this.DirFiles(logDir, "*.err", mdb_option);
+
+            wnmpForm.optionsFileStripMenuItem.DropDownItems.Add(mdb_option);
 
             this.SetStatusLabel();
         }
