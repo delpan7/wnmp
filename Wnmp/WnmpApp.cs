@@ -24,6 +24,7 @@ namespace Wnmp
         protected Main wnmpForm;
         public Label statusLabel { get; set; } // Label that shows the programs status
         public CheckBox statusChecked { get; set; } // CheckBox that shows the programs status
+        public bool isChecked = false;
         public string baseDir { get; set; }    // Directory where all the programs configuration files are
         public string exeName { get; set; }    // Location of the executable file
         public string procName { get; set; }   // Name of the process
@@ -54,7 +55,6 @@ namespace Wnmp
         /// Changes the labels apperance to started
         /// </summary>
         protected void SetStartedLabel() {
-            //statusLabel.Text = "\u221A";
             statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             statusLabel.ForeColor = Color.Lime;
         }
@@ -63,7 +63,6 @@ namespace Wnmp
         /// Changes the labels apperance to stopped
         /// </summary>
         protected void SetStoppedLabel() {
-            //statusLabel.Text = "X";
             statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             statusLabel.ForeColor = Color.Black;
         }
@@ -132,7 +131,6 @@ namespace Wnmp
                                     currentProc.Kill();
                                 }
                             } catch (Exception ex) {
-
                             }
                         }).Start();
                     }
@@ -168,15 +166,15 @@ namespace Wnmp
             }
         }
 
-        public void OptionButton(object sender) {
-            Label btnSender = (Label)sender;
-            Point ptLowerLeft = new Point(0, btnSender.Height);
-            ptLowerLeft = btnSender.PointToScreen(ptLowerLeft);
-            optionContextMenu.Show(ptLowerLeft);
-        }
+        //public void OptionButton(object sender) {
+        //    Label btnSender = (Label)sender;
+        //    Point ptLowerLeft = new Point(0, btnSender.Height);
+        //    ptLowerLeft = btnSender.PointToScreen(ptLowerLeft);
+        //    optionContextMenu.Show(ptLowerLeft);
+        //}
 
 
-        private void configContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e) {
+        protected void configContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e) {
             Console.WriteLine("{0}", e.ToString());
 
             try {
@@ -191,9 +189,7 @@ namespace Wnmp
 
             return (process.Length != 0);
         }
-        public bool IsChecked() {
-            return (statusChecked.Checked == true);
-        }
+       
 
         /// <summary>
         /// Adds configuration files or log files to the context menu strip
@@ -209,7 +205,21 @@ namespace Wnmp
             foreach (FileInfo file in Files) {
                 cms.DropDownItems.Add(new ToolStripMenuItem(file.Name, null));
             }
-            cms.DropDownItemClicked += new ToolStripItemClickedEventHandler(configContextMenu_ItemClicked);
+        }
+
+        protected void SetOption(Dictionary<string, string> options, ToolStripMenuItem cms) {
+            //foreach (Dictionary option in options) {
+            //}
+            //DirectoryInfo dinfo = new DirectoryInfo(path);
+
+            //if (!dinfo.Exists)
+            //    return;
+
+            //FileInfo[] Files = dinfo.GetFiles(getFiles);
+
+            //foreach (FileInfo file in Files) {
+            //    cms.DropDownItems.Add(new ToolStripMenuItem(file.Name, null));
+            //}
         }
 
         protected ToolStripMenuItem CreateMenuItem(string text) {

@@ -10,7 +10,7 @@ namespace Wnmp
 {
     class RedisApp : WnmpApp
     {
-        public RedisApp(Label Label_name, CheckBox chekbox_name) {
+        public RedisApp(Main wnmpForm) {
             baseDir = Main.StartupPath + "/redis/";
             exeName = baseDir + "redis-server.exe";
             procName = "redis-server";
@@ -19,8 +19,8 @@ namespace Wnmp
             startArgs = ""; // Special handling see StartPHP() in the WnmpProgram class
             stopArgs = "";
             killStop = true;
-            statusLabel = Label_name;
-            statusChecked = chekbox_name;
+            statusLabel = wnmpForm.rds_name;
+            statusChecked = wnmpForm.rds_check_box;
             confDir = baseDir;
 
             if (!Directory.Exists(baseDir))

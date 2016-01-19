@@ -67,8 +67,8 @@ namespace Wnmp.Forms
             Nginx.AddStop(PHP);
             Nginx.AddRestart(PHP);
 
-            Memcached = new MemcachedApp(mem_name, mem_check_box);
-            Redis = new RedisApp(rds_name, rds_check_box);
+            Memcached = new MemcachedApp(this);
+            Redis = new RedisApp(this);
         }
 
         private void DoCheckIfAppsAreRunningTimer() {
@@ -164,17 +164,23 @@ namespace Wnmp.Forms
         }
 
         private void SetSettings() {
-            settings.NginxChecked = ngx_check_box.Checked;
-            settings.MariaDBChecked = mdb_check_box.Checked;
-            settings.MemcachedChecked = mem_check_box.Checked;
-            settings.RedisChecked = rds_check_box.Checked;
+            Nginx.isChecked = settings.NginxChecked = ngx_check_box.Checked;
+            MariaDB.isChecked = settings.MariaDBChecked = mdb_check_box.Checked;
+            Memcached.isChecked = settings.MemcachedChecked = mem_check_box.Checked;
+            Redis.isChecked = settings.RedisChecked = rds_check_box.Checked;
         }
 
         private void DoCheckAppsStopTimer() {
             Timer timer = new Timer();
             timer.Interval = 500; // TODO: 5 seconds sounds reasonable?
             timer.Tick += (s, e) => {
-                if (!Nginx.IsRunning() && !PHP.IsRunning() && !Memcached.IsRunning() && !Redis.IsRunning()) {
+                if (Nginx.isChecked && Nginx.IsRunning() 
+                && PHP.isChecked && PHP.IsRunning()
+                && MariaDB.isChecked && MariaDB.IsRunning()
+                && Memcached.isChecked && Memcached.IsRunning()
+                && Redis.isChecked && Redis.IsRunning()) {
+                    
+                } else {
                     start_select.Enabled = true;
                     timer.Stop();
                 }
@@ -232,18 +238,18 @@ namespace Wnmp.Forms
         /*  Right Hand Side */
 
         private void start_select_Click(object sender, EventArgs e) {
-            if (Nginx.IsChecked()) Nginx.Start();
-            if (MariaDB.IsChecked()) MariaDB.Start();
-            if (Memcached.IsChecked()) Memcached.Start();
-            if (Redis.IsChecked()) Redis.Start();
+            if (Nginx.isChecked) Nginx.Start();
+            if (MariaDB.isChecked) MariaDB.Start();
+            if (Memcached.isChecked) Memcached.Start();
+            if (Redis.isChecked) Redis.Start();
         }
 
         private void stop_select_Click(object sender, EventArgs e) {
             start_select.Enabled = false;
-            if (Nginx.IsChecked()) Nginx.Stop();
-            if (MariaDB.IsChecked()) MariaDB.Stop();
-            if (Memcached.IsChecked()) Memcached.Stop();
-            if (Redis.IsChecked()) Redis.Stop();
+            if (Nginx.isChecked) Nginx.Stop();
+            if (MariaDB.isChecked) MariaDB.Stop();
+            if (Memcached.isChecked) Memcached.Stop();
+            if (Redis.isChecked) Redis.Stop();
             DoCheckAppsStopTimer();
         }
 

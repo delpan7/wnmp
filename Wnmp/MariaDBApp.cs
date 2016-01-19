@@ -36,6 +36,7 @@ namespace Wnmp
             this.DirFiles(baseDir, "my.ini", mdb_option);
             mdb_option.DropDownItems.Add(new ToolStripSeparator());
             this.DirFiles(logDir, "*.err", mdb_option);
+            mdb_option.DropDownItemClicked += new ToolStripItemClickedEventHandler(configContextMenu_ItemClicked);
 
             wnmpForm.optionsFileStripMenuItem.DropDownItems.Add(mdb_option);
 

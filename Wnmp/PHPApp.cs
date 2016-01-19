@@ -32,6 +32,7 @@ namespace Wnmp
             DirFiles(confDir, "php.ini", php_option);
             php_option.DropDownItems.Add(new ToolStripSeparator());
             DirFiles(logDir, "*.log", php_option);
+            php_option.DropDownItemClicked += new ToolStripItemClickedEventHandler(configContextMenu_ItemClicked);
 
             wnmpForm.optionsFileStripMenuItem.DropDownItems.Add(php_option);
         }

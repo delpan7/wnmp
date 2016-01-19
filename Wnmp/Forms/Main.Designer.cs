@@ -388,13 +388,13 @@ namespace Wnmp.Forms
         private System.Windows.Forms.ToolStripMenuItem getHTTPHeadersToolStripMenuItem;
         public System.Windows.Forms.CheckBox ngx_check_box;
         public System.Windows.Forms.CheckBox mdb_check_box;
-        private System.Windows.Forms.CheckBox rds_check_box;
-        private System.Windows.Forms.CheckBox mem_check_box;
+        public System.Windows.Forms.CheckBox rds_check_box;
+        public System.Windows.Forms.CheckBox mem_check_box;
         public System.Windows.Forms.ToolStripMenuItem optionsFileStripMenuItem;
         public System.Windows.Forms.Label ngx_name;
         public System.Windows.Forms.Label mdb_name;
-        protected System.Windows.Forms.Label mem_name;
-        protected System.Windows.Forms.Label rds_name;
+        public System.Windows.Forms.Label mem_name;
+        public System.Windows.Forms.Label rds_name;
     }
 }
 
