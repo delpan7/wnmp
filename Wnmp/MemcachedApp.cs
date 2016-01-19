@@ -6,6 +6,8 @@ using System.IO;
 using System.Windows.Forms;
 using Wnmp.Forms;
 using System.ServiceProcess;
+using System.Diagnostics;
+using System.Security.Principal;
 
 namespace Wnmp
 {
@@ -34,6 +36,10 @@ namespace Wnmp
         }
 
         private void install() {
+            if (!IsAdministrator()) {
+                MessageBox.Show("请以管理员身份运行本程序");
+                return;
+            }
             try {
                 StartProcess(installexeName, installArgs);
                 Log.wnmp_log_notice("Install " + progName, progLogSection);
@@ -56,6 +62,22 @@ namespace Wnmp
             return false;
         }
 
-        //public virtual void Start() { }
+        /// <summary>
+        /// 管理员身份
+        /// </summary>
+        /// <returns></returns>
+        public bool IsAdministrator() {
+            WindowsIdentity current = WindowsIdentity.GetCurrent();
+            WindowsPrincipal windowsPrincipal = new WindowsPrincipal(current);
+            return windowsPrincipal.IsInRole(WindowsBuiltInRole.Administrator);
+        }
+
+        public override void Start() {
+            if (!IsAdministrator()) {
+                MessageBox.Show("请以管理员身份运行本程序");
+                return;
+            }
+            base.Start();
+        }
     }
 }

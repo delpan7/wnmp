@@ -29,7 +29,7 @@ namespace Wnmp
                 Log.wnmp_log_error("Error: PHP Not Found", Log.LogSection.WNMP_PHP);
 
             ToolStripMenuItem php_option = CreateMenuItem("PHP 配置");
-            DirFiles(baseDir, "php.ini", php_option);
+            DirFiles(confDir, "php.ini", php_option);
             php_option.DropDownItems.Add(new ToolStripSeparator());
             DirFiles(logDir, "*.log", php_option);
 
@@ -52,7 +52,7 @@ namespace Wnmp
                     port++;
                 }
                 Log.wnmp_log_notice("PHP started", progLogSection);
-                SetStartedLabel();
+                //SetStartedLabel();
             }
             catch (Exception ex)
             {

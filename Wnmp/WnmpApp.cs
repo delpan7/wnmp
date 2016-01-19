@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -18,7 +19,7 @@ namespace Wnmp
 
         public event PHPEventHandler PHPStop;
 
-        protected event PHPEventHandler PHPRestart;
+        public event PHPEventHandler PHPRestart;
 
         protected Main wnmpForm;
         public Label statusLabel { get; set; } // Label that shows the programs status
@@ -95,6 +96,10 @@ namespace Wnmp
             return (progLogSection == Log.LogSection.WNMP_PHP);
         }
 
+        private bool IsMemcached() {
+            return (progLogSection == Log.LogSection.WNMP_MEMCACHED);
+        }
+
         public virtual void Start() {
             try {
                 StartProcess(exeName, startArgs);
@@ -118,16 +123,22 @@ namespace Wnmp
                     }
                 } else {
                     StartProcess(exeName, stopArgs);
-                    //new Thread(delegate () {
-                    //    Thread.Sleep(2000);
-                    //    Process[] process = Process.GetProcessesByName(procName);
-                    //    foreach (Process currentProc in process) {
-                    //        currentProc.Kill();
-                    //    }
-                    //}).Start();
+                    if (!IsMemcached()) {
+                        new Thread(delegate () {
+                            Thread.Sleep(2000);
+                            try {
+                                Process[] process = Process.GetProcessesByName(procName);
+                                foreach (Process currentProc in process) {
+                                    currentProc.Kill();
+                                }
+                            } catch (Exception ex) {
+
+                            }
+                        }).Start();
+                    }
                 }
                 Log.wnmp_log_notice("Stopped " + progName, progLogSection);
-                SetStoppedLabel();
+                if(!IsPHP()) SetStoppedLabel();
             } catch (Exception ex) {
                 Log.wnmp_log_error(ex.Message, progLogSection);
             }
@@ -164,26 +175,12 @@ namespace Wnmp
             optionContextMenu.Show(ptLowerLeft);
         }
 
-        public void LogButton(object sender) {
-            Button btnSender = (Button)sender;
-            Point ptLowerLeft = new Point(0, btnSender.Height);
-            ptLowerLeft = btnSender.PointToScreen(ptLowerLeft);
-            //logContextMenu.Show(ptLowerLeft);
-        }
 
         private void configContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e) {
             Console.WriteLine("{0}", e.ToString());
 
             try {
                 Process.Start(Options.settings.Editor, confDir + e.ClickedItem.Text);
-            } catch (Exception ex) {
-                Log.wnmp_log_error(ex.Message, progLogSection);
-            }
-        }
-
-        private void logContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e) {
-            try {
-                //Process.Start(Options.settings.Editor, logDir + e.Text);
             } catch (Exception ex) {
                 Log.wnmp_log_error(ex.Message, progLogSection);
             }

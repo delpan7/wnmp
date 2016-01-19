@@ -46,7 +46,8 @@ namespace Wnmp
             DirFiles(logDir, "*.log", ngx_option);
 
             wnmpForm.optionsFileStripMenuItem.DropDownItems.Add(ngx_option);
-            this.SetStatusLabel();
+
+            SetStatusLabel();
         }
 
         public void UpdatePHPngxCfg() {
@@ -63,16 +64,6 @@ namespace Wnmp
                 }
                 sw.WriteLine("}");
             }
-        }
-
-        public void app_check_box_CheckedChanged(object sender, EventArgs e) {
-
-            //SetSettings();
-            //settings.UpdateSettings();
-        }
-
-        public void ngx_config_Click(object sender, EventArgs e) {
-            //this.ConfigButton(sender);
         }
     }
 }

@@ -170,6 +170,18 @@ namespace Wnmp.Forms
             settings.RedisChecked = rds_check_box.Checked;
         }
 
+        private void DoCheckAppsStopTimer() {
+            Timer timer = new Timer();
+            timer.Interval = 500; // TODO: 5 seconds sounds reasonable?
+            timer.Tick += (s, e) => {
+                if (!Nginx.IsRunning() && !PHP.IsRunning() && !Memcached.IsRunning() && !Redis.IsRunning()) {
+                    start_select.Enabled = true;
+                    timer.Stop();
+                }
+            };
+            timer.Start();
+        }
+
         private void UpdateOptions() {
             //MessageBox.Show(settings.PHPChecked.ToString());
             //ngx_check_box.Checked = settings.NginxChecked;
@@ -227,10 +239,12 @@ namespace Wnmp.Forms
         }
 
         private void stop_select_Click(object sender, EventArgs e) {
+            start_select.Enabled = false;
             if (Nginx.IsChecked()) Nginx.Stop();
             if (MariaDB.IsChecked()) MariaDB.Stop();
             if (Memcached.IsChecked()) Memcached.Stop();
             if (Redis.IsChecked()) Redis.Stop();
+            DoCheckAppsStopTimer();
         }
 
         private void mdb_shell_Click(object sender, EventArgs e) {

@@ -146,6 +146,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\app.manifest">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\Wnmp.png" />
     <Content Include="Resources\logo.ico" />
   </ItemGroup>
