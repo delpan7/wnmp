@@ -40,14 +40,9 @@ namespace Wnmp
                 Log.wnmp_log_error("Error: Nginx Not Found", Log.LogSection.WNMP_NGINX);
 
             ToolStripMenuItem ngx_option = CreateMenuItem("Nginx 配置");
-
-            Dictionary<string, string> options = new Dictionary<string, string>();
-            setOption(options, ngx_option);
-
-            DirFiles(baseDir + "conf", "*.conf", ngx_option);
-            ngx_option.DropDownItems.Add(new ToolStripSeparator());
-            DirFiles(logDir, "*.log", ngx_option);
-            ngx_option.DropDownItemClicked += new ToolStripItemClickedEventHandler(configContextMenu_ItemClicked);
+            options[confDir] = "*.conf";
+            options[logDir] = "*.log";
+            SetOption(options, ngx_option);
 
             wnmpForm.optionsFileStripMenuItem.DropDownItems.Add(ngx_option);
 

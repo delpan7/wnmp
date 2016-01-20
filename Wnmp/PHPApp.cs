@@ -23,16 +23,15 @@ namespace Wnmp
             stopArgs = "";
             killStop = true;
             confDir = baseDir;
-            logDir = baseDir + "logs/";
+            logDir = Main.StartupPath + "temp/logs/php/";
 
             if (!Directory.Exists(baseDir))
                 Log.wnmp_log_error("Error: PHP Not Found", Log.LogSection.WNMP_PHP);
 
             ToolStripMenuItem php_option = CreateMenuItem("PHP 配置");
-            DirFiles(confDir, "php.ini", php_option);
-            php_option.DropDownItems.Add(new ToolStripSeparator());
-            DirFiles(logDir, "*.log", php_option);
-            php_option.DropDownItemClicked += new ToolStripItemClickedEventHandler(configContextMenu_ItemClicked);
+            options[confDir] = "php.ini";
+            options[logDir] = "*.log";
+            SetOption(options, php_option);
 
             wnmpForm.optionsFileStripMenuItem.DropDownItems.Add(php_option);
         }

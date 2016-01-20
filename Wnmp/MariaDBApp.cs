@@ -33,10 +33,9 @@ namespace Wnmp
                 Log.wnmp_log_error("Error: MariaDB Not Found", Log.LogSection.WNMP_MARIADB);
 
             ToolStripMenuItem mdb_option = CreateMenuItem("MariaDB 配置");
-            this.DirFiles(baseDir, "my.ini", mdb_option);
-            mdb_option.DropDownItems.Add(new ToolStripSeparator());
-            this.DirFiles(logDir, "*.err", mdb_option);
-            mdb_option.DropDownItemClicked += new ToolStripItemClickedEventHandler(configContextMenu_ItemClicked);
+            options[confDir] = "my.ini";
+            options[logDir] = "*.err";
+            SetOption(options, mdb_option);
 
             wnmpForm.optionsFileStripMenuItem.DropDownItems.Add(mdb_option);
 

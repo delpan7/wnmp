@@ -25,6 +25,7 @@ namespace Wnmp
         public Label statusLabel { get; set; } // Label that shows the programs status
         public CheckBox statusChecked { get; set; } // CheckBox that shows the programs status
         public bool isChecked = false;
+        public bool isRunning { get; protected set; }
         public string baseDir { get; set; }    // Directory where all the programs configuration files are
         public string exeName { get; set; }    // Location of the executable file
         public string procName { get; set; }   // Name of the process
@@ -37,18 +38,13 @@ namespace Wnmp
         public string confDir { get; set; }    // Directory where all the programs configuration files are
         public string logDir { get; set; }     // Directory where all the programs log files are
 
+        protected Dictionary<string, string> options = new Dictionary<string, string>();
+
         public int PID { get; protected set; }   // PID of process
         public ContextMenuStrip optionContextMenu { get; set; } // Displays all the programs config files in |confDir|
-        public ContextMenuStrip logContextMenu { get; set; }    // Displays all the programs log files in |logDir|
 
         public WnmpApp() {
             optionContextMenu = new ContextMenuStrip();
-            //optionContextMenu.Items.Add("Start", null, new EventHandler(start_Click));
-            //optionContextMenu.Items.Add("Stop", null, new EventHandler(stop_Click));
-            //optionContextMenu.Items.Add("Restart", null, new EventHandler(restart_Click));
-            //logContextMenu = new ToolStripMenuItem();
-            //configContextMenu.Click += new EventHandler(configContextMenu_ItemClicked);
-            //logContextMenu.Click += logContextMenu_ItemClicked;
         }
 
         /// <summary>
@@ -130,9 +126,12 @@ namespace Wnmp
                                 foreach (Process currentProc in process) {
                                     currentProc.Kill();
                                 }
+                                isRunning = false;
                             } catch (Exception ex) {
                             }
                         }).Start();
+                    } else {
+                        isRunning = false;
                     }
                 }
                 Log.wnmp_log_notice("Stopped " + progName, progLogSection);
@@ -165,14 +164,6 @@ namespace Wnmp
                 Log.wnmp_log_notice("Restarted " + progName, progLogSection);
             }
         }
-
-        //public void OptionButton(object sender) {
-        //    Label btnSender = (Label)sender;
-        //    Point ptLowerLeft = new Point(0, btnSender.Height);
-        //    ptLowerLeft = btnSender.PointToScreen(ptLowerLeft);
-        //    optionContextMenu.Show(ptLowerLeft);
-        //}
-
 
         protected void configContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e) {
             Console.WriteLine("{0}", e.ToString());
@@ -208,18 +199,23 @@ namespace Wnmp
         }
 
         protected void SetOption(Dictionary<string, string> options, ToolStripMenuItem cms) {
-            //foreach (Dictionary option in options) {
-            //}
-            //DirectoryInfo dinfo = new DirectoryInfo(path);
+            int i = 0;
+            foreach (KeyValuePair<string, string> option in options) {
+                if(i > 0) cms.DropDownItems.Add(new ToolStripSeparator());
+                
+                DirectoryInfo dinfo = new DirectoryInfo(option.Key);
 
-            //if (!dinfo.Exists)
-            //    return;
+                if (!dinfo.Exists)
+                    return;
 
-            //FileInfo[] Files = dinfo.GetFiles(getFiles);
+                FileInfo[] Files = dinfo.GetFiles(option.Value);
 
-            //foreach (FileInfo file in Files) {
-            //    cms.DropDownItems.Add(new ToolStripMenuItem(file.Name, null));
-            //}
+                foreach (FileInfo file in Files) {
+                    cms.DropDownItems.Add(new ToolStripMenuItem(file.Name, null));
+                }
+                i++;
+            }
+            cms.DropDownItemClicked += new ToolStripItemClickedEventHandler(configContextMenu_ItemClicked);
         }
 
         protected ToolStripMenuItem CreateMenuItem(string text) {
