@@ -69,6 +69,7 @@ namespace Wnmp.Forms
             this.panel1 = new System.Windows.Forms.Panel();
             this.wnmpdir = new System.Windows.Forms.Button();
             this.log_rtb = new System.Windows.Forms.RichTextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.MainFormMenuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -164,6 +165,7 @@ namespace Wnmp.Forms
             this.groupBox1.Controls.Add(this.mdb_check_box);
             this.groupBox1.Controls.Add(this.mdb_name);
             this.groupBox1.Controls.Add(this.ngx_name);
+            this.groupBox1.Controls.Add(this.panel2);
             this.groupBox1.Location = new System.Drawing.Point(76, 8);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
@@ -340,6 +342,13 @@ namespace Wnmp.Forms
             this.log_rtb.TabIndex = 49;
             this.log_rtb.Text = "";
             // 
+            // panel2
+            // 
+            this.panel2.Location = new System.Drawing.Point(1, 28);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(92, 30);
+            this.panel2.TabIndex = 88;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -395,6 +404,7 @@ namespace Wnmp.Forms
         public System.Windows.Forms.Label mdb_name;
         public System.Windows.Forms.Label mem_name;
         public System.Windows.Forms.Label rds_name;
+        private Panel panel2;
     }
 }
 

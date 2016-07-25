@@ -35,10 +35,10 @@ namespace Wnmp.Configuration
         public bool StartWithWindows = false;
         public bool RunAppsAtLaunch = false;
         public bool MinimizeWnmpToTray = false;
-        public bool NginxChecked = true;
-        public bool MariaDBChecked = true;
-        public bool MemcachedChecked = true;
-        public bool RedisChecked = true;
+        public bool NginxChecked = false;
+        public bool MariaDBChecked = false;
+        public bool MemcachedChecked = false;
+        public bool RedisChecked = false;
         public string phpBin = "";
         public short PHP_Port = 9001;
         public int PHP_Processes = 2;
@@ -65,7 +65,8 @@ namespace Wnmp.Configuration
             int.TryParse(ReadIniValue("phpprocesses", PHP_Processes), out PHP_Processes);
             short.TryParse(ReadIniValue("phpport", PHP_Port), out PHP_Port);
             phpBin = ReadIniValue("phpbin", phpBin);
-            UpdateSettings();
+            MessageBox.Show(NginxChecked.ToString());
+            //UpdateSettings();
         }
 
         private bool LoadIniFile()

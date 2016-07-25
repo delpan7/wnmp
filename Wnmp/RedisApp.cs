@@ -19,9 +19,12 @@ namespace Wnmp
             startArgs = ""; // Special handling see StartPHP() in the WnmpProgram class
             stopArgs = "";
             killStop = true;
+            confDir = baseDir;
+
             statusLabel = wnmpForm.rds_name;
             statusChecked = wnmpForm.rds_check_box;
-            confDir = baseDir;
+
+            isChecked = Options.settings.RedisChecked;
 
             if (!Directory.Exists(baseDir))
                 Log.wnmp_log_error("Error: Redis Not Found", Log.LogSection.WNMP_REDIS);

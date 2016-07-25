@@ -20,8 +20,9 @@ namespace Wnmp
             stopArgs = "-s stop";
             restartArgs = "-s reload";
             killStop = false;
-            statusLabel = wnmpForm.ngx_name;
-            statusChecked = wnmpForm.ngx_check_box;
+            confDir = baseDir + "conf/";
+            logDir = baseDir + "logs/";
+
             //statusChecked.Checked = true;
             //statusChecked.Location = new System.Drawing.Point(25, 49);
             //statusChecked.Margin = new System.Windows.Forms.Padding(2);
@@ -33,8 +34,10 @@ namespace Wnmp
 
             //wnmpForm.groupBox1.Controls.Add(statusChecked);
 
-            confDir = baseDir + "conf/";
-            logDir = baseDir + "logs/";
+            statusLabel = wnmpForm.ngx_name;
+            statusChecked = wnmpForm.ngx_check_box;
+
+            isChecked = Options.settings.MemcachedChecked;
 
             if (!File.Exists(baseDir + "nginx.exe"))
                 Log.wnmp_log_error("Error: Nginx Not Found", Log.LogSection.WNMP_NGINX);

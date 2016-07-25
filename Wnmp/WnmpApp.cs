@@ -45,6 +45,8 @@ namespace Wnmp
 
         public WnmpApp() {
             optionContextMenu = new ContextMenuStrip();
+            
+
         }
 
         /// <summary>
@@ -64,7 +66,7 @@ namespace Wnmp
         }
 
         public void SetStatusLabel() {
-            if (this.IsRunning() == true)
+            if (isRunning == true)
                 SetStartedLabel();
             else
                 SetStoppedLabel();
@@ -96,9 +98,11 @@ namespace Wnmp
         }
 
         public virtual void Start() {
+            //MessageBox.Show("start");
             try {
                 StartProcess(exeName, startArgs);
                 Log.wnmp_log_notice("Started " + progName, progLogSection);
+                SetIsRunning();
                 SetStartedLabel();
             } catch (Exception ex) {
                 Log.wnmp_log_error(ex.Message, progLogSection);
@@ -116,6 +120,7 @@ namespace Wnmp
                     foreach (Process currentProc in process) {
                         currentProc.Kill();
                     }
+                    SetIsRunning();
                 } else {
                     StartProcess(exeName, stopArgs);
                     if (!IsMemcached()) {
@@ -126,16 +131,16 @@ namespace Wnmp
                                 foreach (Process currentProc in process) {
                                     currentProc.Kill();
                                 }
-                                isRunning = false;
+                                SetIsRunning();
                             } catch (Exception ex) {
                             }
                         }).Start();
                     } else {
-                        isRunning = false;
+                        SetIsRunning();
                     }
                 }
                 Log.wnmp_log_notice("Stopped " + progName, progLogSection);
-                if(!IsPHP()) SetStoppedLabel();
+                if (!IsPHP()) SetStoppedLabel();
             } catch (Exception ex) {
                 Log.wnmp_log_error(ex.Message, progLogSection);
             }
@@ -175,10 +180,11 @@ namespace Wnmp
             }
         }
 
-        public bool IsRunning() {
+        protected void SetIsRunning() {
             Process[] process = Process.GetProcessesByName(procName);
 
-            return (process.Length != 0);
+            isRunning = (process.Length != 0);
+            SetStatusLabel();
         }
        
 

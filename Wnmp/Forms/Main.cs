@@ -151,7 +151,7 @@ namespace Wnmp.Forms
         public void ReloadSetupPHP() {
             PHP = new PHPApp(this);
 
-            if (PHP.IsRunning())
+            if (PHP.isRunning)
                 PHP.Restart();
         }
 
@@ -174,11 +174,11 @@ namespace Wnmp.Forms
             Timer timer = new Timer();
             timer.Interval = 500; // TODO: 5 seconds sounds reasonable?
             timer.Tick += (s, e) => {
-                if (Nginx.isChecked && Nginx.IsRunning() 
-                && PHP.isChecked && PHP.IsRunning()
-                && MariaDB.isChecked && MariaDB.IsRunning()
-                && Memcached.isChecked && Memcached.IsRunning()
-                && Redis.isChecked && Redis.IsRunning()) {
+                if (Nginx.isChecked && Nginx.isRunning 
+                && PHP.isChecked && PHP.isRunning
+                && MariaDB.isChecked && MariaDB.isRunning
+                && Memcached.isChecked && Memcached.isRunning
+                && Redis.isChecked && Redis.isRunning) {
                     
                 } else {
                     start_select.Enabled = true;
@@ -267,7 +267,7 @@ namespace Wnmp.Forms
             if (e.Button == MouseButtons.Right) {
                 Nginx.Restart();
             } else {
-                if (Nginx.IsRunning()) {
+                if (Nginx.isRunning) {
                     Nginx.Stop();
                 } else {
                     Nginx.Start();
@@ -279,7 +279,7 @@ namespace Wnmp.Forms
             if (e.Button == MouseButtons.Right) {
                 MariaDB.Restart();
             } else {
-                if (MariaDB.IsRunning()) {
+                if (MariaDB.isRunning) {
                     MariaDB.Stop();
                 } else {
                     MariaDB.Start();
@@ -291,7 +291,7 @@ namespace Wnmp.Forms
             if (e.Button == MouseButtons.Right) {
                 Memcached.Restart();
             } else {
-                if (Memcached.IsRunning()) {
+                if (Memcached.isRunning) {
                     Memcached.Stop();
                 } else {
                     Memcached.Start();
@@ -303,7 +303,7 @@ namespace Wnmp.Forms
             if (e.Button == MouseButtons.Right) {
                 Redis.Restart();
             } else {
-                if (Redis.IsRunning()) {
+                if (Redis.isRunning) {
                     Redis.Stop();
                 } else {
                     Redis.Start();

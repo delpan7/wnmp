@@ -24,8 +24,11 @@ namespace Wnmp
             startArgs = "/c net start memcached"; // Special handling see StartPHP() in the WnmpProgram class
             stopArgs = "/c net stop memcached";
             killStop = false;
+
             statusLabel = wnmpForm.mem_name;
             statusChecked = wnmpForm.mem_check_box;
+
+            isChecked = Options.settings.MemcachedChecked;
 
             if (!Directory.Exists(baseDir))
                 Log.wnmp_log_error("Error: Memcached Not Found", Log.LogSection.WNMP_MEMCACHED);

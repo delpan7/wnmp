@@ -24,10 +24,13 @@ namespace Wnmp
             startArgs = "";
             stopArgs = "";
             killStop = true;
-            statusLabel = wnmpForm.mdb_name;
-            statusChecked = wnmpForm.mdb_check_box;
             confDir = baseDir;
             logDir = baseDir + "data/";
+
+            statusLabel = wnmpForm.mdb_name;
+            statusChecked = wnmpForm.mdb_check_box;
+
+            isChecked = Options.settings.NginxChecked;
 
             if (!Directory.Exists(baseDir))
                 Log.wnmp_log_error("Error: MariaDB Not Found", Log.LogSection.WNMP_MARIADB);
@@ -57,7 +60,7 @@ namespace Wnmp
             }
         }
         public void Shell() {
-            if (IsRunning() == false)
+            if (isRunning == false)
                 Start();
 
             try {
