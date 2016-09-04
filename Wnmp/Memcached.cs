@@ -52,16 +52,6 @@ namespace Wnmp
             return false;
         }
 
-        public bool IsServiceIsExisted(string NameService) {
-            ServiceController[] services = ServiceController.GetServices();
-            foreach (ServiceController s in services) {
-                if (s.ServiceName.ToLower() == NameService.ToLower()) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         /// <summary>
         /// 管理员身份
         /// </summary>
@@ -74,7 +64,9 @@ namespace Wnmp
 
         public override void Start() {
             try {
-                MemController.Start();
+                if (isRunning() == false) {
+                    MemController.Start();
+                }
                 SetStartedLabel();
                 Log.wnmp_log_notice("Started " + progName, progLogSection);
             } catch (Exception ex) {
@@ -84,13 +76,18 @@ namespace Wnmp
 
         public override void Stop() {
             try {
-                MemController.Stop();
+                if (isRunning() == true) {
+                    MemController.Stop();
+                }
+                if (isRunning() == true) {
+                    base.Stop();
+                } else {
+                    Log.wnmp_log_notice("Stopped " + progName, progLogSection);
+                }
                 SetStoppedLabel();
-                Log.wnmp_log_notice("Stopped " + progName, progLogSection);
             } catch (Exception ex) {
                 Log.wnmp_log_notice("Stop(): " + ex.Message, progLogSection);
             }
-            ps.Close();
         }
     }
 }

@@ -38,15 +38,13 @@ namespace Wnmp.Configuration
         public bool RunAppsAtLaunch = false;
         public bool MinimizeWnmpToTray = false;
         public Dictionary<string, bool> appChecked = new Dictionary<string, bool> {
-            { "Nginx", true }, { "PHP", true }, { "Memcached", true }, { "Redis", true }, { "MariaDB", true },
+            { "Nginx", true }, { "PHP", true }, { "Memcached", true }, { "Redis", true }, { "MariaDB", false },
         };
         public string phpBin = "";
         public short PHP_Port = 9001;
         public int PHP_Processes = 2;
         public bool FirstRun = true;
         private string IniFile;
-
-        private static Config configs = new Config();
 
         public Ini(){
             /*
@@ -55,9 +53,10 @@ namespace Wnmp.Configuration
             appChecked.Add("Redis", true);
             appChecked.Add("MariaDB", true);
             */
+            
             if (!File.Exists(iniPath))
                 UpdateSettings(); // Update options with default values
-
+            
             if (!LoadIniFile())
                 return;
             Editor = ReadIniValue("editorpath", Editor);
@@ -158,6 +157,7 @@ namespace Wnmp.Configuration
             int i;
             int port = PHP_Port;
             int php_processes = PHP_Processes;
+            Config configs = new Config();
             string php_processes_file = Main.StartupPath + configs.operatingParam["Nginx"]["base_dir"] + configs.operatingParam["Nginx"]["conf_dir"] + "php_processes.conf";
 
             using (var sw = new StreamWriter(php_processes_file)) {

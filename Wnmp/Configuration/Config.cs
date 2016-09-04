@@ -18,8 +18,8 @@ namespace Wnmp.Configuration
                 { "start_args", "" },
                 { "stop_args", "-s stop" },
                 { "restart_args", "-s reload"},
-                { "conf_dir", "/conf/" },
-                { "log_dir", "/logs/" },
+                { "conf_dir", "conf/" },
+                { "log_dir", "/logs/nginx/" },
             };
             operatingParam["PHP"] = new Dictionary<string, string> {
                 { "base_dir", "/php/" + Options.settings.phpBin + "/" },
@@ -28,8 +28,8 @@ namespace Wnmp.Configuration
                 { "start_args", "" },
                 { "stop_args", "" },
                 { "restart_args", ""},
-                { "conf_dir", "/" },
-                { "log_dir", "/temp/logs/php/" },
+                { "conf_dir", "" },
+                { "log_dir", "/logs/php/" },
             };
             operatingParam["Memcached"] = new Dictionary<string, string> {
                 { "base_dir", "/memcached/" },
@@ -38,7 +38,7 @@ namespace Wnmp.Configuration
                 { "start_args", "" },
                 { "stop_args", "" },
                 { "restart_args", ""},
-                { "conf_dir", "/" },
+                { "conf_dir", "" },
                 { "log_dir", "/" },
             };
             operatingParam["Redis"] = new Dictionary<string, string> {
@@ -48,7 +48,7 @@ namespace Wnmp.Configuration
                 { "start_args", "" },
                 { "stop_args", "" },
                 { "restart_args", ""},
-                { "conf_dir", "/" },
+                { "conf_dir", "" },
                 { "log_dir", "/" },
             };
             operatingParam["MariaDB"] = new Dictionary<string, string> {
@@ -58,8 +58,8 @@ namespace Wnmp.Configuration
                 { "start_args", "" },
                 { "stop_args", "" },
                 { "restart_args", ""},
-                { "conf_dir", "/" },
-                { "log_dir", "/data/" },
+                { "conf_dir", "" },
+                { "log_dir", "/logs/mysql/" },
             };
         }
     }

@@ -30,33 +30,5 @@ namespace Wnmp
             options[logDir] = "*.log";
             SetOption(optionContextMenu);
         }
-
-        public override void Restart()
-        {
-            try {
-                StartProcess(exeName, restartArgs);
-                Log.wnmp_log_notice("Restarted " + progName, progLogSection);
-                SetStartedLabel();
-            } catch (Exception ex) {
-                Log.wnmp_log_error(ex.Message, progLogSection);
-            }
-        }
-
-        public void UpdatePHPngxCfg()
-        {
-            int i;
-            int port = (int)Options.settings.PHP_Port;
-            int PHPProcesses = (int)Options.settings.PHP_Processes;
-
-            using (var sw = new StreamWriter(confDir + "php_processes.conf")) {
-                sw.WriteLine("# DO NOT MODIFY!!! THIS FILE IS MANAGED BY THE WNMP CONTROL PANEL.\r\n");
-                sw.WriteLine("upstream php_processes {");
-                for (i = 1; i <= PHPProcesses; i++) {
-                    sw.WriteLine("    server 127.0.0.1:" + port + " weight=1;");
-                    port++;
-                }
-                sw.WriteLine("}");
-            }
-        }
     }
 }

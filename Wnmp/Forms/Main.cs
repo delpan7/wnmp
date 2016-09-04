@@ -53,17 +53,16 @@ namespace Wnmp.Forms
 
         public Main() {
             InitializeComponent();
+            
             Options.settings.UpdateSettings();
             UpdateOptions();
             Log.setLogComponent(log_rtb);
             Log.wnmp_log_notice("Checking for applications", Log.LogSection.WNMP_MAIN);
-
+            
             Nginx = new Nginx(ngx_name);
             PHP = new PHP();
 
-            Nginx.AddStart(PHP);
-            Nginx.AddStop(PHP);
-            Nginx.AddRestart(PHP);
+            Nginx.AddEvent(PHP);
 
             Memcached = new Memcached(mem_name);
             Redis = new Redis(rds_name);
@@ -83,6 +82,7 @@ namespace Wnmp.Forms
         }
 
         private void Main_Load(object sender, EventArgs e) {
+            
             WnmpTrayIcon.Click += WnmpTrayIcon_Click;
             WnmpTrayIcon.Icon = Properties.Resources.logo;
             WnmpTrayIcon.Visible = true;
@@ -170,12 +170,15 @@ namespace Wnmp.Forms
         }
 
         private void UpdateOptions() {
-            //MessageBox.Show(settings.appChecked["MariaDB"].ToString());
             ngx_check_box.Checked = settings.appChecked["Nginx"];
-            MessageBox.Show(ngx_check_box.Checked.ToString());
             mdb_check_box.Checked = settings.appChecked["MariaDB"];
             mem_check_box.Checked = settings.appChecked["Memcached"];
             rds_check_box.Checked = settings.appChecked["Redis"];
+
+            ngx_check_box.CheckedChanged += new System.EventHandler(this.app_check_box_CheckedChanged);
+            mdb_check_box.CheckedChanged += new System.EventHandler(this.app_check_box_CheckedChanged);
+            mem_check_box.CheckedChanged += new System.EventHandler(this.app_check_box_CheckedChanged);
+            rds_check_box.CheckedChanged += new System.EventHandler(this.app_check_box_CheckedChanged);
         }
 
         /// <summary>

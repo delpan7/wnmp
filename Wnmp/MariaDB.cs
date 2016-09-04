@@ -24,11 +24,10 @@ namespace Wnmp
         }
 
         public new void Stop() {
+            base.Stop();
             try {
-                Process process = Process.GetProcessById(PID);
-                process.Kill();
                 /* A hack to delete MariaDB"s PID file */
-            if (File.Exists(mdb_pidfile))
+                if (File.Exists(mdb_pidfile))
                     File.Delete(mdb_pidfile);
                 PID = 0;
                 Log.wnmp_log_notice("Stopped " + progName, progLogSection);
@@ -36,14 +35,13 @@ namespace Wnmp
             } catch (Exception ex) {
                 Log.wnmp_log_error(ex.Message, progLogSection);
             }
-            ps.Close();
         }
         public void Shell() {
             if (isRunning() == false)
                 Start();
 
             try {
-                Process.Start(exeName, "-u root -p");
+                Process.Start(baseDir + "bin/mysql", "-u root -p");
                 Log.wnmp_log_notice("Started MariaDB shell", progLogSection);
             } catch (Exception ex) {
                 Log.wnmp_log_error(ex.Message, progLogSection);

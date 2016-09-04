@@ -59,7 +59,7 @@ namespace Wnmp
             restartArgs = operatingParam["restart_args"];
             confDir = baseDir + operatingParam["conf_dir"];
             logDir = Main.StartupPath.Replace(@"\", "/") + operatingParam["log_dir"];
-
+            //MessageBox.Show(logDir);
             isChecked = Options.settings.appChecked[progName];
 
             if (!Directory.Exists(baseDir))
@@ -111,7 +111,8 @@ namespace Wnmp
         public virtual void Start()
         {
             try {
-                StartProcess(exeName, startArgs);
+                if (isRunning() == false)
+                    StartProcess(exeName, startArgs);
                 Log.wnmp_log_notice("Started " + progName, progLogSection);
                 SetStartedLabel();
             } catch (Exception ex) {
@@ -126,8 +127,10 @@ namespace Wnmp
         public virtual void Stop()
         {
             try {
-                StartProcess(exeName, stopArgs);
-                
+                if (isRunning() == true && stopArgs != "") {
+                    StartProcess(exeName, stopArgs);
+                }
+
                 if (isRunning()) {
                     Process[] process = Process.GetProcessesByName(procName);
                     foreach (Process currentProc in process) {
@@ -142,13 +145,15 @@ namespace Wnmp
             if (PHPStop != null) {
                 PHPStop();
             }
-            SetStoppedLabel();
+            if (progName != "PHP") {
+                SetStoppedLabel();
+            }
             ps.Close();
         }
 
         public virtual void Restart()
         {
-            if(restartArgs != null) {
+            if (restartArgs != "") {
                 try {
                     StartProcess(exeName, restartArgs);
                     Log.wnmp_log_notice("Restarted " + progName, progLogSection);
@@ -156,12 +161,14 @@ namespace Wnmp
                 } catch (Exception ex) {
                     Log.wnmp_log_error(ex.Message, progLogSection);
                 }
-
+                
                 if (PHPRestart != null) {
                     PHPRestart();
                 }
             } else {
-                Stop();
+                if (isRunning() == true) {
+                    Stop();
+                }
                 Start();
                 Log.wnmp_log_notice("Restarted " + progName, progLogSection);
             }
@@ -215,18 +222,10 @@ namespace Wnmp
             return menu_item;
         }
 
-        public void AddStart(PHP php)
+        public void AddEvent(PHP php)
         {
             PHPStart += new PHPEventHandler(php.Start);
-        }
-
-        public void AddStop(PHP php)
-        {
             PHPStop += new PHPEventHandler(php.Stop);
-        }
-
-        public void AddRestart(PHP php)
-        {
             PHPRestart += new PHPEventHandler(php.Restart);
         }
     }

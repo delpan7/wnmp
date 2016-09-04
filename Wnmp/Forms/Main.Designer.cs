@@ -63,13 +63,13 @@ namespace Wnmp.Forms
             this.mdb_check_box = new System.Windows.Forms.CheckBox();
             this.mdb_name = new System.Windows.Forms.Label();
             this.ngx_name = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.mdb_shell = new System.Windows.Forms.Button();
             this.start_select = new System.Windows.Forms.Button();
             this.stop_select = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.wnmpdir = new System.Windows.Forms.Button();
             this.log_rtb = new System.Windows.Forms.RichTextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.MainFormMenuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -85,7 +85,8 @@ namespace Wnmp.Forms
             this.localhostToolStripMenuItem});
             this.MainFormMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MainFormMenuStrip.Name = "MainFormMenuStrip";
-            this.MainFormMenuStrip.Size = new System.Drawing.Size(364, 25);
+            this.MainFormMenuStrip.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.MainFormMenuStrip.Size = new System.Drawing.Size(485, 28);
             this.MainFormMenuStrip.TabIndex = 4;
             this.MainFormMenuStrip.Text = "menuStrip1";
             // 
@@ -97,31 +98,32 @@ namespace Wnmp.Forms
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(39, 21);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "&File";
+            this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
             // wnmpOptionsToolStripMenuItem
             // 
             this.wnmpOptionsToolStripMenuItem.Name = "wnmpOptionsToolStripMenuItem";
-            this.wnmpOptionsToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.wnmpOptionsToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.wnmpOptionsToolStripMenuItem.Text = "Wnmp配置";
             this.wnmpOptionsToolStripMenuItem.Click += new System.EventHandler(this.wnmpOptionsToolStripMenuItem_Click);
             // 
             // optionsFileStripMenuItem
             // 
             this.optionsFileStripMenuItem.Name = "optionsFileStripMenuItem";
-            this.optionsFileStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.optionsFileStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.optionsFileStripMenuItem.Text = "打开配置文件";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(178, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -131,27 +133,27 @@ namespace Wnmp.Forms
             this.hostToIPToolStripMenuItem,
             this.getHTTPHeadersToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(52, 21);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(61, 24);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // hostToIPToolStripMenuItem
             // 
             this.hostToIPToolStripMenuItem.Name = "hostToIPToolStripMenuItem";
-            this.hostToIPToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.hostToIPToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
             this.hostToIPToolStripMenuItem.Text = "Host To IP";
             this.hostToIPToolStripMenuItem.Click += new System.EventHandler(this.hostToIPToolStripMenuItem_Click);
             // 
             // getHTTPHeadersToolStripMenuItem
             // 
             this.getHTTPHeadersToolStripMenuItem.Name = "getHTTPHeadersToolStripMenuItem";
-            this.getHTTPHeadersToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.getHTTPHeadersToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
             this.getHTTPHeadersToolStripMenuItem.Text = "Get HTTP Headers";
             this.getHTTPHeadersToolStripMenuItem.Click += new System.EventHandler(this.getHTTPHeadersToolStripMenuItem_Click);
             // 
             // localhostToolStripMenuItem
             // 
             this.localhostToolStripMenuItem.Name = "localhostToolStripMenuItem";
-            this.localhostToolStripMenuItem.Size = new System.Drawing.Size(72, 21);
+            this.localhostToolStripMenuItem.Size = new System.Drawing.Size(87, 24);
             this.localhostToolStripMenuItem.Text = "localhost";
             this.localhostToolStripMenuItem.Click += new System.EventHandler(this.localhostToolStripMenuItem_Click);
             // 
@@ -166,11 +168,11 @@ namespace Wnmp.Forms
             this.groupBox1.Controls.Add(this.mdb_name);
             this.groupBox1.Controls.Add(this.ngx_name);
             this.groupBox1.Controls.Add(this.panel2);
-            this.groupBox1.Location = new System.Drawing.Point(76, 8);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Location = new System.Drawing.Point(101, 10);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(210, 104);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Size = new System.Drawing.Size(280, 130);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Applications";
@@ -180,21 +182,21 @@ namespace Wnmp.Forms
             this.rds_check_box.AutoSize = true;
             this.rds_check_box.Checked = true;
             this.rds_check_box.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.rds_check_box.Location = new System.Drawing.Point(100, 70);
-            this.rds_check_box.Margin = new System.Windows.Forms.Padding(2);
+            this.rds_check_box.Location = new System.Drawing.Point(133, 88);
+            this.rds_check_box.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.rds_check_box.Name = "rds_check_box";
-            this.rds_check_box.Size = new System.Drawing.Size(15, 14);
+            this.rds_check_box.Size = new System.Drawing.Size(18, 17);
             this.rds_check_box.TabIndex = 87;
             this.rds_check_box.UseVisualStyleBackColor = true;
-            this.rds_check_box.CheckedChanged += new System.EventHandler(this.app_check_box_CheckedChanged);
             // 
             // rds_name
             // 
             this.rds_name.AutoSize = true;
             this.rds_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rds_name.Location = new System.Drawing.Point(119, 68);
+            this.rds_name.Location = new System.Drawing.Point(159, 85);
+            this.rds_name.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.rds_name.Name = "rds_name";
-            this.rds_name.Size = new System.Drawing.Size(44, 16);
+            this.rds_name.Size = new System.Drawing.Size(52, 20);
             this.rds_name.TabIndex = 86;
             this.rds_name.Text = "Redis";
             this.rds_name.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rds_name_MouseUp);
@@ -204,21 +206,21 @@ namespace Wnmp.Forms
             this.mem_check_box.AutoSize = true;
             this.mem_check_box.Checked = true;
             this.mem_check_box.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mem_check_box.Location = new System.Drawing.Point(98, 37);
-            this.mem_check_box.Margin = new System.Windows.Forms.Padding(2);
+            this.mem_check_box.Location = new System.Drawing.Point(131, 46);
+            this.mem_check_box.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.mem_check_box.Name = "mem_check_box";
-            this.mem_check_box.Size = new System.Drawing.Size(15, 14);
+            this.mem_check_box.Size = new System.Drawing.Size(18, 17);
             this.mem_check_box.TabIndex = 84;
             this.mem_check_box.UseVisualStyleBackColor = true;
-            this.mem_check_box.CheckedChanged += new System.EventHandler(this.app_check_box_CheckedChanged);
             // 
             // mem_name
             // 
             this.mem_name.AutoSize = true;
             this.mem_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mem_name.Location = new System.Drawing.Point(118, 35);
+            this.mem_name.Location = new System.Drawing.Point(157, 44);
+            this.mem_name.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.mem_name.Name = "mem_name";
-            this.mem_name.Size = new System.Drawing.Size(83, 16);
+            this.mem_name.Size = new System.Drawing.Size(100, 20);
             this.mem_name.TabIndex = 83;
             this.mem_name.Text = "Memcached";
             this.mem_name.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mem_name_MouseUp);
@@ -228,32 +230,31 @@ namespace Wnmp.Forms
             this.ngx_check_box.AutoSize = true;
             this.ngx_check_box.Checked = true;
             this.ngx_check_box.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ngx_check_box.Location = new System.Drawing.Point(11, 38);
-            this.ngx_check_box.Margin = new System.Windows.Forms.Padding(2);
+            this.ngx_check_box.Location = new System.Drawing.Point(15, 48);
+            this.ngx_check_box.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ngx_check_box.Name = "ngx_check_box";
-            this.ngx_check_box.Size = new System.Drawing.Size(15, 14);
+            this.ngx_check_box.Size = new System.Drawing.Size(18, 17);
             this.ngx_check_box.TabIndex = 79;
             this.ngx_check_box.UseVisualStyleBackColor = true;
-            this.ngx_check_box.CheckedChanged += new System.EventHandler(this.app_check_box_CheckedChanged);
             // 
             // mdb_check_box
             // 
             this.mdb_check_box.AutoSize = true;
-            this.mdb_check_box.Location = new System.Drawing.Point(11, 71);
-            this.mdb_check_box.Margin = new System.Windows.Forms.Padding(2);
+            this.mdb_check_box.Location = new System.Drawing.Point(15, 89);
+            this.mdb_check_box.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.mdb_check_box.Name = "mdb_check_box";
-            this.mdb_check_box.Size = new System.Drawing.Size(15, 14);
+            this.mdb_check_box.Size = new System.Drawing.Size(18, 17);
             this.mdb_check_box.TabIndex = 80;
             this.mdb_check_box.UseVisualStyleBackColor = true;
-            this.mdb_check_box.CheckedChanged += new System.EventHandler(this.app_check_box_CheckedChanged);
             // 
             // mdb_name
             // 
             this.mdb_name.AutoSize = true;
             this.mdb_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mdb_name.Location = new System.Drawing.Point(32, 70);
+            this.mdb_name.Location = new System.Drawing.Point(43, 88);
+            this.mdb_name.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.mdb_name.Name = "mdb_name";
-            this.mdb_name.Size = new System.Drawing.Size(61, 16);
+            this.mdb_name.Size = new System.Drawing.Size(76, 20);
             this.mdb_name.TabIndex = 68;
             this.mdb_name.Text = "MariaDB";
             this.mdb_name.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mdb_name_MouseUp);
@@ -263,19 +264,28 @@ namespace Wnmp.Forms
             this.ngx_name.AutoSize = true;
             this.ngx_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ngx_name.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.ngx_name.Location = new System.Drawing.Point(32, 36);
+            this.ngx_name.Location = new System.Drawing.Point(43, 45);
+            this.ngx_name.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ngx_name.Name = "ngx_name";
-            this.ngx_name.Size = new System.Drawing.Size(42, 16);
+            this.ngx_name.Size = new System.Drawing.Size(51, 20);
             this.ngx_name.TabIndex = 63;
             this.ngx_name.Text = "Nginx";
             this.ngx_name.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ngx_name_MouseUp);
             // 
+            // panel2
+            // 
+            this.panel2.Location = new System.Drawing.Point(1, 35);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(123, 38);
+            this.panel2.TabIndex = 88;
+            // 
             // mdb_shell
             // 
-            this.mdb_shell.Location = new System.Drawing.Point(292, 23);
-            this.mdb_shell.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mdb_shell.Location = new System.Drawing.Point(389, 29);
+            this.mdb_shell.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.mdb_shell.Name = "mdb_shell";
-            this.mdb_shell.Size = new System.Drawing.Size(63, 37);
+            this.mdb_shell.Size = new System.Drawing.Size(84, 46);
             this.mdb_shell.TabIndex = 58;
             this.mdb_shell.Text = "MariaDB Shell";
             this.mdb_shell.UseVisualStyleBackColor = true;
@@ -283,10 +293,10 @@ namespace Wnmp.Forms
             // 
             // start_select
             // 
-            this.start_select.Location = new System.Drawing.Point(8, 24);
-            this.start_select.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.start_select.Location = new System.Drawing.Point(11, 30);
+            this.start_select.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.start_select.Name = "start_select";
-            this.start_select.Size = new System.Drawing.Size(63, 34);
+            this.start_select.Size = new System.Drawing.Size(84, 42);
             this.start_select.TabIndex = 49;
             this.start_select.Text = "启动所选";
             this.start_select.UseVisualStyleBackColor = true;
@@ -294,10 +304,10 @@ namespace Wnmp.Forms
             // 
             // stop_select
             // 
-            this.stop_select.Location = new System.Drawing.Point(8, 64);
-            this.stop_select.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.stop_select.Location = new System.Drawing.Point(11, 80);
+            this.stop_select.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.stop_select.Name = "stop_select";
-            this.stop_select.Size = new System.Drawing.Size(63, 34);
+            this.stop_select.Size = new System.Drawing.Size(84, 42);
             this.stop_select.TabIndex = 50;
             this.stop_select.Text = "停止所选";
             this.stop_select.UseVisualStyleBackColor = true;
@@ -313,18 +323,18 @@ namespace Wnmp.Forms
             this.panel1.Controls.Add(this.stop_select);
             this.panel1.Controls.Add(this.mdb_shell);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 25);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel1.Location = new System.Drawing.Point(0, 28);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(364, 266);
+            this.panel1.Size = new System.Drawing.Size(485, 336);
             this.panel1.TabIndex = 5;
             // 
             // wnmpdir
             // 
-            this.wnmpdir.Location = new System.Drawing.Point(292, 67);
-            this.wnmpdir.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.wnmpdir.Location = new System.Drawing.Point(389, 84);
+            this.wnmpdir.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.wnmpdir.Name = "wnmpdir";
-            this.wnmpdir.Size = new System.Drawing.Size(63, 37);
+            this.wnmpdir.Size = new System.Drawing.Size(84, 46);
             this.wnmpdir.TabIndex = 59;
             this.wnmpdir.Text = "Wnmp Directory";
             this.wnmpdir.UseVisualStyleBackColor = true;
@@ -334,33 +344,26 @@ namespace Wnmp.Forms
             // 
             this.log_rtb.BackColor = System.Drawing.Color.White;
             this.log_rtb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.log_rtb.Location = new System.Drawing.Point(0, 124);
+            this.log_rtb.Location = new System.Drawing.Point(0, 155);
             this.log_rtb.Margin = new System.Windows.Forms.Padding(0);
             this.log_rtb.Name = "log_rtb";
             this.log_rtb.ReadOnly = true;
-            this.log_rtb.Size = new System.Drawing.Size(360, 150);
+            this.log_rtb.Size = new System.Drawing.Size(479, 186);
             this.log_rtb.TabIndex = 49;
             this.log_rtb.Text = "";
             // 
-            // panel2
-            // 
-            this.panel2.Location = new System.Drawing.Point(1, 28);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(92, 30);
-            this.panel2.TabIndex = 88;
-            // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(364, 291);
+            this.ClientSize = new System.Drawing.Size(485, 364);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.MainFormMenuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.MainFormMenuStrip;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(380, 330);
+            this.MinimumSize = new System.Drawing.Size(501, 401);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Wnmp";

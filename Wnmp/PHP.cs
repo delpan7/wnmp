@@ -30,30 +30,17 @@ namespace Wnmp
             string phpini = confDir + "php.ini";
             
             try {
-                for (i = 1; i <= ProcessCount; i++){
-                    StartProcess(exeName, String.Format("-b localhost:{0} -c {1}", port, phpini));
-                    Log.wnmp_log_notice("Starting PHP " + i + "/" + ProcessCount + " On port: " + port, progLogSection);
-                    port++;
+                if (isRunning() == false) {
+                    for (i = 1; i <= ProcessCount; i++) {
+                        StartProcess(exeName, String.Format("-b localhost:{0} -c {1}", port, phpini));
+                        Log.wnmp_log_notice("Starting PHP " + i + "/" + ProcessCount + " On port: " + port, progLogSection);
+                        port++;
+                    }
                 }
                 Log.wnmp_log_notice("PHP started", progLogSection);
-                //SetStartedLabel();
             }catch (Exception ex){
                 Log.wnmp_log_error(ex.Message, progLogSection);
             }
-        }
-
-        public override void Stop()
-        {
-            try {
-                Process[] process = Process.GetProcessesByName(procName);
-                foreach (Process currentProc in process) {
-                    currentProc.Kill();
-                }
-                Log.wnmp_log_notice("Stopped " + progName, progLogSection);
-            } catch (Exception ex) {
-                Log.wnmp_log_error(ex.Message, progLogSection);
-            }
-            ps.Close();
         }
     }
 }
