@@ -8,21 +8,10 @@ using Wnmp.Forms;
 
 namespace Wnmp
 {
-    public class NginxApp : WnmpApp
+    public class Nginx : Wnmp
     {
-        public NginxApp(Main wnmpForm) {
-            baseDir = Main.StartupPath.Replace(@"\", "/") + "/nginx/";
-            exeName = baseDir + "nginx.exe";
-            procName = "nginx";
-            progName = "Nginx";
-            progLogSection = Log.LogSection.WNMP_NGINX;
-            startArgs = "";
-            stopArgs = "-s stop";
-            restartArgs = "-s reload";
-            killStop = false;
-            confDir = baseDir + "conf/";
-            logDir = baseDir + "logs/";
-
+        public Nginx(Label status_label) : base(status_label)
+        {
             //statusChecked.Checked = true;
             //statusChecked.Location = new System.Drawing.Point(25, 49);
             //statusChecked.Margin = new System.Windows.Forms.Padding(2);
@@ -34,25 +23,27 @@ namespace Wnmp
 
             //wnmpForm.groupBox1.Controls.Add(statusChecked);
 
-            statusLabel = wnmpForm.ngx_name;
-            statusChecked = wnmpForm.ngx_check_box;
+            progLogSection = Log.LogSection.WNMP_NGINX;
 
-            isChecked = Options.settings.MemcachedChecked;
-
-            if (!File.Exists(baseDir + "nginx.exe"))
-                Log.wnmp_log_error("Error: Nginx Not Found", Log.LogSection.WNMP_NGINX);
-
-            ToolStripMenuItem ngx_option = CreateMenuItem("Nginx 配置");
+            optionContextMenu = CreateMenuItem("Nginx 配置");
             options[confDir] = "*.conf";
             options[logDir] = "*.log";
-            SetOption(options, ngx_option);
-
-            wnmpForm.optionsFileStripMenuItem.DropDownItems.Add(ngx_option);
-
-            SetStatusLabel();
+            SetOption(optionContextMenu);
         }
 
-        public void UpdatePHPngxCfg() {
+        public override void Restart()
+        {
+            try {
+                StartProcess(exeName, restartArgs);
+                Log.wnmp_log_notice("Restarted " + progName, progLogSection);
+                SetStartedLabel();
+            } catch (Exception ex) {
+                Log.wnmp_log_error(ex.Message, progLogSection);
+            }
+        }
+
+        public void UpdatePHPngxCfg()
+        {
             int i;
             int port = (int)Options.settings.PHP_Port;
             int PHPProcesses = (int)Options.settings.PHP_Processes;

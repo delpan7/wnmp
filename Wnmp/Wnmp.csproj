@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\Config.cs" />
     <Compile Include="Forms\HostToIPForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,12 +79,12 @@
       <DependentUpon>HttpHeaders.cs</DependentUpon>
     </Compile>
     <Compile Include="Log.cs" />
-    <Compile Include="MariaDBApp.cs" />
-    <Compile Include="NginxApp.cs" />
-    <Compile Include="PHPApp.cs" />
-    <Compile Include="MemcachedApp.cs" />
-    <Compile Include="RedisApp.cs" />
-    <Compile Include="WnmpApp.cs" />
+    <Compile Include="MariaDB.cs" />
+    <Compile Include="Nginx.cs" />
+    <Compile Include="PHP.cs" />
+    <Compile Include="Memcached.cs" />
+    <Compile Include="Redis.cs" />
+    <Compile Include="Wnmp.cs" />
     <Compile Include="Forms\Main.cs">
       <SubType>Form</SubType>
     </Compile>

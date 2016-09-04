@@ -21,7 +21,7 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 using Microsoft.Win32;
-
+using Wnmp;
 using Wnmp.Configuration;
 using System.Linq;
 
@@ -33,7 +33,6 @@ namespace Wnmp.Forms
     public partial class Options : Form
     {
         public static Ini settings = new Ini();
-        public static Main mainForm;
         private string Editor;
 
         public Options()
@@ -81,13 +80,22 @@ namespace Wnmp.Forms
         {
             SetSettings();
             settings.UpdateSettings();
-            
+
             /* 切换PHP版本 */
-            mainForm.ReloadSetupPHP();
-            //更新PHP进程配置文件
-            mainForm.UpdatePHPngxCfg();
+            SwitchPHP();
 
             this.Close();
+        }
+
+        /// <summary>
+        /// 切换PHP版本
+        /// </summary>
+        public void SwitchPHP()
+        {
+            PHP PHP = new PHP();
+
+            if (PHP.isRunning())
+                PHP.Restart();
         }
 
         private void SetSettings()

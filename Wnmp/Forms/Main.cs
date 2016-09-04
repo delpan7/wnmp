@@ -31,11 +31,11 @@ namespace Wnmp.Forms
     /// </summary>
     public partial class Main : Form
     {
-        private NginxApp Nginx;
-        private MariaDBApp MariaDB;
-        private PHPApp PHP;
-        private MemcachedApp Memcached;
-        private RedisApp Redis;
+        private Nginx Nginx;
+        private MariaDB MariaDB;
+        private PHP PHP;
+        private Memcached Memcached;
+        private Redis Redis;
         public static Ini settings = new Ini();
         public static string StartupPath { get { return Application.StartupPath; } }
 
@@ -54,21 +54,20 @@ namespace Wnmp.Forms
         public Main() {
             InitializeComponent();
             Options.settings.UpdateSettings();
-            Options.mainForm = this;
             UpdateOptions();
             Log.setLogComponent(log_rtb);
             Log.wnmp_log_notice("Checking for applications", Log.LogSection.WNMP_MAIN);
 
-            Nginx = new NginxApp(this);
-            MariaDB = new MariaDBApp(this);
-            PHP = new PHPApp(this);
+            Nginx = new Nginx(ngx_name);
+            PHP = new PHP();
 
             Nginx.AddStart(PHP);
             Nginx.AddStop(PHP);
             Nginx.AddRestart(PHP);
 
-            Memcached = new MemcachedApp(this);
-            Redis = new RedisApp(this);
+            Memcached = new Memcached(mem_name);
+            Redis = new Redis(rds_name);
+            MariaDB = new MariaDB(mdb_name);
         }
 
         private void DoCheckIfAppsAreRunningTimer() {
@@ -145,40 +144,22 @@ namespace Wnmp.Forms
             }
         }
 
-        /// <summary>
-        /// 切换PHP版本
-        /// </summary>
-        public void ReloadSetupPHP() {
-            PHP = new PHPApp(this);
-
-            if (PHP.isRunning)
-                PHP.Restart();
-        }
-
-        /// <summary>
-        /// 更新PHP进程配置文件
-        /// </summary>
-        public void UpdatePHPngxCfg() {
-            Nginx.UpdatePHPngxCfg();
-
-        }
-
         private void SetSettings() {
-            Nginx.isChecked = settings.NginxChecked = ngx_check_box.Checked;
-            MariaDB.isChecked = settings.MariaDBChecked = mdb_check_box.Checked;
-            Memcached.isChecked = settings.MemcachedChecked = mem_check_box.Checked;
-            Redis.isChecked = settings.RedisChecked = rds_check_box.Checked;
+            Nginx.isChecked = settings.appChecked["Nginx"] = ngx_check_box.Checked;
+            MariaDB.isChecked = settings.appChecked["MariaDB"] = mdb_check_box.Checked;
+            Memcached.isChecked = settings.appChecked["Memcached"] = mem_check_box.Checked;
+            Redis.isChecked = settings.appChecked["Redis"] = rds_check_box.Checked;
         }
 
         private void DoCheckAppsStopTimer() {
             Timer timer = new Timer();
             timer.Interval = 500; // TODO: 5 seconds sounds reasonable?
             timer.Tick += (s, e) => {
-                if (Nginx.isChecked && Nginx.isRunning 
-                && PHP.isChecked && PHP.isRunning
-                && MariaDB.isChecked && MariaDB.isRunning
-                && Memcached.isChecked && Memcached.isRunning
-                && Redis.isChecked && Redis.isRunning) {
+                if (Nginx.isChecked && Nginx.isRunning()
+                && PHP.isChecked && PHP.isRunning()
+                && MariaDB.isChecked && MariaDB.isRunning()
+                && Memcached.isChecked && Memcached.isRunning()
+                && Redis.isChecked && Redis.isRunning()) {
                     
                 } else {
                     start_select.Enabled = true;
@@ -189,13 +170,12 @@ namespace Wnmp.Forms
         }
 
         private void UpdateOptions() {
-            //MessageBox.Show(settings.PHPChecked.ToString());
-            //ngx_check_box.Checked = settings.NginxChecked;
-            //mdb_check_box.Checked = settings.MariaDBChecked;
-            //php_check_box.Checked = settings.PHPChecked;
-            //mem_check_box.Checked = settings.MemcachedChecked;
-            //rds_check_box.Checked = settings.RedisChecked;
-            //MessageBox.Show(php_check_box.Checked.ToString());
+            //MessageBox.Show(settings.appChecked["MariaDB"].ToString());
+            ngx_check_box.Checked = settings.appChecked["Nginx"];
+            MessageBox.Show(ngx_check_box.Checked.ToString());
+            mdb_check_box.Checked = settings.appChecked["MariaDB"];
+            mem_check_box.Checked = settings.appChecked["Memcached"];
+            rds_check_box.Checked = settings.appChecked["Redis"];
         }
 
         /// <summary>
@@ -238,6 +218,7 @@ namespace Wnmp.Forms
         /*  Right Hand Side */
 
         private void start_select_Click(object sender, EventArgs e) {
+            //MessageBox.Show(settings.appChecked["MariaDB"].ToString());
             if (Nginx.isChecked) Nginx.Start();
             if (MariaDB.isChecked) MariaDB.Start();
             if (Memcached.isChecked) Memcached.Start();
@@ -267,7 +248,7 @@ namespace Wnmp.Forms
             if (e.Button == MouseButtons.Right) {
                 Nginx.Restart();
             } else {
-                if (Nginx.isRunning) {
+                if (Nginx.isRunning()) {
                     Nginx.Stop();
                 } else {
                     Nginx.Start();
@@ -279,7 +260,7 @@ namespace Wnmp.Forms
             if (e.Button == MouseButtons.Right) {
                 MariaDB.Restart();
             } else {
-                if (MariaDB.isRunning) {
+                if (MariaDB.isRunning()) {
                     MariaDB.Stop();
                 } else {
                     MariaDB.Start();
@@ -291,7 +272,7 @@ namespace Wnmp.Forms
             if (e.Button == MouseButtons.Right) {
                 Memcached.Restart();
             } else {
-                if (Memcached.isRunning) {
+                if (Memcached.isRunning()) {
                     Memcached.Stop();
                 } else {
                     Memcached.Start();
@@ -303,7 +284,7 @@ namespace Wnmp.Forms
             if (e.Button == MouseButtons.Right) {
                 Redis.Restart();
             } else {
-                if (Redis.isRunning) {
+                if (Redis.isRunning()) {
                     Redis.Stop();
                 } else {
                     Redis.Start();
@@ -318,6 +299,13 @@ namespace Wnmp.Forms
 
         private void button1_Click(object sender, EventArgs e) {
             PHP.Restart();
+        }
+
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            optionsFileStripMenuItem.DropDownItems.Add(Nginx.optionContextMenu);
+            optionsFileStripMenuItem.DropDownItems.Add(PHP.optionContextMenu);
+            optionsFileStripMenuItem.DropDownItems.Add(MariaDB.optionContextMenu);
         }
     }
 }

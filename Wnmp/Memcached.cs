@@ -9,33 +9,24 @@ using System.ServiceProcess;
 using System.Diagnostics;
 using System.Security.Principal;
 
+
 namespace Wnmp
 {
-    class MemcachedApp : WnmpApp
+    class Memcached : Wnmp
     {
-        private string installexeName = "-d install";
+        private readonly ServiceController MemController = new ServiceController();
+        //private string installexeName = "-d install";
         private string installArgs = "-d install";
-        public MemcachedApp(Main wnmpForm) {
-            baseDir = Main.StartupPath.Replace(@"\", "/") + "/memcached/";
-            exeName = "cmd.exe";
-            procName = "memcached";
-            progName = "Memcached";
+        public Memcached(Label status_label) : base(status_label)
+        {
+            /* Set MariaDB service details */
+            MemController.MachineName = Environment.MachineName;
+            MemController.ServiceName = "memcached";
             progLogSection = Log.LogSection.WNMP_MEMCACHED;
-            startArgs = "/c net start memcached"; // Special handling see StartPHP() in the WnmpProgram class
-            stopArgs = "/c net stop memcached";
-            killStop = false;
 
-            statusLabel = wnmpForm.mem_name;
-            statusChecked = wnmpForm.mem_check_box;
-
-            isChecked = Options.settings.MemcachedChecked;
-
-            if (!Directory.Exists(baseDir))
-                Log.wnmp_log_error("Error: Memcached Not Found", Log.LogSection.WNMP_MEMCACHED);
-
-            if (!isInstall()) install();
-
-            this.SetStatusLabel();
+            if (!ServiceExists()) {
+                install();
+            }
         }
 
         private void install() {
@@ -44,15 +35,21 @@ namespace Wnmp
                 return;
             }
             try {
-                StartProcess(installexeName, installArgs);
+                StartProcess(baseDir + procName, installArgs);
                 Log.wnmp_log_notice("Install " + progName, progLogSection);
             } catch (Exception ex) {
                 Log.wnmp_log_error(ex.Message, progLogSection);
             }
         }
 
-        private bool isInstall() {
-            return IsServiceIsExisted("memcached");
+        public bool ServiceExists() {
+            ServiceController[] services = ServiceController.GetServices();
+            foreach (var service in services) {
+                if (service.ServiceName == MemController.ServiceName) {
+                    return true;
+                }    
+            }
+            return false;
         }
 
         public bool IsServiceIsExisted(string NameService) {
@@ -76,11 +73,24 @@ namespace Wnmp
         }
 
         public override void Start() {
-            if (!IsAdministrator()) {
-                MessageBox.Show("请以管理员身份运行本程序");
-                return;
+            try {
+                MemController.Start();
+                SetStartedLabel();
+                Log.wnmp_log_notice("Started " + progName, progLogSection);
+            } catch (Exception ex) {
+                Log.wnmp_log_error("Start(): " + ex.Message, progLogSection);
             }
-            base.Start();
+        }
+
+        public override void Stop() {
+            try {
+                MemController.Stop();
+                SetStoppedLabel();
+                Log.wnmp_log_notice("Stopped " + progName, progLogSection);
+            } catch (Exception ex) {
+                Log.wnmp_log_notice("Stop(): " + ex.Message, progLogSection);
+            }
+            ps.Close();
         }
     }
 }

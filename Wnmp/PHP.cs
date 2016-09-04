@@ -5,35 +5,21 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 using Wnmp.Forms;
+using System.Diagnostics;
 
 namespace Wnmp
 {
-    public class PHPApp : WnmpApp
+    public class PHP : Wnmp
     {
-
-        
-        public PHPApp(Main wnmpForm)
+        public PHP()
         {
-            baseDir = Main.StartupPath + "/php/" + Options.settings.phpBin + "/";
-            exeName = baseDir + "php-cgi.exe";
-            procName = "php-cgi";
-            progName = "PHP";
+            ps.StartInfo.EnvironmentVariables.Add("PHP_FCGI_MAX_REQUESTS", "0"); // Disable auto killing PHP
             progLogSection = Log.LogSection.WNMP_PHP;
-            startArgs = ""; // Special handling see StartPHP() in the WnmpProgram class
-            stopArgs = "";
-            killStop = true;
-            confDir = baseDir;
-            logDir = Main.StartupPath + "temp/logs/php/";
 
-            if (!Directory.Exists(baseDir))
-                Log.wnmp_log_error("Error: PHP Not Found", Log.LogSection.WNMP_PHP);
-
-            ToolStripMenuItem php_option = CreateMenuItem("PHP 配置");
+            optionContextMenu = CreateMenuItem("PHP 配置");
             options[confDir] = "php.ini";
             options[logDir] = "*.log";
-            SetOption(options, php_option);
-
-            wnmpForm.optionsFileStripMenuItem.DropDownItems.Add(php_option);
+            SetOption(optionContextMenu);
         }
 
         public override void Start()
@@ -42,22 +28,32 @@ namespace Wnmp
             int ProcessCount = Options.settings.PHP_Processes;
             short port = Options.settings.PHP_Port;
             string phpini = confDir + "php.ini";
-
-            try
-            {
-                for (i = 1; i <= ProcessCount; i++)
-                {
+            
+            try {
+                for (i = 1; i <= ProcessCount; i++){
                     StartProcess(exeName, String.Format("-b localhost:{0} -c {1}", port, phpini));
                     Log.wnmp_log_notice("Starting PHP " + i + "/" + ProcessCount + " On port: " + port, progLogSection);
                     port++;
                 }
                 Log.wnmp_log_notice("PHP started", progLogSection);
                 //SetStartedLabel();
-            }
-            catch (Exception ex)
-            {
+            }catch (Exception ex){
                 Log.wnmp_log_error(ex.Message, progLogSection);
             }
+        }
+
+        public override void Stop()
+        {
+            try {
+                Process[] process = Process.GetProcessesByName(procName);
+                foreach (Process currentProc in process) {
+                    currentProc.Kill();
+                }
+                Log.wnmp_log_notice("Stopped " + progName, progLogSection);
+            } catch (Exception ex) {
+                Log.wnmp_log_error(ex.Message, progLogSection);
+            }
+            ps.Close();
         }
     }
 }
